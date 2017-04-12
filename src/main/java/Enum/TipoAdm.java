@@ -14,3 +14,6 @@ public enum TipoAdm {
     ADMINISTRADOR,CLIENTE;
     
 }
+
+
+// vai se fuder
