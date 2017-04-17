@@ -45,7 +45,7 @@
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
                         <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i>Entrar/Cadastrar</a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
-                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">account_balance</i>Home</a></li>
+                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
                 </div>
             </nav>
@@ -115,7 +115,7 @@
 
         <div class="container">
             <div class="row" >
-                <form class="col s12" method="post" action="ControleUsuario">
+                <form class="col s12" action="ControleUsuario" method="POST" >
 
 
                     <div class="row">
@@ -238,11 +238,10 @@
                     
                     <div class="col l4 offset-l2 s12">
                         <h5 class="white-text grey-text text-lighten-1"><i class="material-icons left red-text text-red darken-4">share</i>Siga-nos nas redes sociais</h5>
-                        <ul class="social-nav model-9">
+                        <ul class="social-nav model-9 center-align">
                             <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
                             <li><a href="#" class="facebook"> <i class="fa fa-facebook"></i></a></li>
                             <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
                         </ul>
                         <br/>
                     </div>

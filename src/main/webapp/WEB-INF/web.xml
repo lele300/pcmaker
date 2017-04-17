@@ -17,6 +17,10 @@
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
     <servlet>
+        <servlet-name>ControleUsuario</servlet-name>
+        <servlet-class>Controle.ControleUsuario</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ControleAcesso</servlet-name>
         <servlet-class>Controle.ControleAcesso</servlet-class>
     </servlet>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ControleComponente</servlet-name>
         <url-pattern>/ControleComponente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControleUsuario</servlet-name>
+        <url-pattern>/cadastrarUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -122,6 +122,14 @@
             <div class="row" >
                 <form class="col s12" method="post" action="ControleUsuario">
 
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input name="id" id="id" type="text" class="validate" hidden>
+                            
+                        </div>
+                        
+                    </div>
+                    
 
                     <div class="row">
                         <div class="input-field col s12">

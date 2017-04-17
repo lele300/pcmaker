@@ -66,6 +66,12 @@ public class ControleUsuario extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if(uri.equals(req.getContextPath() + "consultarPorId")){
+            try {
+                consultarPorId(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }    
     }
     
@@ -187,5 +193,20 @@ public class ControleUsuario extends HttpServlet {
         daoUsuario.alterarUsuario(usuario);
         this.consultaTodosUsuarios(req, resp);        
     }
+    
+    public void consultarPorId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
+        
+        int id = Integer.parseInt(req.getParameter("id"));
+        
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(id);
+        
+        UsuarioDAO daoUsuario = new UsuarioDAO();
+        usuario = daoUsuario.consultarPorId(usuario);
+        req.setAttribute("usuario", usuario);
+        req.getRequestDispatcher("alterarUsuario.jsp").forward(req, resp);
+        
+    }
+    
 }
 
