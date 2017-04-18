@@ -10,9 +10,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-/**
+ /**
  *
  * @author devops
  */
@@ -27,6 +28,9 @@ public class Atributo {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "atributo")
     private TipoAtributo tipoAtributo;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Componente componente;
  
 
     @Override

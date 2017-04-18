@@ -115,7 +115,7 @@
 
         <div class="container">
             <div class="row" >
-                <form class="col s12" action="ControleUsuario" method="POST" >
+                <form class="col s12" action="cadastrarUsuario" method="POST" >
 
 
                     <div class="row">

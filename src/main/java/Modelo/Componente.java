@@ -29,7 +29,7 @@ public class Componente {
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "componente")
     private TipoComponente tipoComponente;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoAtributo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componente")
     private ArrayList<Atributo> atributos;
 
 
