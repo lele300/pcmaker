@@ -119,15 +119,11 @@ public class UsuarioDAO {
     };
     
     public Usuario consultarPorId(Usuario usuario){
-        
-        try{
+
         EntityManager manager = new JPAUtil().getEntityManager();
         usuario = manager.find(Usuario.class, usuario.getIdUsuario());
-        } catch(Exception ex){
-            ex.getMessage();
-            System.out.println("Erro ao recuperar usuário: "+ex);
-        }
         return usuario;
+        
     }
 }
     

@@ -152,13 +152,13 @@
                             <td><%=e.getBairro()%></td>
                             <td><%=e.getCep()%></d>
                             <td><%=e.getUf()%></td>
-                            <td><%=e.getNumero()%></td>=e.getComplemen
+                            <td><%=e.getNumero()%></td>
                             <td><%=u.getTipoAdm()%></td>
                             <td><%=e.getCidade()%></td>
                             <td><%=e.getComplemento()%></td>
                                
                         <td><b><a href="deletarUsuario?id=<%=u.getIdUsuario()%>"/>Excluir</b> </td>
-                        <td> <b><a href="alterarUsuario.jsp?id=<%=u.getIdUsuario()%>"/>Alterar</b> </td>
+                        <td> <b><a href="consultarPorId?id=<%=u.getIdUsuario()%>"/>Alterar</b> </td>
                     </tr>
                     <%}%>
                    <%}%>

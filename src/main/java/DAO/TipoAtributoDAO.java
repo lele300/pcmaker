@@ -20,23 +20,19 @@ import org.hibernate.HibernateException;
 public class TipoAtributoDAO {
     
     //Método para cadastrar um Tipo atributo  no banco de dados
-    public void cadastrarTipoAtributo(TipoAtributo TipoAtributo) {
+    public void cadastrarTipoAtributo(TipoAtributo tipoAtributo) {
 
         EntityManager manager = new JPAUtil().getEntityManager();
         try {
             manager.getTransaction().begin(); // Inicia uma transação
-            if (TipoAtributo.getNome() == null) {
-                manager.persist(TipoAtributo);
-            } else {
-                manager.merge(TipoAtributo); // Carrega a entitade TipoAtributo e o torna MANAGED
-            }
+            manager.persist(tipoAtributo);
             manager.flush(); // Força uma sincronia com o banco de dados
             manager.getTransaction().commit(); // Comita uma transação. 
             System.out.println(" Novo Tipo Atributo inserido com sucesso");
         } catch (Exception ex) {
             ex.getMessage();
             manager.getTransaction().rollback();// Executa um rollback em caso de erros
-            System.out.println("Erro ao inserir um tipo atriuto novo: "+ex);
+            System.out.println("Erro ao inserir um tipo atributo novo: "+ex);
         } finally {
             manager.close(); //Encerra uma transação
         }
@@ -49,20 +45,20 @@ public class TipoAtributoDAO {
         // Instancia um objeto EntityManager para utilizar operações SQL
         EntityManager manager = new JPAUtil().getEntityManager();
         List<TipoAtributo> litaTipoAtributo = new ArrayList<>();
-        TypedQuery<TipoAtributo> query = manager.createQuery("select u from tipo_atributo u", TipoAtributo.class);
+        TypedQuery<TipoAtributo> query = manager.createQuery("select tp from TipoAtributo tp", TipoAtributo.class);
         litaTipoAtributo = query.getResultList();
         return litaTipoAtributo;
     }
     
     //Metodo para deletar um Tipo atributo do banco
-    public void deletarTipoAtributo(TipoAtributo TipoAtributo) {
+    public void deletarTipoAtributo(TipoAtributo tipoAtributo) {
 
         EntityManager manager = new JPAUtil().getEntityManager(); //Inicia um Entity Manager      
         manager.getTransaction().begin(); //Inicia uma transação
 
         try {
-            TipoAtributo = manager.find(TipoAtributo.class, TipoAtributo.getId()); // Resgata um Tipo Atributo através da primary key
-            manager.remove(TipoAtributo); //Exclui o tipoAtributo do Banco de dados.
+            tipoAtributo = manager.find(TipoAtributo.class, tipoAtributo.getId()); // Resgata um Tipo Atributo através da primary key
+            manager.remove(tipoAtributo); //Exclui o tipoAtributo do Banco de dados.
             manager.getTransaction().commit(); //Comita a transação 
         } catch (Exception ex) {
             ex.getMessage();
@@ -74,13 +70,13 @@ public class TipoAtributoDAO {
     }
     
     //Metodo 
-    public void alterarTipoAtributo(TipoAtributo TipoAtributo) {
+    public void alterarTipoAtributo(TipoAtributo tipoAtributo) {
 
         EntityManager manager = new JPAUtil().getEntityManager();
         manager.getTransaction().begin();
         try{
-            if(TipoAtributo.getNome() != null){
-            manager.merge(TipoAtributo);
+            if(tipoAtributo.getNome() != null){
+            manager.merge(tipoAtributo);
             manager.getTransaction().commit();
             System.err.println("Tipo atributo  alterado com sucesso");
             }
@@ -93,8 +89,6 @@ public class TipoAtributoDAO {
         }
 
     }
-    
-    
-    
+ 
     
 }

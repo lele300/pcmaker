@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
  
-@WebServlet(name = "ControleUsuario", urlPatterns = {"/cadastrarUsuario","/consultarUsuario","/deletarUsuario","/alterarUsuario"})
+@WebServlet(name = "ControleUsuario", urlPatterns = {"/cadastrarUsuario","/consultarUsuario","/deletarUsuario","/alterarUsuario","/consultarPorId"})
 public class ControleUsuario extends HttpServlet {
 
     @Override
@@ -66,7 +66,7 @@ public class ControleUsuario extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if(uri.equals(req.getContextPath() + "consultarPorId")){
+        } else if(uri.equals(req.getContextPath() + "/consultarPorId")){
             try {
                 consultarPorId(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
@@ -140,7 +140,7 @@ public class ControleUsuario extends HttpServlet {
     
     public void deletarUsuario(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
         
-        Usuario usuario= new Usuario();  
+        Usuario usuario = new Usuario();  
     
         usuario.setIdUsuario(Integer.parseInt(req.getParameter("id")));
         
@@ -153,8 +153,10 @@ public class ControleUsuario extends HttpServlet {
     public void alterarUsuario(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
        
         int id = Integer.parseInt(req.getParameter("id"));
-        String nomeCompleto = req.getParameter("nomeCompleto");
+        String login = req.getParameter("login");
         String senha = req.getParameter("senha");
+        String nomeCompleto = req.getParameter("nomeCompleto");
+        String telefone = req.getParameter("telefone");
         String rg = req.getParameter("rg");
         String cpf = req.getParameter("cpf");
         String cep = req.getParameter("cep");
@@ -178,10 +180,14 @@ public class ControleUsuario extends HttpServlet {
         
         Usuario usuario = new Usuario();
         
-        usuario.setNomeCompleto(nomeCompleto);
+        usuario.setIdUsuario(id);
+        usuario.setLogin(login);
         usuario.setSenha(senha);
+        usuario.setNomeCompleto(nomeCompleto);
+        usuario.setTelefone(telefone);
         usuario.setRg(rg);
         usuario.setCpf(cpf);
+        usuario.setTipoAdm(TipoAdm.CLIENTE);
         
         listaEnderecos.add(endereco);
         usuario.setEnderecos(listaEnderecos);
@@ -196,13 +202,14 @@ public class ControleUsuario extends HttpServlet {
     
     public void consultarPorId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
         
-        int id = Integer.parseInt(req.getParameter("id"));
-        
         Usuario usuario = new Usuario();
-        usuario.setIdUsuario(id);
+        
+        usuario.setIdUsuario(Integer.parseInt(req.getParameter("id")));
         
         UsuarioDAO daoUsuario = new UsuarioDAO();
+        
         usuario = daoUsuario.consultarPorId(usuario);
+        
         req.setAttribute("usuario", usuario);
         req.getRequestDispatcher("alterarUsuario.jsp").forward(req, resp);
         

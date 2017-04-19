@@ -117,7 +117,6 @@
             <div class="row" >
                 <form class="col s12" action="cadastrarUsuario" method="POST" >
 
-
                     <div class="row">
                         <div class="input-field col s12">
                             <input name="nomeCompleto" id="nomeCompleto" type="text" class="validate hoverable" maxlength="100" required>
