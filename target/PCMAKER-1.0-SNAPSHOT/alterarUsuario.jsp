@@ -129,18 +129,15 @@
                         <div class="input-field col s12">
                             <input name="nomeCompleto" id="nomeCompleto" type="text" class="validate hoverable" maxlength="100" required value="<%=usuario.getNomeCompleto()%>">
                             <label for="nomeCompleto" class="grey-text text-darken-4"><i class="material-icons left">directions_walk</i>Nome Completo</label>
+                            
                         </div>
-                    </div>
-
-
-                    <div class="row">
-
-                        <div class="input-field col s12">
+                            
+                    <div class="input-field col s12">
 
                             <input name="login" id="login" type="text" class="validate hoverable" required value="<%=usuario.getLogin()%>" hidden>
                             <input name="senha" id="senha" type="password" class="validate hoverable" minlength="6" required value="<%=usuario.getSenha()%>" hidden>
+                            
                         </div>
-
                     </div>
 
                     <div class="row">
@@ -171,7 +168,7 @@
                     <% for (Endereco e : usuario.getEnderecos()) {%>
                     <div class="row">
 
-
+                        <input name="idEndereco" id="idEndereco" type="text" class="validate hoverable" minlength="6" required value="<%=e.getIdEndereco()%>" hidden>
                         <div class="input-field col s6">
                             <input name="cep" id="cep" type="text" class="validate hoverable" maxlength="8" required value="<%=e.getCep()%>">
                             <label for="cep" class="grey-text text-darken-4"><i class="material-icons left">local_shipping</i>CEP</label>

@@ -5,33 +5,43 @@
  */
 package Modelo;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author devops
  */
-public class Componente {
+
+@Entity
+public class Componente implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(length = 255, nullable = false, insertable = true, updatable = true, unique = true)
+    @Column(length = 100, nullable = false, insertable = true, updatable = true, unique = true)
     private String nome;
     
-    @OneToMany(cascade = CascadeType.ALL , mappedBy = "componente")
-    private TipoComponente tipoComponente;
+    @Column(length = 100, nullable = false, insertable = true, updatable = true)
+    private String marca;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componente")
-    private ArrayList<Atributo> atributos;
-
+    @Column(length = 50, nullable = false, insertable = true, updatable = true)
+    private String modelo;
+    
+    @Column(length = 512, nullable = false, insertable = true, updatable = true)
+    private String descricao;
+    
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "componente")
+    private List<Atributo> atributos;
 
     public int getId() {
         return id;
@@ -49,25 +59,47 @@ public class Componente {
         this.nome = nome;
     }
 
-    public TipoComponente getTipoComponente() {
-        return tipoComponente;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setTipoComponente(TipoComponente tipoComponente) {
-        this.tipoComponente = tipoComponente;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
-    public ArrayList<Atributo> getAtributo() {
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public List<Atributo> getAtributos() {
         return atributos;
     }
 
-    public void setAtributo(ArrayList<Atributo> atributo) {
-        this.atributos = atributo;
+    public void setAtributos(List<Atributo> atributos) {
+        this.atributos = atributos;
     }
-    
-     @Override
+
+    @Override
     public int hashCode() {
         int hash = 7;
+        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this.nome);
+        hash = 61 * hash + Objects.hashCode(this.marca);
+        hash = 61 * hash + Objects.hashCode(this.modelo);
+        hash = 61 * hash + Objects.hashCode(this.descricao);
+        hash = 61 * hash + Objects.hashCode(this.atributos);
         return hash;
     }
 
@@ -86,7 +118,27 @@ public class Componente {
         if (this.id != other.id) {
             return false;
         }
-        return true;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.marca, other.marca)) {
+            return false;
+        }
+        if (!Objects.equals(this.modelo, other.modelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        return Objects.equals(this.atributos, other.atributos);
     }
+
+    @Override
+    public String toString() {
+        return "Componente{" + "id=" + id + ", nome=" + nome + ", marca=" + marca + ", modelo=" + modelo + ", descricao=" + descricao + ", atributos=" + atributos + '}';
+    }
+
     
 }
+    
+    

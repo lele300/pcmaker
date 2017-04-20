@@ -159,6 +159,7 @@ public class ControleUsuario extends HttpServlet {
         String telefone = req.getParameter("telefone");
         String rg = req.getParameter("rg");
         String cpf = req.getParameter("cpf");
+        int idEndereco = Integer.parseInt(req.getParameter("idEndereco"));
         String cep = req.getParameter("cep");
         String rua = req.getParameter("rua");
         String bairro = req.getParameter("bairro");
@@ -170,6 +171,7 @@ public class ControleUsuario extends HttpServlet {
         List<Endereco> listaEnderecos = new ArrayList<>();
         Endereco endereco = new Endereco();
         
+        endereco.setIdEndereco(idEndereco);
         endereco.setCep(cep);
         endereco.setRua(rua);
         endereco.setBairro(bairro);

@@ -36,6 +36,10 @@ $('.dropdown-button').dropdown({
   $( "#header-plugin" ).load( "http://vivinantony.github.io/header-plugin/", function() {
 	$("a.back-to-link").attr("href", "http://blog.thelittletechie.com/2015/05/different-social-nav-styles.html#tlt");  
 });
+
+$(document).ready(function() {
+    $('select').material_select();
+});
     
 
 

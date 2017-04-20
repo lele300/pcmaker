@@ -5,61 +5,38 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 
  /**
  *
  * @author devops
  */
-public class Atributo {
+
+
+public class Atributo implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @Column(length = 100, nullable = false, updatable = true, insertable = true)
-    private String valor;
+    private String nomeAtributo;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "atributo")
-    private TipoAtributo tipoAtributo;
+    @Column(length = 100, nullable = false, updatable = true, insertable = true)
+    private double valor;
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Componente componente;
- 
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Atributo other = (Atributo) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    public Atributo() {
-
-    }
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Componente_Atributo")
+    private List<Componente> componentes;
 
     public int getId() {
         return id;
@@ -69,15 +46,30 @@ public class Atributo {
         this.id = id;
     }
 
-    public String getValor() {
+    public String getNomeAtributo() {
+        return nomeAtributo;
+    }
+
+    public void setNomeAtributo(String nomeAtributo) {
+        this.nomeAtributo = nomeAtributo;
+    }
+
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
-     
+    public List<Componente> getComponentes() {
+        return componentes;
+    }
+
+    public void setComponentes(List<Componente> componentes) {
+        this.componentes = componentes;
+    }
+
     
     
 }

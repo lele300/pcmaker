@@ -20,20 +20,10 @@
         <servlet-name>ControleAcesso</servlet-name>
         <servlet-class>Controle.ControleAcesso</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ControleComponente</servlet-name>
-        <servlet-class>Controle.ControleComponente</servlet-class>
-    </servlet>
-
     <servlet-mapping>
         <servlet-name>ControleAcesso</servlet-name>
         <url-pattern>/ControleAcesso</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ControleComponente</servlet-name>
-        <url-pattern>/ControleComponente</url-pattern>
-    </servlet-mapping>
-
     <session-config>
         <session-timeout>
             30

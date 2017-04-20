@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  *
@@ -28,7 +27,7 @@ public class Endereco implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEndereco;
     
-    @Column(length = 8, unique = true, nullable = false) //Único CEP no banco
+    @Column(length = 8, nullable = false) //Único CEP no banco
     private String cep;
     
     @Column(length = 100, nullable = false)

@@ -7,6 +7,7 @@ package DAO;
 
 import Modelo.Atributo;
 import Util.JPAUtil;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,8 +18,9 @@ import org.hibernate.HibernateException;
  *
  * @author devops
  */
-public class AtributoDAO {
-    
+
+public class AtributoDAO implements Serializable {
+     
     
      //Método para cadastrar um Atributo  no banco de dados
     public void cadastrarAtributo(Atributo atributo) {
@@ -26,18 +28,14 @@ public class AtributoDAO {
         EntityManager manager = new JPAUtil().getEntityManager();
         try {
             manager.getTransaction().begin(); // Inicia uma transação
-            if (atributo.getValor() == null) {
-                manager.persist(atributo);
-            } else {
-                manager.merge(atributo); // Carrega a entitade Atributo e o torna MANAGED
-            }
+            manager.persist(atributo);
             manager.flush(); // Força uma sincronia com o banco de dados
             manager.getTransaction().commit(); // Comita uma transação. 
-            System.out.println(" Novo Tipo Atributo inserido com sucesso");
+            System.out.println("Atributo inserido com sucesso");
         } catch (Exception ex) {
             ex.getMessage();
             manager.getTransaction().rollback();// Executa um rollback em caso de erros
-            System.out.println("Erro ao inserir um Atributo novo: "+ex);
+            System.out.println("Erro ao inserir um Atributo: "+ex);
         } finally {
             manager.close(); //Encerra uma transação
         }
@@ -50,7 +48,7 @@ public class AtributoDAO {
         // Instancia um objeto EntityManager para utilizar operações SQL
         EntityManager manager = new JPAUtil().getEntityManager();
         List<Atributo> litaAtributo = new ArrayList<>();
-        TypedQuery<Atributo> query = manager.createQuery("select u from atributo u", Atributo.class);
+        TypedQuery<Atributo> query = manager.createQuery("select at from Atributo at", Atributo.class);
         litaAtributo = query.getResultList();
         return litaAtributo;
     }
@@ -80,11 +78,10 @@ public class AtributoDAO {
         EntityManager manager = new JPAUtil().getEntityManager();
         manager.getTransaction().begin();
         try{
-            if(atributo.getValor() != null){
             manager.merge(atributo);
             manager.getTransaction().commit();
-            System.err.println("Tipo Atributo  alterado com sucesso");
-            }
+            System.err.println("Atributo  alterado com sucesso");
+            
         } catch(HibernateException ex){
             ex.getMessage();
             manager.getTransaction().rollback();
@@ -94,9 +91,5 @@ public class AtributoDAO {
         }
 
     }
-    
-    //testando com um comentario novo. 
-    
-    
-    
+
 }

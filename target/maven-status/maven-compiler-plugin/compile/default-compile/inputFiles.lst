@@ -14,7 +14,7 @@ C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\DAO\ComponenteDAO.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Controle\ControleAcesso.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Enum\TipoAdm.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Modelo\TipoAtributo.java
-C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Controle\ControleComponente.java
+C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Controle\ControleTipoComponente.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Modelo\Carrinho.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Util\JPAUtil.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Controle\ControleTipoAtributo.java

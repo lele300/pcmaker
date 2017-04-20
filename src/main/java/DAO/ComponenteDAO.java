@@ -17,6 +17,7 @@ import org.hibernate.HibernateException;
  *
  * @author devops
  */
+
 public class ComponenteDAO {
     
     //Método para cadastrar um Componente  no banco de dados
