@@ -6,21 +6,20 @@
 package Modelo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
-
- /**
+/**
  *
- * @author devops
+ * @author leo_l
  */
-
 
 public class Atributo implements Serializable {
     
@@ -28,15 +27,16 @@ public class Atributo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(length = 100, nullable = false, updatable = true, insertable = true)
-    private String nomeAtributo;
+    @Column(length = 255, insertable = true, updatable = true)
+    private String valor;
     
-    @Column(length = 100, nullable = false, updatable = true, insertable = true)
-    private double valor;
+    //Um Atributo só está associado á um tipoAtributo
+    @ManyToOne(cascade = CascadeType.ALL)
+    private TipoAtributo tipoAtributo;
     
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Componente_Atributo")
-    private List<Componente> componentes;
+    //Um componente está associado á varios atributos
+    @ManyToMany
+    private Componente componente;
 
     public int getId() {
         return id;
@@ -46,30 +46,49 @@ public class Atributo implements Serializable {
         this.id = id;
     }
 
-    public String getNomeAtributo() {
-        return nomeAtributo;
-    }
-
-    public void setNomeAtributo(String nomeAtributo) {
-        this.nomeAtributo = nomeAtributo;
-    }
-
-    public double getValor() {
+    public String getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 
-    public List<Componente> getComponentes() {
-        return componentes;
+    public TipoAtributo getTipoAtributo() {
+        return tipoAtributo;
     }
 
-    public void setComponentes(List<Componente> componentes) {
-        this.componentes = componentes;
+    public void setTipoAtributo(TipoAtributo tipoAtributo) {
+        this.tipoAtributo = tipoAtributo;
     }
 
-    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + this.id;
+        hash = 41 * hash + Objects.hashCode(this.valor);
+        hash = 41 * hash + Objects.hashCode(this.tipoAtributo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Atributo other = (Atributo) obj;
+        return this.id == other.id;
+    }
+
+    @Override
+    public String toString() {
+        return "Atributo{" + "id=" + id + ", valor=" + valor + ", tipoAtributo=" + tipoAtributo + '}';
+    }
     
 }

@@ -5,16 +5,14 @@
  */
 package Controle;
 
-import Modelo.Usuario;
-import DAO.UsuarioDAO;
-import Enum.TipoAdm;
+
 import Modelo.Atributo;
 import Modelo.Componente;
-import Modelo.Endereco;
+import Modelo.TipoAtributo;
+import Modelo.TipoComponente;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -80,6 +78,29 @@ public class ControleComponente extends HttpServlet {
     
 
     public void cadastrarComponente(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
+        
+        String nomeComponente = req.getParameter("nomeComponente");
+        int quantidade = Integer.parseInt(req.getParameter("quantidade"));
+        String marca = req.getParameter("marca");
+        String modelo = req.getParameter("modelo");
+        String descricao = req.getParameter("descricao");
+        int[] opcoesSelecionadas = req.getParameterValues("opcaoAtributo");
+        ArrayList<TipoAtributo> listaAtributo = new ArrayList<>();
+        
+        //Criando o objeto TipoComponente e setando o nome do componentea
+  TipoAtributo objta;
+        TipoComponente tipoComponente = new TipoComponente();
+        tipoComponente.setNomeComponente(nomeComponente);
+                objta = new TipoAtributo();
+                objta.setId(opcoesSelecionadas[i]);
+                listaAtributo.add(objta);
+            }
+        }
+        componente.getMarca(marca)   
+        componente.setQuantidade(quantidade);
+        componente.setDescricao(descricao);
+        componente.setListaAtributo(listaAtributo);
+        
         
         
     }

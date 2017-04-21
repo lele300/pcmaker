@@ -116,14 +116,21 @@
             <div class="row">
                 <form class="col s12" method="post" action="ControleComponente">
                     <div class="row">
-                        <div class="input-field col s12">
+                        
+                        <div class="input-field col s6">
                             <input name="nomeComponente" id="nomeComponente" type="text" class="validate hoverable" maxlength="50" required>
                             <label for="nomeComponente" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">layers</i>Componente</label>
+                        </div> 
+                        
+                        <div class="input-field col s6">
+                            <input name="quantidade" id="quantidade" type="text" class="validate hoverable" maxlength="50" required>
+                            <label for="quantidade" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">layers</i>Quantidade</label>
                         </div> 
                       
                     </div>
                     
                     <div class="row">
+                        
                         <div class="input-field col s6">
                             <input name="modelo" id="modelo" type="text" class="validate hoverable" maxlength="50" required>
                             <label for="modelo" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">layers</i>Modelo</label>
@@ -137,6 +144,7 @@
                     </div>
                     
                     <div class="row">
+                        
                         <div class="input-field col s12">
                             <textarea name="descricao" id="descricao" class="materialize-textarea hoverable"></textarea>
                             <label for="descricao" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">flag</i>Descrição</label>
@@ -144,65 +152,99 @@
                         
                     </div>
                     
-                    <div class="row">   
-                        <div class="input-field col s12">
-                            <select multiple name="opcaoAtributos">
-                                <optgroup label="Placa-Mãe">
-                                    <option value="" disabled>Escolha os atributos</option>
-                                    <option value="soquete">Soquete</option>
-                                    <option value="slot">Slot Placa de vídeo</option>
-                                    <option value="portasUSB">Portas USB</option>
-                                    <option value="wattsConsumidos">Watts consumidos</option>
-                                    <option value="slotsSATA">Slots SATA</option>
-                                    <option value="clock">Clock</option>
-                                </optgroup>
-                                <optgroup label="Processador">
-                                    <option value="soquete">Soquete</option>
-                                    <option value="cache">Cache</option>
-                                    <option value="wattsConsumidos">Watts consumidos</option>
-                                    <option value="nucleos">Núcleos</option>
-                                    <option value="clock">Clock</option>
-                                </optgroup>
-                                
-                                 <optgroup label="HD">
-                                    <option value="capacidade">Capacidade</option>
-                                    <option value="tipoHD">Tipo do HD</option>
-                                    <option value="wattsConsumidos">Watts consumidos</option>
-                                    <option value="velocidade">Velocidade</option>
-                                    <option value="interface">Interface</option>
-                                </optgroup>
-                                
-                                 <optgroup label="PlacaDeVideo">
-                                    <option value="memoria">Memória(DDR3,DDR4...)</option>
-                                    <option value="quantidadeMemoria">Quantidade de memória</option>
-                                    <option value="wattsConsumidos">Watts consumidos</option>
-                                </optgroup>
-                                
-                                 <optgroup label="Memória">
-                                    <option value="clock">Clock</option>
-                                    <option value="quantidadeMemória">Quantidade de memória</option>
-                                    <option value="wattsConsumidos">Watts consumidos</option>
-                                    <option value="memoria">Memória(DDR3,DDR4...)</option>
-                                </optgroup>
-                                
-                                <optgroup label="Fonte">
-                                    <option value="potecia">Potência</option>
-                                    <option value="voltagem">Voltagem</option>
-                                    <option value="tensao">Tensão</option>
-                                </optgroup>
-                                
-                                <optgroup label="Gabinete">
-                                    <option value="portasUSB">Portas USB</option>
-                                    <option value="cor">Cor</option>
-                                    <option value="peso">Peso</option>
-                                    <option value="material">Material</option>
-                                </optgroup>
-                                
-                                
-                            </select>
-                            <label>Selecione os atributos do seu componente</label>
+                    <!-- Opções dos atributos -->
+                    
+                    <div class="row">
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in black" id="clock" checked="checked" />
+                            <label for="clock">Clock</label>
                         </div>
-                    </div>  
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="capacidade" checked="checked" />
+                            <label for="capacidade">Capacidade (500 GB...)</label>
+                        </div>
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="tipoMemoria" checked="checked" />
+                            <label for="tipoMemoria">Memória (DD3,DDR4...)</label>
+                        </div>
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="velocidadeHD" checked="checked" />
+                            <label for="velocidadeHD">Vel. HD (5200 RPM...)</label>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class=" col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="portasUSB" checked="checked" />
+                            <label for="portasUSB">Qtde. Portas USB</label>
+                        </div>
+                        
+                         <div class=" col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="quantidadeMemoria" checked="checked" />
+                            <label for="quantidadeMemoria">Qtde. Memória (2 GB...)</label>
+                        </div>
+                        
+                         <div class=" col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="interface" checked="checked" />
+                            <label for="interface">Interface (SATA...)</label>
+                        </div>
+                        
+                         <div class=" col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="soquete" checked="checked" />
+                            <label for="soquete">Soquete</label>
+                         </div>
+                    </div>
+                    
+                    <div class="row">
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="quantidadeNucleos" checked="checked" />
+                            <label for="quantidadeNucleos">Qtde. de Núcleos</label> 
+                        </div>
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="cache" checked="checked" />
+                            <label for="cache">Cache</label> 
+                        </div>
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="potencia" checked="checked" />
+                            <label for="potencia">Potência</label> 
+                        </div>
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="voltagem" checked="checked" />
+                            <label for="voltagem">Voltagem</label>                            
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="cor" checked="checked" />
+                            <label for="cor">Cor</label> 
+                        </div>
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="peso" checked="checked" />
+                            <label for="peso">Cache</label> 
+                        </div>
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="materialGabinete" checked="checked" />
+                            <label for="materialGabinete">Material Gabinete</label> 
+                        </div>
+                        
+                        <div class="col s3">
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="quantidadeThreads" checked="checked" />
+                            <label for="quantidadeThreads">Qtde. de Threads</label>                            
+                        </div>
+                    </div>
                     
                     <input type="submit" class="btn waves-effect waves-light grey darken-4" value="Cadastrar">
                 </form>

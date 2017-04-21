@@ -10,38 +10,41 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
- * @author devops
+ * @author leo_l
  */
 
-@Entity
 public class Componente implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     
-    @Column(length = 100, nullable = false, insertable = true, updatable = true, unique = true)
-    private String nome;
-    
-    @Column(length = 100, nullable = false, insertable = true, updatable = true)
-    private String marca;
-    
-    @Column(length = 50, nullable = false, insertable = true, updatable = true)
+    @Column(length = 100, insertable = true, updatable = true, nullable = false)
     private String modelo;
     
-    @Column(length = 512, nullable = false, insertable = true, updatable = true)
+    @Column(length = 100, insertable = true, updatable = true, nullable = false)
+    private String marca;
+    
+    @Column(length = 3, insertable = true, updatable = true, nullable = false)
+    private int quantidade;
+    
+    @Column(length = 255, insertable = true, updatable = true, nullable = false)
     private String descricao;
     
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "componente")
-    private List<Atributo> atributos;
+    //Um componente só pode estar associado á um tipoComponente
+    @ManyToOne(cascade = CascadeType.ALL)
+    private TipoComponente tipoComponente;
+    
+    //Um componente pode estar associado á vários atributos
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Atributo> listaAtributo;
 
     public int getId() {
         return id;
@@ -49,22 +52,6 @@ public class Componente implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
     }
 
     public String getModelo() {
@@ -75,6 +62,22 @@ public class Componente implements Serializable {
         this.modelo = modelo;
     }
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -83,23 +86,18 @@ public class Componente implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<Atributo> getAtributos() {
-        return atributos;
+    public List<Atributo> getListaAtributo() {
+        return listaAtributo;
     }
 
-    public void setAtributos(List<Atributo> atributos) {
-        this.atributos = atributos;
+    public void setListaAtributo(List<Atributo> listaAtributo) {
+        this.listaAtributo = listaAtributo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + this.id;
-        hash = 61 * hash + Objects.hashCode(this.nome);
-        hash = 61 * hash + Objects.hashCode(this.marca);
-        hash = 61 * hash + Objects.hashCode(this.modelo);
-        hash = 61 * hash + Objects.hashCode(this.descricao);
-        hash = 61 * hash + Objects.hashCode(this.atributos);
+        int hash = 5;
+        hash = 71 * hash + this.id;
         return hash;
     }
 
@@ -118,27 +116,27 @@ public class Componente implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.marca, other.marca)) {
+        if (this.quantidade != other.quantidade) {
             return false;
         }
         if (!Objects.equals(this.modelo, other.modelo)) {
             return false;
         }
+        if (!Objects.equals(this.marca, other.marca)) {
+            return false;
+        }
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
-        return Objects.equals(this.atributos, other.atributos);
+        if (!Objects.equals(this.listaAtributo, other.listaAtributo)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Componente{" + "id=" + id + ", nome=" + nome + ", marca=" + marca + ", modelo=" + modelo + ", descricao=" + descricao + ", atributos=" + atributos + '}';
+        return "Componente{" + "id=" + id + ", modelo=" + modelo + ", marca=" + marca + ", quantidade=" + quantidade + ", descricao=" + descricao + ", listaAtributo=" + listaAtributo + '}';
     }
-
     
 }
-    
-    
