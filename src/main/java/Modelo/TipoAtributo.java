@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
  * @author leo_l
  */
 
+@Entity
 public class TipoAtributo implements Serializable {
     
     @Id

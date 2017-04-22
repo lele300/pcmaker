@@ -6,6 +6,7 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +22,7 @@ import javax.persistence.ManyToOne;
  * @author leo_l
  */
 
+@Entity
 public class Atributo implements Serializable {
     
     @Id
@@ -34,9 +36,9 @@ public class Atributo implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private TipoAtributo tipoAtributo;
     
-    //Um componente está associado á varios atributos
+    //Um atributo está associado á varios atributos
     @ManyToMany
-    private Componente componente;
+    private List<Componente> componentes;
 
     public int getId() {
         return id;
@@ -61,6 +63,16 @@ public class Atributo implements Serializable {
     public void setTipoAtributo(TipoAtributo tipoAtributo) {
         this.tipoAtributo = tipoAtributo;
     }
+
+    public List<Componente> getComponentes() {
+        return componentes;
+    }
+
+    public void setComponentes(List<Componente> componentes) {
+        this.componentes = componentes;
+    }
+    
+    
 
     @Override
     public int hashCode() {

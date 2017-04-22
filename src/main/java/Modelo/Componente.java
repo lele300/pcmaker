@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -20,6 +22,7 @@ import javax.persistence.ManyToOne;
  * @author leo_l
  */
 
+@Entity
 public class Componente implements Serializable {
     
     @Id
@@ -44,6 +47,7 @@ public class Componente implements Serializable {
     
     //Um componente pode estar associado á vários atributos
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Componente_Atributo")
     private List<Atributo> listaAtributo;
 
     public int getId() {

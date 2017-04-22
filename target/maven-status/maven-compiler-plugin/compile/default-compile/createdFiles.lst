@@ -1,7 +1,9 @@
+Modelo\Atributo_.class
 Controle\ControleAcesso.class
 Modelo\Endereco_.class
 DAO\UsuarioDAO.class
 AutorizacaoDeAcesso\AcessoLogado.class
+DAO\AtributoDAO.class
 Modelo\Componente.class
 Modelo\Usuario.class
 Modelo\Endereco.class
@@ -11,7 +13,8 @@ Controle\ControleUsuario.class
 Modelo\Atributo.class
 Util\JPAUtil.class
 Modelo\Usuario_.class
-Controle\ControleComponente.class
+Modelo\TipoAtributo_.class
 Enum\TipoAdm.class
 DAO\ComponenteDAO.class
 AutorizacaoDeAcesso\AcessoAdministrativo.class
+Controle\ControleAtributo.class
