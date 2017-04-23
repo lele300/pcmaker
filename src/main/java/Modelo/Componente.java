@@ -46,8 +46,7 @@ public class Componente implements Serializable {
     private TipoComponente tipoComponente;
     
     //Um componente pode estar associado á vários atributos
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Componente_Atributo")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "componentes")
     private List<Atributo> listaAtributo;
 
     public int getId() {

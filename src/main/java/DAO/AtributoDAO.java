@@ -41,7 +41,7 @@ public class AtributoDAO {
         
         EntityManager manager = new JPAUtil().getEntityManager();
         List<Atributo> listaAtributos = new ArrayList<>();
-        TypedQuery<Atributo> query = manager.createQuery("select at from Atributo at join at.componente",Atributo.class);
+        TypedQuery<Atributo> query = manager.createQuery("select a from Atributo a join a.tipoAtributo",Atributo.class);
         listaAtributos = query.getResultList();
         return listaAtributos;
         

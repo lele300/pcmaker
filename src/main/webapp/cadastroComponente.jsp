@@ -45,7 +45,7 @@
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
                         <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i>Entrar/Cadastrar</a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
-                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">account_balance</i>Home</a></li>
+                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
                 </div>
             </nav>
@@ -115,49 +115,24 @@
         <div class="container">
             <div class="row">
                 <form class="col s12" method="post" action="ControleComponente">
-                    <div class="row">
-                        
-                        <div class="input-field col s6">
-                            <input name="nomeComponente" id="nomeComponente" type="text" class="validate hoverable" maxlength="50" required>
-                            <label for="nomeComponente" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">layers</i>Componente</label>
-                        </div> 
-                        
-                        <div class="input-field col s6">
-                            <input name="quantidade" id="quantidade" type="text" class="validate hoverable" maxlength="50" required>
-                            <label for="quantidade" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">layers</i>Quantidade</label>
-                        </div> 
-                      
-                    </div>
-                    
-                    <div class="row">
-                        
-                        <div class="input-field col s6">
-                            <input name="modelo" id="modelo" type="text" class="validate hoverable" maxlength="50" required>
-                            <label for="modelo" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">layers</i>Modelo</label>
-                        </div>       
-                        
-                        <div class="input-field col s6">
-                            <input name="marca" id="marca" type="text" class="validate hoverable" maxlength="50" required>
-                            <label for="marca" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">layers</i>Marca</label>
-                        </div> 
-                        
-                    </div>
                     
                     <div class="row">
                         
                         <div class="input-field col s12">
-                            <textarea name="descricao" id="descricao" class="materialize-textarea hoverable"></textarea>
-                            <label for="descricao" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">flag</i>Descrição</label>
-                        </div>
-                        
+                            <input name="nomeComponente" id="nomeComponente" type="text" class="validate hoverable" maxlength="50" required>
+                            <label for="nomeComponente" class="grey-text text-darken-4"><i class="material-icons left brown-text text-lighten-2">layers</i>Componente</label>
+                        </div> 
                     </div>
                     
                     <!-- Opções dos atributos -->
+                    <div class="row">
+                        <h5><label for="instrucao" class="grey-text text-darken-4"><i class="material-icons left red-text text-darken-4">info_outline</i> Selecione os atributos que deseja para este componente </label></h5>
+                    </div>
                     
                     <div class="row">
                         
                         <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in black" id="clock" checked="checked" />
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="clock" checked="checked" />
                             <label for="clock">Clock</label>
                         </div>
                         
@@ -232,7 +207,7 @@
                         
                         <div class="col s3">
                             <input type="checkbox" name="opcaoAtributo" class="filled-in" id="peso" checked="checked" />
-                            <label for="peso">Cache</label> 
+                            <label for="peso">Watts Consumidos</label> 
                         </div>
                         
                         <div class="col s3">
@@ -246,15 +221,19 @@
                         </div>
                     </div>
                     
-                    <input type="submit" class="btn waves-effect waves-light grey darken-4" value="Cadastrar">
+                    <div class="row">
+                     
+                    </div>
+                    <input type="submit" class="btn waves-effect waves-light grey darken-4" value="Cadastrar Componente">
                 </form>
             </div>
         </div>
+ 
 
     <!-- Fim do formulário de cadastro de componente -->
 
 </div>
-
+   
 
 <!-- Início do Rodapé -->
 <footer class="page-footer grey darken-4">

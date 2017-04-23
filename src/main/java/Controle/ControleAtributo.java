@@ -14,6 +14,7 @@ import Modelo.TipoComponente;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,7 +42,7 @@ public class ControleAtributo extends HttpServlet {
             }
         } else if(uri.equals(req.getContextPath() + "/alterarAtributo")){
             try {
-                alterarUsuario(req, resp);
+                alterarAtributo(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -57,19 +58,19 @@ public class ControleAtributo extends HttpServlet {
         
         if(uri.equals(req.getContextPath() + "/consultarAtributo")){
             try {
-                consultaTodosUsuarios(req,resp);
+                consultaTodosAtributos(req,resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if(uri.equals(req.getContextPath() + "/deletarAtributo")) {
             try {
-                deletarUsuario(req, resp);
+                deletarAtributo(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if(uri.equals(req.getContextPath() + "/consultarPorIdAtributo")){
             try {
-                consultarPorId(req, resp);
+                consultarPorIdAtributo(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -77,7 +78,7 @@ public class ControleAtributo extends HttpServlet {
     }
     
     
-
+    //Método para cadastrar um atributo novo no banco de dados
     public void cadastrarAtributo(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
         
         //Recuperando o tipoAtributo do formulário
@@ -106,24 +107,81 @@ public class ControleAtributo extends HttpServlet {
         
     }
      
-    public void consultaTodosUsuarios(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
+    //Método para consultar todos os atributos cadastrados no banco de dados
+    public void consultaTodosAtributos(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
         
+        //Instância da AtributoDAO
+        AtributoDAO daoAtributo = new AtributoDAO();
+        
+        // Setando o resultado da consulta na listaAtributos
+        List<Atributo> listaAtributos = daoAtributo.consultarAtributos();
+        
+        //Atribuindo uma String para enviar á JSP consultaAtributos.jsp
+        req.setAttribute("listaAtributos", listaAtributos);
+        req.getRequestDispatcher("consultaAtributos.jsp").forward(req, resp);
 
     }
     
-    public void deletarUsuario(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
+    public void deletarAtributo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
         
+        //Recuperando o id do atributo da JSP e fazendo parse para Integer
+        int id = Integer.parseInt(req.getParameter("id"));
+        
+        //Instanciando objeto Atributo e setando o id
+        Atributo atributo = new Atributo();
+        atributo.setId(id);
+        
+        //Instanciando o objeto AtributoDAO para operações do banco de dados
+        AtributoDAO daoAtributo = new AtributoDAO();
+        
+        //Deleta o atributo do banco de dados
+        daoAtributo.deletarAtributo(atributo);
+        
+        //Chama o método para consultar todos os atributos e retornar á pagina de listagem dos atributos.
+        this.consultaTodosAtributos(req, resp);
      
     }
       
-    public void alterarUsuario(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
+    public void alterarAtributo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
        
+        //Recuperando o tipoAtributo do formulário
+        String nomeTipoAtributo = req.getParameter("nomeTipoAtributo");
+        
+        //Criando objeto TipoAtributo para setar o nomeTipoAtributo
+        TipoAtributo tipoAtributo = new TipoAtributo();
+        tipoAtributo.setNomeAtributo(nomeTipoAtributo);
+        
+        //Criando um ArrayList listaAtributo para popula-lo e inseri-lo em tipoAtributo
+        ArrayList<Atributo> listaAtributo = new ArrayList<>();
+        Atributo atributo = new Atributo();
+        
+        //Setando o objeto tipoAtributo dentro do objeto Atributo
+        atributo.setTipoAtributo(tipoAtributo);
+        
+        //Inserindo o objeto Atributo dentro da lista
+        listaAtributo.add(atributo);
+        
+        //Setando listaAtributo no objeto TipoAtributo
+        tipoAtributo.setAtributo(listaAtributo);
+        
+        AtributoDAO daoAtributo = new AtributoDAO();
+        daoAtributo.alterarAtributo(atributo);
+        this.consultaTodosAtributos(req, resp);
              
     }
     
-    public void consultarPorId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
+    public void consultarPorIdAtributo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException{
         
+       int id = Integer.parseInt(req.getParameter("id"));
        
+       Atributo atributo = new Atributo();
+       atributo.setId(id);
+       
+       AtributoDAO daoAtributo = new AtributoDAO();
+       atributo = daoAtributo.consultarPorIdAtributo(atributo);
+       
+       req.setAttribute("atributo", atributo);
+       req.getRequestDispatcher("alterarAtributo.jsp");
         
     }
     

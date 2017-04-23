@@ -1,12 +1,14 @@
 Modelo\Atributo_.class
 Controle\ControleAcesso.class
 Modelo\Endereco_.class
+Modelo\TipoComponente_.class
 DAO\UsuarioDAO.class
 AutorizacaoDeAcesso\AcessoLogado.class
 DAO\AtributoDAO.class
 Modelo\Componente.class
 Modelo\Usuario.class
 Modelo\Endereco.class
+Modelo\Componente_.class
 Modelo\TipoAtributo.class
 Modelo\TipoComponente.class
 Controle\ControleUsuario.class
