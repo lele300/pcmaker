@@ -116,9 +116,9 @@ public class ControleAtributo extends HttpServlet {
         // Setando o resultado da consulta na listaAtributos
         List<Atributo> listaAtributos = daoAtributo.consultarAtributos();
         
-        //Atribuindo uma String para enviar á JSP consultaAtributos.jsp
+        //Atribuindo uma String para enviar á JSP consultaAtributos.jsp o objeto listaAtributos
         req.setAttribute("listaAtributos", listaAtributos);
-        req.getRequestDispatcher("consultaAtributos.jsp").forward(req, resp);
+        req.getRequestDispatcher("cadastroComponente.jsp").forward(req, resp);
 
     }
     
@@ -186,4 +186,5 @@ public class ControleAtributo extends HttpServlet {
     }
     
 }
+
 

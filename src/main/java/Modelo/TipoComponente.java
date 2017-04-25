@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -35,6 +36,9 @@ public class TipoComponente implements Serializable {
     //Um tipoComponente está associado á vários componentes
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoComponente")
     private List<Componente> componentes;
+    
+    @ManyToMany()
+    private TipoAtributo tipoAtributo;
 
     public int getId() {
         return id;

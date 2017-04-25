@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -46,7 +47,7 @@ public class Componente implements Serializable {
     private TipoComponente tipoComponente;
     
     //Um componente pode estar associado á vários atributos
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "componentes")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componentes")
     private List<Atributo> listaAtributo;
 
     public int getId() {

@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -37,8 +38,8 @@ public class Atributo implements Serializable {
     private TipoAtributo tipoAtributo;
     
     //Um atributo pode estar associado á varios componentes
-    @ManyToMany
-    private List<Componente> componentes;
+    @ManyToOne
+    private Componente componentes;
 
     public int getId() {
         return id;
