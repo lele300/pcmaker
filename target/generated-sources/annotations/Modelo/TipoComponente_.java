@@ -12,6 +12,7 @@ public abstract class TipoComponente_ {
 	public static volatile ListAttribute<TipoComponente, Componente> componentes;
 	public static volatile SingularAttribute<TipoComponente, String> nomeComponente;
 	public static volatile SingularAttribute<TipoComponente, Integer> id;
+	public static volatile SingularAttribute<TipoComponente, TipoAtributo> tipoAtributo;
 
 }
 
