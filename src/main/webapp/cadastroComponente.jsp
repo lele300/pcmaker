@@ -4,6 +4,8 @@
     Author     : Leonardo
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Atributo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -129,97 +131,21 @@
                         <h5><label for="instrucao" class="grey-text text-darken-4"><i class="material-icons left red-text text-darken-4">info_outline</i> Selecione os atributos que deseja para este componente </label></h5>
                     </div>
                     
-                    <div class="row">
-                        
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="clock" checked="checked" />
-                            <label for="clock">Clock</label>
-                        </div>
-                        
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="capacidade" checked="checked" />
-                            <label for="capacidade">Capacidade (500 GB...)</label>
-                        </div>
-                        
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="tipoMemoria" checked="checked" />
-                            <label for="tipoMemoria">Memória (DD3,DDR4...)</label>
-                        </div>
-                        
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="velocidadeHD" checked="checked" />
-                            <label for="velocidadeHD">Vel. HD (5200 RPM...)</label>
-                        </div>
-                        
-                    </div>
                     
-                    <div class="row">
-                        <div class=" col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="portasUSB" checked="checked" />
-                            <label for="portasUSB">Qtde. Portas USB</label>
-                        </div>
-                        
-                         <div class=" col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="quantidadeMemoria" checked="checked" />
-                            <label for="quantidadeMemoria">Qtde. Memória (2 GB...)</label>
-                        </div>
-                        
-                         <div class=" col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="interface" checked="checked" />
-                            <label for="interface">Interface (SATA...)</label>
-                        </div>
-                        
-                         <div class=" col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="soquete" checked="checked" />
-                            <label for="soquete">Soquete</label>
-                         </div>
-                    </div>
                     
                     <div class="row">
                         
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="quantidadeNucleos" checked="checked" />
-                            <label for="quantidadeNucleos">Qtde. de Núcleos</label> 
-                        </div>
+                        <% List<Atributo> listaAtributo = (List<Atributo>) request.getAttribute("listaAtributos");
+                             for ( Atributo at : listaAtributo ){ %>     
                         
                         <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="cache" checked="checked" />
-                            <label for="cache">Cache</label> 
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="<%=at.getTipoAtributo().getNomeAtributo()%>" value="<%=at.getTipoAtributo().getId()%>">
+                            <label for="<%=at.getTipoAtributo().getNomeAtributo()%>"><%=at.getTipoAtributo().getNomeAtributo()%></label>
                         </div>
                         
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="potencia" checked="checked" />
-                            <label for="potencia">Potência</label> 
-                        </div>
+                        <%}%>
                         
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="voltagem" checked="checked" />
-                            <label for="voltagem">Voltagem</label>                            
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="cor" checked="checked" />
-                            <label for="cor">Cor</label> 
-                        </div>
-                        
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="peso" checked="checked" />
-                            <label for="peso">Watts Consumidos</label> 
-                        </div>
-                        
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="materialGabinete" checked="checked" />
-                            <label for="materialGabinete">Material Gabinete</label> 
-                        </div>
-                        
-                        <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="quantidadeThreads" checked="checked" />
-                            <label for="quantidadeThreads">Qtde. de Threads</label>                            
-                        </div>
-                    </div>
+                    </div>    
                     
                     <div class="row">
                      
