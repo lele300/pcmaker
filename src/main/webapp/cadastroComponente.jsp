@@ -4,6 +4,7 @@
     Author     : Leonardo
 --%>
 
+<%@page import="Modelo.TipoAtributo"%>
 <%@page import="java.util.List"%>
 <%@page import="Modelo.Atributo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -116,7 +117,7 @@
 
         <div class="container">
             <div class="row">
-                <form class="col s12" method="post" action="ControleComponente">
+                <form class="col s12" method="post" action="cadastrarComponente">
                     
                     <div class="row">
                         
@@ -135,12 +136,12 @@
                     
                     <div class="row">
                         
-                        <% List<Atributo> listaAtributo = (List<Atributo>) request.getAttribute("listaAtributos");
-                             for ( Atributo at : listaAtributo ){ %>     
+                        <% List<TipoAtributo> listaTipoAtributo = (List<TipoAtributo>) request.getAttribute("listaTipoAtributos");
+                             for ( TipoAtributo at : listaTipoAtributo ){ %>     
                         
                         <div class="col s3">
-                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="<%=at.getTipoAtributo().getNomeAtributo()%>" value="<%=at.getTipoAtributo().getId()%>">
-                            <label for="<%=at.getTipoAtributo().getNomeAtributo()%>"><%=at.getTipoAtributo().getNomeAtributo()%></label>
+                            <input type="checkbox" name="opcaoAtributo" class="filled-in" id="<%=at.getNomeAtributo()%>" value="<%=at.getId()%>">
+                            <label for="<%=at.getNomeAtributo()%>"><%=at.getNomeAtributo()%></label>
                         </div>
                         
                         <%}%>

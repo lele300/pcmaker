@@ -37,7 +37,7 @@ public class TipoAtributo implements Serializable {
     private List<Atributo> atributos;
     
     @ManyToMany(cascade = CascadeType.ALL)
-    private TipoComponente tipoComponente;
+    private List<TipoComponente> tipoComponentes;
 
     public int getId() {
         return id;
@@ -55,13 +55,21 @@ public class TipoAtributo implements Serializable {
         this.nomeAtributo = nomeAtributo;
     }
 
-    public List<Atributo> getAtributo() {
+    public List<Atributo> getAtributos() {
         return atributos;
     }
 
-    public void setAtributo(List<Atributo> atributos) {
+    public void setAtributos(List<Atributo> atributos) {
         this.atributos = atributos;
     }
+
+    public List<TipoComponente> getTipoComponentes() {
+        return tipoComponentes;
+    }
+
+    public void setTipoComponentes(List<TipoComponente> tipoComponentes) {
+        this.tipoComponentes = tipoComponentes;
+    }  
 
     @Override
     public int hashCode() {

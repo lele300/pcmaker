@@ -10,7 +10,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class TipoAtributo_ {
 
 	public static volatile SingularAttribute<TipoAtributo, String> nomeAtributo;
-	public static volatile SingularAttribute<TipoAtributo, TipoComponente> tipoComponente;
+	public static volatile ListAttribute<TipoAtributo, TipoComponente> tipoComponentes;
 	public static volatile SingularAttribute<TipoAtributo, Integer> id;
 	public static volatile ListAttribute<TipoAtributo, Atributo> atributos;
 

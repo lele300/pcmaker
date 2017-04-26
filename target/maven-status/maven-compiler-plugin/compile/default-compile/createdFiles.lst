@@ -15,6 +15,7 @@ Controle\ControleUsuario.class
 Modelo\Atributo.class
 Util\JPAUtil.class
 Modelo\Usuario_.class
+Controle\ControleComponente.class
 Modelo\TipoAtributo_.class
 Enum\TipoAdm.class
 DAO\ComponenteDAO.class

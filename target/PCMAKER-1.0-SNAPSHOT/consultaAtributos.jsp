@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="Modelo.TipoAtributo"%>
 <%@page import="java.util.List"%>
 <%@page import="Modelo.Atributo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -124,12 +125,12 @@
                     </tr>  
                 </thead>     
 
-                <% List<Atributo> listaAtributo = (List<Atributo>) request.getAttribute("listaAtributos");
-                   for ( Atributo at : listaAtributo ){ %>     
+                <% List<TipoAtributo> listaTipoAtributo = (List<TipoAtributo>) request.getAttribute("listaTipoAtributos");
+                   for ( TipoAtributo at : listaTipoAtributo ){ %>     
                    <tr>
                         <tbody>
                              <td><%=at.getId()%></td>
-                             <td><%=at.getTipoAtributo().getNomeAtributo()%></td>                           
+                             <td><%=at.getNomeAtributo()%></td>                           
                              <td><b><a href="deletarAtributo?id=<%=at.getId()%>"/>Excluir</b> </td>
                              <td> <b><a href="consultarPorIdAtributo?id=<%=at.getId()%>"/>Alterar</b> </td>
                     </tr>

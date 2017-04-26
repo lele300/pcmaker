@@ -11,10 +11,10 @@ public abstract class Componente_ {
 
 	public static volatile SingularAttribute<Componente, String> marca;
 	public static volatile SingularAttribute<Componente, TipoComponente> tipoComponente;
-	public static volatile ListAttribute<Componente, Atributo> listaAtributo;
 	public static volatile SingularAttribute<Componente, Integer> id;
 	public static volatile SingularAttribute<Componente, String> modelo;
 	public static volatile SingularAttribute<Componente, Integer> quantidade;
+	public static volatile ListAttribute<Componente, Atributo> atributos;
 	public static volatile SingularAttribute<Componente, String> descricao;
 
 }

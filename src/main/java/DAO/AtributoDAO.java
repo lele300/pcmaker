@@ -36,18 +36,7 @@ public class AtributoDAO {
         }
         
     }
-    
-    public List<Atributo> consultarAtributos(){
-        
-        EntityManager manager = new JPAUtil().getEntityManager();
-        List<Atributo> listaAtributos = new ArrayList<>();
-        TypedQuery<Atributo> query = manager.createQuery("select a from Atributo a join a.tipoAtributo",Atributo.class);
-        listaAtributos = query.getResultList();
-        return listaAtributos;
-        
-    }
-    
-    
+     
     //Método para deleter um Atributo e suas dependências (TipoAtributo)
     
     public void deletarAtributo(Atributo atributo){

@@ -7,10 +7,9 @@ package Controle;
 
 
 import DAO.AtributoDAO;
+import DAO.TipoAtributoDAO;
 import Modelo.Atributo;
-import Modelo.Componente;
 import Modelo.TipoAtributo;
-import Modelo.TipoComponente;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -99,7 +98,7 @@ public class ControleAtributo extends HttpServlet {
         listaAtributo.add(atributo);
         
         //Setando a listaAtributo dentro do objeto tipoAtributo
-        tipoAtributo.setAtributo(listaAtributo);
+        tipoAtributo.setAtributos(listaAtributo);
         
         AtributoDAO daoAtributo = new AtributoDAO();
         daoAtributo.cadastrarAtributo(atributo);
@@ -111,14 +110,14 @@ public class ControleAtributo extends HttpServlet {
     public void consultaTodosAtributos(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
         
         //Instância da AtributoDAO
-        AtributoDAO daoAtributo = new AtributoDAO();
+        TipoAtributoDAO daoTipoAtributo = new TipoAtributoDAO();
         
         // Setando o resultado da consulta na listaAtributos
-        List<Atributo> listaAtributos = daoAtributo.consultarAtributos();
+        List<TipoAtributo> listaTipoAtributos = daoTipoAtributo.consultarTipoAtributos();
         
         //Atribuindo uma String para enviar á JSP consultaAtributos.jsp o objeto listaAtributos
-        req.setAttribute("listaAtributos", listaAtributos);
-        req.getRequestDispatcher("cadastroComponente.jsp").forward(req, resp);
+        req.setAttribute("listaTipoAtributos", listaTipoAtributos);
+        req.getRequestDispatcher("consultaAtributos.jsp").forward(req, resp);
 
     }
     
@@ -162,7 +161,7 @@ public class ControleAtributo extends HttpServlet {
         listaAtributo.add(atributo);
         
         //Setando listaAtributo no objeto TipoAtributo
-        tipoAtributo.setAtributo(listaAtributo);
+        tipoAtributo.setAtributos(listaAtributo);
         
         AtributoDAO daoAtributo = new AtributoDAO();
         daoAtributo.alterarAtributo(atributo);

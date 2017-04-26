@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -38,7 +37,7 @@ public class TipoComponente implements Serializable {
     private List<Componente> componentes;
     
     @ManyToMany()
-    private TipoAtributo tipoAtributo;
+    private List<TipoAtributo> tipoAtributos;
 
     public int getId() {
         return id;
@@ -64,7 +63,14 @@ public class TipoComponente implements Serializable {
         this.componentes = componentes;
     }
 
-    
+    public List<TipoAtributo> getTipoAtributos() {
+        return tipoAtributos;
+    }
+
+    public void setTipoAtributos(List<TipoAtributo> tipoAtributos) {
+        this.tipoAtributos = tipoAtributos;
+    }
+
     
     @Override
     public int hashCode() {
