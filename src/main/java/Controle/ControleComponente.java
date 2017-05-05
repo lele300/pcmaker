@@ -5,9 +5,11 @@
  */
 package Controle;
 
+import DAO.AtributoDAO;
 import DAO.ComponenteDAO;
 import DAO.TipoAtributoDAO;
 import DAO.TipoComponenteDAO;
+import Modelo.Atributo;
 import Modelo.Componente;
 import Modelo.TipoAtributo;
 import Modelo.TipoComponente;
@@ -23,7 +25,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControleComponente", urlPatterns = {"/cadastrarComponente", "/consultarComponente", "/deletarComponente", "/alterarComponente", "/consultarPorIdComponente", "/iniciarCadastroComponente"})
+@WebServlet(name = "ControleComponente", urlPatterns = {"/cadastrarTipoComponente", "/cadastrarComponente", "/consultarComponente", "/deletarComponente", "/alterarComponente", "/consultarPorIdComponente", "/iniciarCadastroComponente"})
 
 public class ControleComponente extends HttpServlet {
 
@@ -32,17 +34,23 @@ public class ControleComponente extends HttpServlet {
 
         String uri = req.getRequestURI();
 
-        if (uri.equals(req.getContextPath() + "/cadastrarComponente")) {
+        if (uri.equals(req.getContextPath() + "/cadastrarTipoComponente")) {
             try {
-                cadastrarComponente(req, resp);
+                cadastrarTipoComponente(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (uri.equals(req.getContextPath() + "/alterarComponente")) {
             try {
-                alterarUsuario(req, resp);
+                alterarComponente(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (uri.equals(req.getContextPath() + "/cadastrarComponente")) {
+            try {
+                cadastrarComponente(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleComponente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -54,19 +62,19 @@ public class ControleComponente extends HttpServlet {
 
         if (uri.equals(req.getContextPath() + "/consultarComponente")) {
             try {
-                consultaTodosUsuarios(req, resp);
+                consultaTodosComponente(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (uri.equals(req.getContextPath() + "/deletarComponente")) {
             try {
-                deletarUsuario(req, resp);
+                deletarComponente(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (uri.equals(req.getContextPath() + "/consultarPorIdComponente")) {
             try {
-                consultarPorId(req, resp);
+                consultarPorIdComponente(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -89,11 +97,11 @@ public class ControleComponente extends HttpServlet {
 
         //Atribuindo uma String para enviar á JSP consultaAtributos.jsp o objeto listaAtributos
         req.setAttribute("listaTipoAtributos", listaTipoAtributos);
-        req.getRequestDispatcher("cadastroComponente.jsp").forward(req, resp);
+        req.getRequestDispatcher("cadastroTipoComponente.jsp").forward(req, resp);
 
     }
 
-    public void cadastrarComponente(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
+    public void cadastrarTipoComponente(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
 
         //Recuperando o valor do nomeComponente
         String nomeComponente = req.getParameter("nomeComponente");
@@ -123,20 +131,116 @@ public class ControleComponente extends HttpServlet {
 
     }
 
-    public void consultaTodosUsuarios(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
+    public void cadastrarComponente(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
+
+        String marca = req.getParameter("marca");
+        String modelo = req.getParameter("modelo");
+        int quantidade = Integer.parseInt(req.getParameter("quantidade"));
+        String descricao = req.getParameter("descricao");
+        double preco = Double.parseDouble(req.getParameter("preco"));
+        int idTipoComponente = Integer.parseInt(req.getParameter("tipoComponente"));
+
+        //Instância do objeto Componente
+        Componente componente = new Componente();
+
+        //Setando os valores para a tabela Componente
+        componente.setMarca(marca);
+        componente.setModelo(modelo);
+        componente.setQuantidade(quantidade);
+        componente.setDescricao(descricao);
+        componente.setPreco(preco);     
+
+        TipoComponente tipoComponente = new TipoComponente();
+        tipoComponente.setId(idTipoComponente);
+        
+        TipoComponenteDAO tipoComponenteDAO = new TipoComponenteDAO();
+        tipoComponente =  tipoComponenteDAO.consultarTipoComponentePorId(tipoComponente);
+        
+        
+        componente.setTipoComponente(new TipoComponente());
+        componente.getTipoComponente().setId(idTipoComponente);
+        
+        
+        List<Atributo> listaAtributo = new ArrayList<>();
+        for (TipoAtributo at : tipoComponente.getTipoAtributos()) {
+
+            String valorAtributo = req.getParameter("atributo" + at.getId());
+            Atributo atributo = new Atributo();
+            atributo.setValor(valorAtributo);
+            TipoAtributo tp = new TipoAtributo();
+            tp.setId(at.getId());
+            atributo.setTipoAtributo(tp);
+            listaAtributo.add(atributo);
+            at.setAtributos(listaAtributo);
+            atributo.setComponentes(componente);
+
+        }
+
+        componente.setAtributos(listaAtributo);
+
+        ComponenteDAO daoComponente = new ComponenteDAO();
+        daoComponente.cadastrarComponente(componente);
+        
+//        for (Atributo atributo : componente.getAtributos()) {
+//
+//            AtributoDAO daoAtributo = new AtributoDAO();
+//            daoAtributo.cadastrarAtributo(atributo);
+//            
+//        }
+        req.getRequestDispatcher("cadastroTipoComponenteOK.jsp").forward(req, resp);
 
     }
 
-    public void deletarUsuario(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+    public void consultaTodosComponente(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
+
+        //Instância de TipoComponenteDAO para recuperar a lista de TiposComponente
+        //Com seus tiposAtributos definidos
+        TipoComponenteDAO daoTipoComponente = new TipoComponenteDAO();
+
+        //Lista para armazenar os tiposComponentes do banco de dados
+        List<TipoComponente> listaTipoComponente = daoTipoComponente.consultarTipoComponentes();
+
+        // Atribuir a lista em um objeto para recuperar na JSP listaCadastroTipoComponente.jsp
+        req.setAttribute("listaTipoComponente", listaTipoComponente);
+        req.getRequestDispatcher("listaCadastroTipoComponente.jsp").forward(req, resp);
+        System.out.println(listaTipoComponente);
 
     }
 
-    public void alterarUsuario(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+    public void deletarComponente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+
+        //Instância de TipoComponente
+        TipoComponente tipoComponente = new TipoComponente();
+
+        //Recuperando o ID do TipoComponente da JSP
+        tipoComponente.setId(Integer.parseInt(req.getParameter("id")));
+
+        //Instância da classe de persistência
+        TipoComponenteDAO tipoComponenteDAO = new TipoComponenteDAO();
+
+        //Deletando o objeto TipoComponente do BD
+        tipoComponenteDAO.deletarTipoComponente(tipoComponente);
+
+        this.consultaTodosComponente(req, resp);
 
     }
 
-    public void consultarPorId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+    public void alterarComponente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
 
+    }
+
+    public void consultarPorIdComponente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+
+        TipoComponente tipoComponente = new TipoComponente();
+
+        tipoComponente.setId(Integer.parseInt(req.getParameter("id")));
+
+        TipoComponenteDAO tipoComponenteDAO = new TipoComponenteDAO();
+
+        tipoComponente = tipoComponenteDAO.consultarTipoComponentePorId(tipoComponente);
+
+        req.setAttribute("tipoComponente", tipoComponente);
+        req.getRequestDispatcher("alterarTipoComponente.jsp");
     }
 
 }

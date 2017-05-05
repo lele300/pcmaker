@@ -22,7 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-      
+
         <!-- Dropdown das peças -->
         <ul id="dropdown1" class="dropdown-content">
             <li><a class="grey darken-4 grey-text text-lighten-5 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">memory</i>Processador</a></li>
@@ -113,7 +113,7 @@
             </div>
         </div>
         <!-- Fim do Modal -->
-        
+
         <div class="col s10 off-set s2">
             <table class="highlight centered bordered responsive-table">
                 <thead>
@@ -126,19 +126,19 @@
                 </thead>     
 
                 <% List<TipoAtributo> listaTipoAtributo = (List<TipoAtributo>) request.getAttribute("listaTipoAtributos");
-                   for ( TipoAtributo at : listaTipoAtributo ){ %>     
-                   <tr>
-                        <tbody>
-                             <td><%=at.getId()%></td>
-                             <td><%=at.getNomeAtributo()%></td>                           
-                             <td><b><a href="deletarAtributo?id=<%=at.getId()%>"/>Excluir</b> </td>
-                             <td> <b><a href="consultarPorIdAtributo?id=<%=at.getId()%>"/>Alterar</b> </td>
-                    </tr>
-                        <%}%>
-                       </tbody>
+                    for (TipoAtributo at : listaTipoAtributo) {%>     
+                <tr>
+                <tbody>
+                <td><%=at.getId()%></td>
+                <td><%=at.getNomeAtributo()%></td>                           
+                <td><b><a href="deletarAtributo?id=<%=at.getId()%>"/>Excluir</b> </td>
+                <td> <b><a href="consultarPorIdTipoAtributo?id=<%=at.getId()%>"/>Alterar</b> </td>
+                </tr>
+                <%}%>
+                </tbody>
             </table>
         </div>
-        
+
         <!-- Início do Rodapé -->
         <footer class="page-footer grey darken-4">
             <div class="container">
@@ -155,7 +155,7 @@
                             <li><a class="" href="#!">Memória</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="col l4 offset-l2 s12">
                         <h5 class="white-text grey-text text-lighten-1"><i class="material-icons left red-text text-red darken-4">share</i>Siga-nos nas redes sociais</h5>
                         <ul class="social-nav model-9">

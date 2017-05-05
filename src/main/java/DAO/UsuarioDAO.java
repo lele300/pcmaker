@@ -20,7 +20,6 @@ import org.hibernate.HibernateException;
  */
 public class UsuarioDAO {
 
-    
     //Método para cadastrar um cliente no banco de dados
     public void cadastrarUsuario(Usuario usuario) {
 
@@ -38,7 +37,7 @@ public class UsuarioDAO {
         } catch (Exception ex) {
             ex.getMessage();
             manager.getTransaction().rollback();// Executa um rollback em caso de erros
-            System.out.println("Erro ao inserir usuário: "+ex);
+            System.out.println("Erro ao inserir usuário: " + ex);
         } finally {
             manager.close(); //Encerra uma transação
         }
@@ -69,7 +68,7 @@ public class UsuarioDAO {
         } catch (Exception ex) {
             ex.getMessage();
             manager.getTransaction().rollback();
-            System.err.println("Erro ao deletar usuário: "+ex);
+            System.err.println("Erro ao deletar usuário: " + ex);
         }
         manager.close(); //Fecha a transação
 
@@ -92,7 +91,7 @@ public class UsuarioDAO {
         } catch (HibernateException ex) {
             ex.getMessage();
             manager.getTransaction().rollback();
-            System.err.println("Erro ao autenticar usuário: "+ex);
+            System.err.println("Erro ao autenticar usuário: " + ex);
         }
 
         return usuario; //Retorna um valor cliente.
@@ -102,28 +101,27 @@ public class UsuarioDAO {
 
         EntityManager manager = new JPAUtil().getEntityManager();
         manager.getTransaction().begin();
-        try{
-            if(usuario.getIdUsuario() != null){
-            manager.merge(usuario);
-            manager.getTransaction().commit();
-            System.err.println("Usuário alterado com sucesso");
+        try {
+            if (usuario.getIdUsuario() != null) {
+                manager.merge(usuario);
+                manager.getTransaction().commit();
+                System.err.println("Usuário alterado com sucesso");
             }
-        } catch(HibernateException ex){
+        } catch (HibernateException ex) {
             ex.getMessage();
             manager.getTransaction().rollback();
-            System.err.println("Erro ao alterar usuário: "+ex);
-        } finally{
+            System.err.println("Erro ao alterar usuário: " + ex);
+        } finally {
             manager.close();
         }
 
-    };
-    
-    public Usuario consultarPorId(Usuario usuario){
+    }
+
+    public Usuario consultarPorId(Usuario usuario) {
 
         EntityManager manager = new JPAUtil().getEntityManager();
         usuario = manager.find(Usuario.class, usuario.getIdUsuario());
         return usuario;
-        
+
     }
 }
-    

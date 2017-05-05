@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import Modelo.Atributo;
 import Modelo.TipoAtributo;
 import Util.JPAUtil;
 import java.util.ArrayList;
@@ -18,15 +17,74 @@ import javax.persistence.TypedQuery;
  * @author leo_l
  */
 public class TipoAtributoDAO {
-    
-    public List<TipoAtributo> consultarTipoAtributos(){
-        
+
+    public void cadastrarTipoAtributo(TipoAtributo tipoAtributo) {
+
+        EntityManager manager = new JPAUtil().getEntityManager();
+        manager.getTransaction().begin();
+        try {
+            manager.persist(tipoAtributo);
+            manager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.getMessage();
+            System.out.println("Não foi possível criar o TipoAtributo: " + ex);
+            manager.getTransaction().rollback();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public List<TipoAtributo> consultarTipoAtributos() {
+
         EntityManager manager = new JPAUtil().getEntityManager();
         List<TipoAtributo> listaTipoAtributos = new ArrayList<>();
-        TypedQuery<TipoAtributo> query = manager.createQuery("select tp from TipoAtributo tp",TipoAtributo.class);
+        TypedQuery<TipoAtributo> query = manager.createQuery("select tp from TipoAtributo tp", TipoAtributo.class);
         listaTipoAtributos = query.getResultList();
         return listaTipoAtributos;
-        
+
     }
-    
+
+    public void deletarTipoAtributo(TipoAtributo tipoAtributo) {
+
+        EntityManager manager = new JPAUtil().getEntityManager();
+        manager.getTransaction().begin();
+        try {
+            tipoAtributo = manager.find(TipoAtributo.class, tipoAtributo.getId());
+            manager.remove(tipoAtributo);
+            manager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.getMessage();
+            System.out.println("Não foi possível localizar Tipo Atributo " + tipoAtributo.getId() + " : " + ex);
+            manager.getTransaction().rollback();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public void alterarTipoAtributo(TipoAtributo tipoAtributo) {
+
+        EntityManager manager = new JPAUtil().getEntityManager();
+        manager.getTransaction().begin();
+        try {
+            manager.merge(tipoAtributo);
+            manager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.getMessage();
+            System.out.println("Não foi possível alterar um Tipo Atributo : " + ex);
+            manager.getTransaction().rollback();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public TipoAtributo consultarPorIdTipoAtributo(TipoAtributo tipoAtributo) {
+
+        EntityManager manager = new JPAUtil().getEntityManager();
+
+        //Retorna um objeto TipoAtributo pela Primary Key (PK)
+        tipoAtributo = manager.find(TipoAtributo.class, tipoAtributo.getId());
+        return tipoAtributo;
+
+    }
+
 }

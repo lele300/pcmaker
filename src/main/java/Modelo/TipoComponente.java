@@ -33,7 +33,7 @@ public class TipoComponente implements Serializable {
     private String nomeComponente;
     
     //Um tipoComponente está associado á vários componentes
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoComponente")
+    @OneToMany(mappedBy = "tipoComponente")
     private List<Componente> componentes;
     
     @ManyToMany()

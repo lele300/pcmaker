@@ -33,10 +33,10 @@ public class TipoAtributo implements Serializable {
     private String nomeAtributo;
     
     //Um tipoAtributo está associado á vários atributos
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoAtributo")
+    @OneToMany(mappedBy = "tipoAtributo")
     private List<Atributo> atributos;
     
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "tipoAtributos")
     private List<TipoComponente> tipoComponentes;
 
     public int getId() {

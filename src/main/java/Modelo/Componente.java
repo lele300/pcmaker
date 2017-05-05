@@ -20,30 +20,32 @@ import javax.persistence.OneToMany;
  *
  * @author leo_l
  */
-
 @Entity
 public class Componente implements Serializable {
-    
+
     @Id
     @GeneratedValue
     private int id;
-    
+
     @Column(length = 100, insertable = true, updatable = true, nullable = false)
     private String modelo;
-    
+
     @Column(length = 100, insertable = true, updatable = true, nullable = false)
     private String marca;
-    
+
     @Column(length = 3, insertable = true, updatable = true, nullable = false)
     private int quantidade;
-    
+
+    @Column(insertable = true, updatable = true, nullable = false)
+    private double preco;
+
     @Column(length = 255, insertable = true, updatable = true, nullable = false)
     private String descricao;
-    
+
     //Um componente só pode estar associado á um tipoComponente
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     private TipoComponente tipoComponente;
-    
+
     //Um componente pode estar associado á vários atributos
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "componentes")
     private List<Atributo> atributos;
@@ -104,16 +106,25 @@ public class Componente implements Serializable {
         this.atributos = atributos;
     }
 
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 59 * hash + this.id;
-        hash = 59 * hash + Objects.hashCode(this.modelo);
-        hash = 59 * hash + Objects.hashCode(this.marca);
-        hash = 59 * hash + this.quantidade;
-        hash = 59 * hash + Objects.hashCode(this.descricao);
-        hash = 59 * hash + Objects.hashCode(this.tipoComponente);
-        hash = 59 * hash + Objects.hashCode(this.atributos);
+        hash = 41 * hash + this.id;
+        hash = 41 * hash + Objects.hashCode(this.modelo);
+        hash = 41 * hash + Objects.hashCode(this.marca);
+        hash = 41 * hash + this.quantidade;
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.preco) ^ (Double.doubleToLongBits(this.preco) >>> 32));
+        hash = 41 * hash + Objects.hashCode(this.descricao);
+        hash = 41 * hash + Objects.hashCode(this.tipoComponente);
+        hash = 41 * hash + Objects.hashCode(this.atributos);
         return hash;
     }
 
@@ -129,7 +140,27 @@ public class Componente implements Serializable {
             return false;
         }
         final Componente other = (Componente) obj;
-        return this.id == other.id;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.quantidade != other.quantidade) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.preco) != Double.doubleToLongBits(other.preco)) {
+            return false;
+        }
+        if (!Objects.equals(this.modelo, other.modelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.marca, other.marca)) {
+            return false;
+        }
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoComponente, other.tipoComponente)) {
+            return false;
+        }
+        return Objects.equals(this.atributos, other.atributos);
     }
-    
 }

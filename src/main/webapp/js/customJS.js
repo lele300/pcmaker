@@ -7,7 +7,7 @@
       inDuration: 300, // Transition in duration
       outDuration: 200, // Transition out duration
       startingTop: '3%', // Starting top style attribute
-      endingTop: '11%' // Ending top style attribute    
+      endingTop: '11%' // Ending top style attribute   
     });
 });
 

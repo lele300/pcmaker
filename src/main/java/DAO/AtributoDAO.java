@@ -17,72 +17,82 @@ import javax.persistence.TypedQuery;
  * @author leo_l
  */
 public class AtributoDAO {
-    
-    public void cadastrarAtributo(Atributo atributo){
-        
+
+    public void cadastrarAtributo(Atributo atributo) {
+
         EntityManager manager = new JPAUtil().getEntityManager();
         manager.getTransaction().begin();
-        try{
+        try {
             manager.persist(atributo);
             manager.flush();
             manager.getTransaction().commit();
-            
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             ex.getMessage();
-            System.out.println("Não foi possível inserir atributo: "+ex);
+            System.out.println("Não foi possível inserir atributo: " + ex);
             manager.getTransaction().rollback();
-        } finally{
+        } finally {
             manager.close();
         }
-        
+
     }
-     
+
     //Método para deleter um Atributo e suas dependências (TipoAtributo)
-    
-    public void deletarAtributo(Atributo atributo){
-        
+    public void deletarAtributo(Atributo atributo) {
+
         EntityManager manager = new JPAUtil().getEntityManager();
         manager.getTransaction().begin();
-        try{
+        try {
             atributo = manager.find(Atributo.class, atributo.getId());
             manager.remove(atributo);
             manager.getTransaction().commit();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             ex.getMessage();
-            System.out.println("Não foi possível deletar um Atributo: "+ex);
+            System.out.println("Não foi possível deletar um Atributo: " + ex);
             manager.getTransaction().rollback();
         } finally {
             manager.close();
         }
     }
     
-    public void alterarAtributo(Atributo atributo){
+    public List<Atributo> consultarAtributos() {
         
         EntityManager manager = new JPAUtil().getEntityManager();
+        List<Atributo> listaAtributos = new ArrayList<>();
+        TypedQuery<Atributo> query = manager.createQuery("select at from Atributo at", Atributo.class);
+        listaAtributos = query.getResultList();
+        return listaAtributos;
+           
+    }
+    
+   
+    public void alterarAtributo(Atributo atributo) {
+
+        EntityManager manager = new JPAUtil().getEntityManager();
         manager.getTransaction().begin();
-        try{
+        try {
             manager.merge(atributo);
             manager.getTransaction().commit();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             ex.getMessage();
-            System.out.println("Não foi possível atualizar o Atributo: "+ex);
+            System.out.println("Não foi possível atualizar o Atributo: " + ex);
             manager.getTransaction().rollback();
         } finally {
             manager.close();
         }
     }
-    
-    public Atributo consultarPorIdAtributo(Atributo atributo){
+
+    public Atributo consultarPorIdAtributo(Atributo atributo) {
         EntityManager manager = new JPAUtil().getEntityManager();
-        try{
+        try {
             atributo = manager.find(Atributo.class, atributo.getId());
-        } catch(Exception ex){
+        } catch (Exception ex) {
             ex.getMessage();
-            System.out.println("Não foi possível localizar o Atributo de ID "+atributo.getId()+ " : "+ex);
+            System.out.println("Não foi possível localizar o Atributo de ID " + atributo.getId() + " : " + ex);
         } finally {
             manager.close();
         }
         return atributo;
     }
-    
+
 }

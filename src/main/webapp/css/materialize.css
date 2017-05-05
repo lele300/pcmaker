@@ -5533,6 +5533,7 @@ button.btn-floating {
 
 .modal .modal-content {
   padding: 24px;
+  overflow-y: auto;
 }
 
 .modal .modal-close {
