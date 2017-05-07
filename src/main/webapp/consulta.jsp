@@ -22,7 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-      
+
         <!-- Dropdown das peças -->
         <ul id="dropdown1" class="dropdown-content">
             <li><a class="grey darken-4 grey-text text-lighten-5 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">memory</i>Processador</a></li>
@@ -42,14 +42,20 @@
         <!-- Inicío Barra de Navegação -->
         <div class="navbar-fixed">
 
+            <% Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
+
+                if (usuario != null) {
+
+
+            %>
 
             <nav> 
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i>Entrar/Cadastrar</a></li>
+                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
-                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">account_balance</i>Home</a></li>
+                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
                 </div>
             </nav>
@@ -113,7 +119,7 @@
             </div>
         </div>
         <!-- Fim do Modal -->
-        
+
         <div class="col s10 off-set s2">
             <table class="highlight centered bordered responsive-table">
                 <thead>
@@ -138,34 +144,34 @@
                 </thead>     
 
                 <% List<Usuario> listaUsuario = (List<Usuario>) request.getAttribute("listaUsuarios");
-                   for (Usuario u : listaUsuario){ %>     
-                   <tr>
-                   <tbody>
-                        <td><%=u.getIdUsuario()%></td>
-                        <td><%=u.getNomeCompleto()%></td>
-                        <td><%=u.getLogin()%></td>
-                        <td><%=u.getEmail()%></td>
-                        <td><%=u.getCpf()%></td>
-                        <td><%=u.getRg()%></td>
-                        <%for(Endereco e : u.getEnderecos()){ %>
-                            <td><%=e.getRua()%></td>
-                            <td><%=e.getBairro()%></td>
-                            <td><%=e.getCep()%></d>
-                            <td><%=e.getUf()%></td>
-                            <td><%=e.getNumero()%></td>
-                            <td><%=u.getTipoAdm()%></td>
-                            <td><%=e.getCidade()%></td>
-                            <td><%=e.getComplemento()%></td>
-                               
-                        <td><b><a href="deletarUsuario?id=<%=u.getIdUsuario()%>"/>Excluir</b> </td>
-                        <td> <b><a href="consultarPorId?id=<%=u.getIdUsuario()%>"/>Alterar</b> </td>
-                    </tr>
-                    <%}%>
-                   <%}%>
-                  </tbody>
+                    for (Usuario u : listaUsuario) {%>     
+                <tr>
+                <tbody>
+                <td><%=u.getIdUsuario()%></td>
+                <td><%=u.getNomeCompleto()%></td>
+                <td><%=u.getLogin()%></td>
+                <td><%=u.getEmail()%></td>
+                <td><%=u.getCpf()%></td>
+                <td><%=u.getRg()%></td>
+                <%for (Endereco e : u.getEnderecos()) {%>
+                <td><%=e.getRua()%></td>
+                <td><%=e.getBairro()%></td>
+                <td><%=e.getCep()%></d>
+                <td><%=e.getUf()%></td>
+                <td><%=e.getNumero()%></td>
+                <td><%=u.getTipoAdm()%></td>
+                <td><%=e.getCidade()%></td>
+                <td><%=e.getComplemento()%></td>
+
+                <td><b><a href="deletarUsuario?id=<%=u.getIdUsuario()%>"/>Excluir</b> </td>
+                <td> <b><a href="consultarPorId?id=<%=u.getIdUsuario()%>"/>Alterar</b> </td>
+                </tr>
+                <%}%>
+                <%}%>
+                </tbody>
             </table>
         </div>
-        
+
         <!-- Início do Rodapé -->
         <footer class="page-footer grey darken-4">
             <div class="container">
@@ -182,7 +188,7 @@
                             <li><a class="" href="#!">Memória</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="col l4 offset-l2 s12">
                         <h5 class="white-text grey-text text-lighten-1"><i class="material-icons left red-text text-red darken-4">share</i>Siga-nos nas redes sociais</h5>
                         <ul class="social-nav model-9">
@@ -202,6 +208,7 @@
                 </div>
             </div>
         </footer>
+        <%}%>
         <!-- Fim do Rodapé -->
 
 

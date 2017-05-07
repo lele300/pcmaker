@@ -1,3 +1,4 @@
+<%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.TipoAtributo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,11 +35,18 @@
         <div class="navbar-fixed">
 
 
+            <% Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
+
+                    if (usuario != null) {
+
+
+                %>
+            
             <nav> 
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i>Entrar/Cadastrar</a></li>
+                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
@@ -161,6 +169,7 @@
                 </div>
             </div>
         </footer>
+        <%}%>
         <!-- Fim do Rodapé -->
 
         <!--Import jQuery before materialize.js-->

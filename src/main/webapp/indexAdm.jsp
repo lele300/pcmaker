@@ -61,7 +61,49 @@
         </div>    <br>
         <!-- Fim da Barra de Navegação --> 
 
-        <h3>Teremos aqui um usuário COMUM</h3>
+        <div class="container">
+            <div class="row">
+                <div class="col s4">
+                    <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">CRIAÇÃO DE USUÁRIO</h5></center>
+                        <center><a href="cadastroUsuario.jsp"><i class="large material-icons red-text text-darken-4">person_add</i></a></center>
+                        <span class="grey-text text-lighten-1">Aqui você pode criar usuários com tipos áreas do sistema diferentes, como por exemplo administrador
+                            e um usuário cliente.
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="col s4">
+                    <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">CRIAÇÃO DE COMPONENTE</h5></center>
+                        <center><a href="iniciarCadastroComponente"><i class="large material-icons red-text text-darken-4">layers</i></a></center>
+                        <span class="grey-text text-lighten-1"> Aqui você pode criar qualquer componente para sua loja , como por exemplo processadores, memórias,
+                            HD's e seus respectivos atributos.
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="col s4">
+                    <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">CRIAÇÃO DE ATRIBUTOS</h5></center>
+                        <center><a href="cadastroTipoAtributo.jsp"><i class="large material-icons red-text text-darken-4">assignment</i></a></center>
+                        <span class="grey-text text-lighten-1">Aqui você pode criar quaisquer atributos que irão compor seus componentes. Com isso, você pode definir
+                           quais características ele terá.
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="col s4">
+                    <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">LOGOUT DO SISTEMA</h5></center>
+                        <center><a href="ControleAcesso?acao=Sair"><i class="large material-icons red-text text-darken-4">power_settings_new</i></a></center>
+                        <span class="grey-text text-lighten-1"> Aqui você fará logout do sistema e não poderá ter acesso as áreas até realizar uma 
+                            nova autenticação.
+                        </span>    
+                    </div>
+                </div>
+            </div>
+
             
         </div>
         <!-- Início do Rodapé -->

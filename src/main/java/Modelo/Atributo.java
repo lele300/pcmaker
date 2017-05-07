@@ -35,7 +35,7 @@ public class Atributo implements Serializable {
     private TipoAtributo tipoAtributo;
     
     //Um atributo pode estar associado á um componente
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Componente componentes;
 
     public int getId() {
