@@ -11,7 +11,6 @@ import Modelo.Atributo;
 import Modelo.TipoAtributo;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,7 +69,6 @@ public class ControleAtributo extends HttpServlet {
         }
     }
 
-    //Método para cadastrar um atributo novo no banco de dados
     public void cadastrarAtributo(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
 
         //Recuperando o tipoAtributo do formulário
@@ -89,7 +87,6 @@ public class ControleAtributo extends HttpServlet {
 
     }
 
-    //Método para consultar todos os atributos cadastrados no banco de dados
     public void consultaTodosAtributos(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
 
         //Instância da AtributoDAO
@@ -135,21 +132,21 @@ public class ControleAtributo extends HttpServlet {
         tipoAtributo.setId(id);
         tipoAtributo.setNomeAtributo(nomeTipoAtributo);
 
-        //Criando um ArrayList listaAtributo para popula-lo e inseri-lo em tipoAtributo
-        ArrayList<Atributo> listaAtributo = new ArrayList<>();
-        Atributo atributo = new Atributo();
+//        //Criando um ArrayList listaAtributo para popula-lo e inseri-lo em tipoAtributo
+//        ArrayList<Atributo> listaAtributo = new ArrayList<>();
+//        Atributo atributo = new Atributo();
+//
+//        //Setando o objeto tipoAtributo dentro do objeto Atributo
+//        atributo.setTipoAtributo(tipoAtributo);
+//
+//        //Inserindo o objeto Atributo dentro da lista
+//        listaAtributo.add(atributo);
+//
+//        //Setando listaAtributo no objeto TipoAtributo
+//        tipoAtributo.setAtributos(listaAtributo);
 
-        //Setando o objeto tipoAtributo dentro do objeto Atributo
-        atributo.setTipoAtributo(tipoAtributo);
-
-        //Inserindo o objeto Atributo dentro da lista
-        listaAtributo.add(atributo);
-
-        //Setando listaAtributo no objeto TipoAtributo
-        tipoAtributo.setAtributos(listaAtributo);
-
-        AtributoDAO daoAtributo = new AtributoDAO();
-        daoAtributo.alterarAtributo(atributo);
+        TipoAtributoDAO daoTipoAtributo = new TipoAtributoDAO();
+        daoTipoAtributo.alterarTipoAtributo(tipoAtributo);
         this.consultaTodosAtributos(req, resp);
 
     }

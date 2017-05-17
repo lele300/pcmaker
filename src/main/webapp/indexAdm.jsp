@@ -12,6 +12,7 @@
 
         if (usuario != null) {
 
+        String noCall = "";
 
     %>
     <head>
@@ -45,12 +46,14 @@
             <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">straighten</i>Memória</a></li>
         </ul>
         <!-- Inicío Barra de Navegação -->
+        
+        
         <div class="navbar-fixed">
 
 
             <nav> 
                 <div class="nav-wrapper grey darken-4">
-                    <a href="#" class="brand-logo">Logo</a>
+                    <a href="<%=noCall%>" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
                         <li><a class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
@@ -66,9 +69,9 @@
                 <div class="col s4">
                     <div class="card-panel grey darken-4 hoverable">
                         <center><h5 class="grey-text text-lighten-1">CRIAÇÃO DE USUÁRIO</h5></center>
-                        <center><a href="cadastroUsuario.jsp"><i class="large material-icons red-text text-darken-4">person_add</i></a></center>
-                        <span class="grey-text text-lighten-1">Aqui você pode criar usuários com tipos áreas do sistema diferentes, como por exemplo administrador
-                            e um usuário cliente.
+                        <center><a href="cadastroUsuarioAdm.jsp"><i class="large material-icons red-text text-darken-4">person_add</i></a></center>
+                        <span class="grey-text text-lighten-1">Aqui você pode criar usuários e definir o tipo de acesso ao sistema como por exemplo clientes ou
+                            administradores que terá maiores privilégios.
                         </span>
                     </div>
                 </div>

@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Leonardo
  */
-@WebFilter(servletNames = {"ControleComponente","ControleAtributo"})
+@WebFilter(servletNames = {"ControleComponente","ControleAtributo"}, urlPatterns = {"/cadastrarAcessoUsuario","/alterarAcessoUsuario"})
 public class AcessoAdministrativo implements Filter {
 
     @Override

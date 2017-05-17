@@ -5,7 +5,6 @@
  */
 package Controle;
 
-import DAO.AtributoDAO;
 import DAO.ComponenteDAO;
 import DAO.TipoAtributoDAO;
 import DAO.TipoComponenteDAO;
@@ -84,6 +83,12 @@ public class ControleComponente extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if ((uri.equals(req.getContextPath() + "/iniciarCarrinhoComponente"))) {
+            try {
+                itensCarrinhoComponente(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -114,7 +119,7 @@ public class ControleComponente extends HttpServlet {
         String[] opcoesSelecionadas = req.getParameterValues("opcaoAtributo");
         ArrayList<TipoAtributo> listaTipoAtributo = new ArrayList<>();
 
-        //Para cada opção selecionada no checkbox, gravar o id do TipoAtributo
+        //Para cada opção selecionada no checkbox, gravar o id do TipoAtributo e setar em listaTipoAtributo
         for (String opcaoSelecionada : opcoesSelecionadas) {
             int idTipoAtributo = Integer.parseInt(opcaoSelecionada);
             TipoAtributo atributos = new TipoAtributo();
@@ -211,15 +216,19 @@ public class ControleComponente extends HttpServlet {
 
         //Instância de TipoComponente
         TipoComponente tipoComponente = new TipoComponente();
+        Componente componente = new Componente();
 
         //Recuperando o ID do TipoComponente da JSP
         tipoComponente.setId(Integer.parseInt(req.getParameter("id")));
+        componente.setId(Integer.parseInt(req.getParameter("id")));
 
         //Instância da classe de persistência
         TipoComponenteDAO tipoComponenteDAO = new TipoComponenteDAO();
+        ComponenteDAO componenteDAO = new ComponenteDAO();
 
         //Deletando o objeto TipoComponente do BD
         tipoComponenteDAO.deletarTipoComponente(tipoComponente);
+        componenteDAO.deletarComponente(componente);
 
         this.consultaTodosComponente(req, resp);
 
@@ -242,5 +251,17 @@ public class ControleComponente extends HttpServlet {
         req.setAttribute("tipoComponente", tipoComponente);
         req.getRequestDispatcher("alterarTipoComponente.jsp");
     }
+    
+    
+    public void itensCarrinhoComponente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
 
+        ComponenteDAO daoComponente = new ComponenteDAO();
+        
+        List<Componente> listaComponentes = new ArrayList<>();
+        listaComponentes = daoComponente.consultarComponentes();
+        
+        req.setAttribute("listaComponentes", listaComponentes);
+        req.getRequestDispatcher("carrinhoComponente.jsp").forward(req, resp);
+        
+    }
 }

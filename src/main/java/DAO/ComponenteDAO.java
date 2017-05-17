@@ -26,7 +26,7 @@ public class ComponenteDAO {
 
         EntityManager manager = new JPAUtil().getEntityManager();
         List<Componente> listaComponentes = new ArrayList<>();
-        TypedQuery<Componente> query = manager.createQuery("select comp from Componente comp join comp.atributo", Componente.class);
+        TypedQuery<Componente> query = manager.createQuery("select comp from Componente comp join comp.atributos", Componente.class);
         listaComponentes = query.getResultList();
         return listaComponentes;
 
