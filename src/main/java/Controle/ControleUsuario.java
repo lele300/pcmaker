@@ -267,7 +267,12 @@ public class ControleUsuario extends HttpServlet {
         usuario.setRg(rg);
         usuario.setCpf(cpf);
         usuario.setTelefone(telefone);
-        usuario.setTipoAdm(TipoAdm.valueOf(tipoAcesso));
+        
+        if(tipoAcesso.equalsIgnoreCase("administrador")) {
+            usuario.setTipoAdm(TipoAdm.ADMINISTRADOR);
+        } else if(tipoAcesso.equalsIgnoreCase("cliente")) {
+            usuario.setTipoAdm(TipoAdm.CLIENTE);
+        }
         
         listaEnderecos.add(endereco);
         usuario.setEnderecos(listaEnderecos);
@@ -323,7 +328,12 @@ public class ControleUsuario extends HttpServlet {
         usuario.setTelefone(telefone);
         usuario.setRg(rg);
         usuario.setCpf(cpf);
-        usuario.setTipoAdm(TipoAdm.valueOf(tipoAcesso));
+        
+         if(tipoAcesso.equalsIgnoreCase("administrador")) {
+            usuario.setTipoAdm(TipoAdm.ADMINISTRADOR);
+        } else if(tipoAcesso.equalsIgnoreCase("cliente")) {
+            usuario.setTipoAdm(TipoAdm.CLIENTE);
+        }
         
         listaEnderecos.add(endereco);
         usuario.setEnderecos(listaEnderecos);
