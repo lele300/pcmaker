@@ -62,7 +62,7 @@ public class ControleAcesso extends HttpServlet {
             }
         } catch (Exception ex) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
-            request.setAttribute("erro", ex);
+            request.setAttribute("erro", "Login ou senha incorretos !");
             rd.forward(request, response);
         }
 

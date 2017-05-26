@@ -169,7 +169,7 @@
 
     <div class="modal-content grey lighten-4">
 
-        <form class="col s12" action="admin/cadastrarComponente" method="POST">
+        <form class="col s12" action="cadastrarComponente" method="POST">
 
             <div class="row">
 
