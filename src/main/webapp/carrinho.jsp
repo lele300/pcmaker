@@ -21,6 +21,13 @@
     </head>
 
     <body>
+        
+            <% Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
+
+                if (usuario != null) {
+
+
+            %>
         <!-- Dropdown das peças -->
         <ul id="dropdown1" class="dropdown-content">
             <li><a class="grey darken-4 grey-text text-lighten-5 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">memory</i>Processador</a></li>
@@ -37,20 +44,25 @@
             <li class="divider"></li>
             <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">straighten</i>Memória</a></li>
         </ul>
+        
+              <!-- Dropdown de funcionalidades de usuários -->
+        
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a class="grey darken-4 grey-text text-lighten-1 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">shopping_cart</i>Meus pedidos</a></li>
+            <li class="divider"></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="consultarPorId?id=<%=usuario.getIdUsuario()%>"><i class="material-icons left red-text text-darken-4">perm_identity</i>Meu perfil</a></li>
+            <li class="divider"></li>
+        </ul>
+        
+        <!-- Fim da lista de funcionalidades -->
         <!-- Inicío Barra de Navegação -->
         <div class="navbar-fixed">
 
-            <% Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
-
-                if (usuario != null) {
-
-
-            %>
             <nav> 
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
+                        <li><a href="" class="dropdown-button hoverable grey-text text-lighten-1" data-activates="dropdown2"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
@@ -121,7 +133,8 @@
         <!-- Carrinho de Compras -->
 
         <div class="container">
-            <center><h2>LOJA</h2></center>
+            
+            <center><h2>Escolha os componentes do seu PC</h2></center>
 
             <div class="row">
 
@@ -133,15 +146,24 @@
                     <div class="card-panel grey darken-4 hoverable">
                         <center><h5 class="grey-text text-lighten-1"><%=comp.getTipoComponente().getNomeComponente()%></h5></center>
                         <center><a href=""><i class="large material-icons red-text text-darken-4">layers</i></a></center>
-                        <select name="componentes" class="grey lighten-4" required>
+                        <select name="componentes" class="grey lighten-3" required>
                             <option value="" disabled selected>Escolha o Componente</option>
                             <option value="<%=comp.getModelo()%>"><%=comp.getModelo()%></option>
                         </select>
-                        <span class="grey-text text-lighten-1"><a href="cadastroUsuarioAdm.jsp">
-                                <i class="medium material-icons left-align red-text text-darken-4">add</i>Mais detalhes</a>
-                        </span>
-                        <a href="inserirComponenteNoCarrinho?id=<%=comp.getId()%>" class="btn waves-effect waves-light grey darken-4">Colocar no carrinho</a>
+                        <span class="grey-text text-lighten-1">
+                            <center><a class="btn waves-effect waves-green grey lighten-3 grey-text text-darken-3">Veja as informações<i class="medium material-icons left red-text text-darken-5">add</i></a></center>
+                        </span> 
+                        
+                        <span class="grey-text text-darken-4">
+                            <center>________________________________________</center>
+                        </span> 
+
+                        <span class="grey-text text-lighten-1">
+                            <center><a href="inserirComponenteNoCarrinho?id=<%=comp.getId()%>" class="btn waves-effect waves-green grey lighten-3 grey-text text-darken-3">Colocar no carrinho<i class="medium material-icons left green-text text-darken-1">add_shopping_cart</i></a></center>
+                        </span> 
+                        
                     </div>
+                        
                 </div>
 
                 <%}%>
@@ -184,7 +206,7 @@
             <div class="footer-copyright">
                 <div class="container">
                     © 2017 Todos os direitos reservados de PC MAKER | Versão 1.0
-                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    <a class="grey-text text-lighten-1 right" href="#!">Fale Conosco</a>
                 </div>
             </div>
         </footer>

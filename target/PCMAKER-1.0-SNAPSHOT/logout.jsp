@@ -146,7 +146,7 @@
             <div class="footer-copyright">
                 <div class="container">
                     © 2017 Todos os direitos reservados de PC MAKER | Versão 1.0
-                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    <a class="grey-text text-lighten-1 right" href="#!">Fale Conosco</a>
                 </div>
             </div>
         </footer>
