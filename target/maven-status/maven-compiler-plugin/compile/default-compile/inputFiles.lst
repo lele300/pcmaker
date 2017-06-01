@@ -2,6 +2,7 @@ C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\DAO\TipoAtributoDAO.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\DAO\UsuarioDAO.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\DAO\AtributoDAO.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Modelo\Atributo.java
+C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Controle\ControleCarrinho.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\AutorizacaoDeAcesso\AcessoLogado.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\DAO\TipoComponenteDAO.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Modelo\Usuario.java
@@ -14,6 +15,7 @@ C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Controle\ControleAcesso.ja
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Enum\TipoAdm.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Modelo\TipoAtributo.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Controle\ControleComponente.java
+C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Modelo\Carrinho.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Util\JPAUtil.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Controle\ControleUsuario.java
 C:\Users\leo_l\Documents\Github\pcmaker\src\main\java\Modelo\TipoComponente.java

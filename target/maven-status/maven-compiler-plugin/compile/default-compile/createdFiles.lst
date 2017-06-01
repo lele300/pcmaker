@@ -13,6 +13,7 @@ Enum\TipoAdm.class
 AutorizacaoDeAcesso\AcessoAdministrativo.class
 DAO\TipoAtributoDAO.class
 Modelo\Atributo_.class
+Modelo\Carrinho.class
 Controle\ControleAcesso.class
 AutorizacaoDeAcesso\AcessoLogado.class
 Modelo\Componente.class
@@ -21,5 +22,6 @@ DAO\TipoComponenteDAO.class
 Modelo\TipoComponente.class
 Controle\ControleUsuario.class
 Modelo\Atributo.class
+Controle\ControleCarrinho.class
 DAO\ComponenteDAO.class
 Controle\ControleAtributo.class

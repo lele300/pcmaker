@@ -36,6 +36,7 @@
             <li class="divider"></li>
             <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">straighten</i>Memória</a></li>
         </ul>
+        
         <!-- Inicío Barra de Navegação -->
         <div class="navbar-fixed">
 
@@ -51,14 +52,23 @@
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="<%=noCall%>" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
+                        <li><a href="#" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
-                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
+                        <li><a href="principal.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
                 </div>
             </nav>
         </div>    <br>
         <!-- Fim da Barra de Navegação -->
+        
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a class="grey darken-4 grey-text text-lighten-1 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">shopping_cart</i>Meus pedidos</a></li>
+            <li class="divider"></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="consultarPorId?id=<%=usuario.getIdUsuario()%>"><i class="material-icons left red-text text-darken-4">perm_identity</i>Meu perfil</a></li>
+            <li class="divider"></li>
+        </ul>
+        
+        <!-- Fim da lista de funcionalidades -->
 
         <!-- Início do Modal(Login) -->
         <div id="modal1" class="modal">
@@ -121,27 +131,27 @@
 
         <!-- Formulário Cadastro Cliente -->                
 
-        <% Usuario usuario = (Usuario) request.getAttribute("usuario");%>
+        <% Usuario alteracaoUsuario = (Usuario) request.getAttribute("usuario");%>
         <div class="container">
             <div class="row" >
                 <form class="col s12" action="alterarUsuario" method="POST" >
 
                     <div class="row">
                         <div class="col s12">
-                            <input name="id" id="id" type="text" value="<%=usuario.getIdUsuario()%>" hidden>
+                            <input name="id" id="id" type="text" value="<%=alteracaoUsuario.getIdUsuario()%>" hidden>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <input name="nomeCompleto" id="nomeCompleto" type="text" class="validate hoverable" maxlength="100" required value="<%=usuario.getNomeCompleto()%>">
+                            <input name="nomeCompleto" id="nomeCompleto" type="text" class="validate hoverable" maxlength="100" required value="<%=alteracaoUsuario.getNomeCompleto()%>">
                             <label for="nomeCompleto" class="grey-text text-darken-4"><i class="material-icons left">directions_walk</i>Nome Completo</label>
 
                         </div>
 
                         <div class="input-field col s12">
 
-                            <input name="login" id="login" type="text" class="validate hoverable" required value="<%=usuario.getLogin()%>" hidden>
+                            <input name="login" id="login" type="text" class="validate hoverable" required value="<%=alteracaoUsuario.getLogin()%>" hidden>
                             <input name="senha" id="senha" type="password" class="validate hoverable" minlength="6" required value="<%=usuario.getSenha()%>" hidden>
 
                         </div>
@@ -149,12 +159,12 @@
 
                     <div class="row">
                         <div class="input-field col s6">
-                            <input name="email" id="email" type="email" class="validate hoverable" required value="<%=usuario.getEmail()%>">
+                            <input name="email" id="email" type="email" class="validate" required value="<%=alteracaoUsuario.getEmail()%>" disabled>
                             <label for="email" class="grey-text text-darken-4" data-wrong="errado"><i class="material-icons left">contact_mail</i>E-mail</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input name="telefone" id="telefone" type="text" class="validate hoverable" required value="<%=usuario.getTelefone()%>">
+                            <input name="telefone" id="telefone" type="text" class="validate hoverable" required value="<%=alteracaoUsuario.getTelefone()%>">
                             <label for="telefone" class="grey-text text-darken-4"><i class="material-icons left">contact_phone</i>Telefone</label>
                         </div>
                     </div>
@@ -163,16 +173,16 @@
 
 
                         <div class="input-field col s6">
-                            <input name="rg" id="rg" type="text" class="validate hoverable" maxlength="16" required value="<%=usuario.getRg()%>">
+                            <input name="rg" id="rg" type="text" class="validate hoverable" maxlength="16" required value="<%=alteracaoUsuario.getRg()%>">
                             <label for="rg" class="grey-text text-darken-4"><i class="material-icons left">style</i>RG</label>
                         </div>
                         <div class="input-field col s6">
-                            <input name="cpf" id="cpf" type="text" class="validate hoverable" maxlength="11" required value="<%=usuario.getCpf()%>">
+                            <input name="cpf" id="cpf" type="text" class="validate" maxlength="11" value="<%=alteracaoUsuario.getCpf()%>">
                             <label for="cpf" class="grey-text text-darken-4"><i class="material-icons left">style</i>CPF</label>
                         </div>
                     </div>
 
-                    <% for (Endereco e : usuario.getEnderecos()) {%>
+                    <% for (Endereco e : alteracaoUsuario.getEnderecos()) {%>
                     <div class="row">
 
                         <input name="idEndereco" id="idEndereco" type="text" class="validate hoverable" minlength="6" required value="<%=e.getIdEndereco()%>" hidden>

@@ -22,6 +22,10 @@ public class Carrinho {
     public void adicionarNoCarrinho(Componente componente){
         componentesNoCarrinho.add(componente);
     }
+    
+    public void removerDoCarrinho(Componente componente){
+        componentesNoCarrinho.remove(componente);
+    }
       
     
 }

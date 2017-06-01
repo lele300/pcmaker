@@ -11,6 +11,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -43,11 +44,11 @@ public class Componente implements Serializable {
     private String descricao;
 
     //Um componente só pode estar associado á um tipoComponente
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     private TipoComponente tipoComponente;
 
     //Um componente pode estar associado á vários atributos
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componentes")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componentes", fetch = FetchType.EAGER)
     private List<Atributo> atributos;
 
     public int getId() {
@@ -163,4 +164,5 @@ public class Componente implements Serializable {
         }
         return Objects.equals(this.atributos, other.atributos);
     }
+    
 }

@@ -168,6 +168,7 @@
                             <input name="cpf" id="cpf" type="text" class="validate hoverable" maxlength="11" required>
                             <label for="cpf" class="grey-text text-darken-4"><i class="material-icons left">style</i>CPF</label>
                         </div>
+                        
                         <div class="input-field col s4">
                             <select name="tipoAcesso">
                                 <option value="" disabled selected>Escolha o tipo de acesso</option>

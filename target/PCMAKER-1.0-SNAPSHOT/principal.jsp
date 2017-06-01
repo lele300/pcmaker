@@ -30,40 +30,71 @@
 
         <!-- Dropdown das peças -->
         <ul id="dropdown1" class="dropdown-content">
-            <li><a class="grey darken-4 grey-text text-lighten-5 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">memory</i>Processador</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">memory</i>Processador</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">developer_board</i>Placa-mãe</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">developer_board</i>Placa-mãe</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">hd</i>Placa de Vídeo</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">hd</i>Placa de Vídeo</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">local_laundry_service</i>HD</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">local_laundry_service</i>HD</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">settings_input_hdmi</i>Fonte</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">settings_input_hdmi</i>Fonte</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">kitchen</i>Gabinete</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">kitchen</i>Gabinete</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">straighten</i>Memória</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">straighten</i>Memória</a></li>
         </ul>
+
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a class="grey darken-4 grey-text text-lighten-1 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">shopping_cart</i>Meus pedidos</a></li>
+            <li class="divider"></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="consultarPorId?id=<%=usuario.getIdUsuario()%>"><i class="material-icons left red-text text-darken-4">perm_identity</i>Meu perfil</a></li>     
+        </ul>
+
         <!-- Inicío Barra de Navegação -->
         <div class="navbar-fixed">
-
 
             <nav> 
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
+                        <li><a class="dropdown-button hoverable grey-text text-lighten-1" data-activates="dropdown2"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
-                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
+                        <li><a href="principal.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
                 </div>
             </nav>
         </div>    <br>
         <!-- Fim da Barra de Navegação --> 
 
-        <h3>Teremos aqui um usuário COMUM</h3>
-            
+        <!-- Início área usuário comum -->
+        
+        <div class="container">
+            <div class="row">
+                <div class="col s6">
+                    <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">IR PARA LOJA</h5></center>
+                        <center><a href="itensCarrinhoComponente"><i class="large material-icons green-text text-darken-3">add_shopping_cart</i></a></center>
+                        <span class="grey-text text-lighten-1">Você será redirecionado para a loja, e poderá escolher as configurações para seu computador. 
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="col s6">
+                    <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">LOGOUT DO SISTEMA</h5></center>
+                        <center><a href="ControleAcesso?acao=Sair"><i class="large material-icons red-text text-darken-4">power_settings_new</i></a></center>
+                        <span class="grey-text text-lighten-1"> Aqui você fará logout do sistema e não poderá finalizar pedidos até realizar uma
+                            nova autenticação.
+                        </span>    
+                    </div>
+                </div>
+            </div>
         </div>
+        
+        <!-- Fim área usuário comum -->
+             
+         </div>
         <!-- Início do Rodapé -->
         <footer class="page-footer grey darken-4">
             <div class="container">
@@ -96,7 +127,7 @@
             <div class="footer-copyright">
                 <div class="container">
                     © 2017 Todos os direitos reservados de PC MAKER | Versão 1.0
-                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    <a class="grey-text text-lighten-1 right" href="#!">Fale Conosco</a>
                 </div>
             </div>
         </footer>

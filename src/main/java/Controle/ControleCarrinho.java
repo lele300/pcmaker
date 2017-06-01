@@ -22,12 +22,27 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author leo_l
  */
-@WebServlet(name = "ControleCarrinho", urlPatterns = {"/ControleCarrinho"})
+@WebServlet(name = "ControleCarrinho", urlPatterns = {"/carrinho", "/inserirComponenteNoCarrinho", "/removerComponenteDoCarrinho"})
 public class ControleCarrinho extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  
+        String url = req.getRequestURI();
 
+        if (url.equals(req.getContextPath() + "/inserirComponenteNoCarrinho")) {
+            try {
+                inserirComponenteNoCarrinho(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleCarrinho.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (url.equals(req.getContextPath() + "/removerComponenteDoCarrinho")) {
+            try {
+                removerComponenteDoCarrinho(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleCarrinho.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
     }
 
     private void inserirComponenteNoCarrinho(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
@@ -49,11 +64,32 @@ public class ControleCarrinho extends HttpServlet {
             }
             
             carrinho.adicionarNoCarrinho(componente);
-            resp.sendRedirect("carrinho.jsp");
-        } catch(Exception ex){
+            System.out.println(carrinho.getComponentes());
+            resp.sendRedirect("carrinhoComponente.jsp");
+            
+        } catch(IOException | NumberFormatException ex){
             Logger.getLogger(ControleCarrinho.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }    
     }
+    
+    
+     private void removerComponenteDoCarrinho(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
 
+         try{
+             int id = Integer.parseInt(req.getParameter("id"));
+             Componente removerComponente = new Componente();
+             removerComponente.setId(id);
+             
+             ComponenteDAO daoComponente = new ComponenteDAO();
+             removerComponente = daoComponente.consultarPorIdComponente(removerComponente);
+             
+             Carrinho carrinho = (Carrinho) req.getSession().getAttribute("carrinho");
+             carrinho.removerDoCarrinho(removerComponente);
+             resp.sendRedirect("carrinho.jsp");
+             
+         }catch(Exception ex){
+             ex.getMessage();
+             System.out.println("Não foi possível retirar o componente do carrinho "+ex);
+         }
+     }
 }

@@ -31,20 +31,33 @@
 
         <!-- Dropdown das peças -->
         <ul id="dropdown1" class="dropdown-content">
-            <li><a class="grey darken-4 grey-text text-lighten-5 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">memory</i>Processador</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">memory</i>Processador</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">developer_board</i>Placa-mãe</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">developer_board</i>Placa-mãe</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">hd</i>Placa de Vídeo</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">hd</i>Placa de Vídeo</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">local_laundry_service</i>HD</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">local_laundry_service</i>HD</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">settings_input_hdmi</i>Fonte</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">settings_input_hdmi</i>Fonte</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">kitchen</i>Gabinete</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">kitchen</i>Gabinete</a></li>
             <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">straighten</i>Memória</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="#!"><i class="material-icons left red-text text-darken-4">straighten</i>Memória</a></li>
         </ul>
+        <!-- Fim do Dropdown de peças -->
+        
+        <!-- Dropdown de funcionalidades de usuários -->
+        
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a class="grey darken-4 grey-text text-lighten-1 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">shopping_cart</i>Meus pedidos</a></li>
+            <li class="divider"></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1" href="consultarPorId?id=<%=usuario.getIdUsuario()%>"><i class="material-icons left red-text text-darken-4">perm_identity</i>Meu perfil</a></li>
+            <li class="divider"></li>
+        </ul>
+        
+        <!-- Fim da lista de funcionalidades -->
+        
         <!-- Inicío Barra de Navegação -->
         
         
@@ -53,9 +66,9 @@
 
             <nav> 
                 <div class="nav-wrapper grey darken-4">
-                    <a href="<%=noCall%>" class="brand-logo">Logo</a>
+                    <a href="" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
+                        <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="<%=noCall%>" data-activates="dropdown2"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
@@ -68,7 +81,7 @@
             <div class="row">
                 <div class="col s4">
                     <div class="card-panel grey darken-4 hoverable">
-                        <center><h5 class="grey-text text-lighten-1">CRIAÇÃO DE USUÁRIO</h5></center>
+                        <center><h5 class="grey-text text-lighten-1">CRIAÇÃO DE USUÁRIOS</h5></center>
                         <center><a href="cadastroUsuarioAdm.jsp"><i class="large material-icons red-text text-darken-4">person_add</i></a></center>
                         <span class="grey-text text-lighten-1">Aqui você pode criar usuários e definir o tipo de acesso ao sistema como por exemplo clientes ou
                             administradores que terá maiores privilégios.
@@ -78,7 +91,7 @@
                 
                 <div class="col s4">
                     <div class="card-panel grey darken-4 hoverable">
-                        <center><h5 class="grey-text text-lighten-1">CRIAÇÃO DE COMPONENTE</h5></center>
+                        <center><h5 class="grey-text text-lighten-1">CRIAÇÃO DE COMPONENTES</h5></center>
                         <center><a href="iniciarCadastroComponente"><i class="large material-icons red-text text-darken-4">layers</i></a></center>
                         <span class="grey-text text-lighten-1"> Aqui você pode criar qualquer componente para sua loja , como por exemplo processadores, memórias,
                             HD's e seus respectivos atributos.
@@ -98,13 +111,35 @@
                 
                 <div class="col s4">
                     <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">GERENCIAR USUÁRIOS</h5></center>
+                        <center><a href="consultarUsuario"><i class="large material-icons red-text text-darken-4">settings</i></a></center>
+                        <span class="grey-text text-lighten-1"> Aqui você poderá gerenciar todos os usuários cadastrados no sistema, incluindo administradores, e usuários
+                            comuns.
+                        </span>    
+                    </div>
+                </div>
+                
+                <div class="col s4">
+                    <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">GERENCIAR COMPONENTES</h5></center>
+                        <center><a href="consultarComponente"><i class="large material-icons red-text text-darken-4">settings</i></a></center>
+                        <span class="grey-text text-lighten-1"> Aqui você poderá gerenciar todos os tipos de componentes cadastrados no sistema e criar
+                            um componente.
+                        </span>    
+                    </div>
+                </div>
+                
+                <div class="col s4">
+                    <div class="card-panel grey darken-4 hoverable">
                         <center><h5 class="grey-text text-lighten-1">LOGOUT DO SISTEMA</h5></center>
                         <center><a href="ControleAcesso?acao=Sair"><i class="large material-icons red-text text-darken-4">power_settings_new</i></a></center>
-                        <span class="grey-text text-lighten-1"> Aqui você fará logout do sistema e não poderá ter acesso as áreas até realizar uma 
+                        <span class="grey-text text-lighten-1"> Aqui você fará logout do sistema e não poderá ter acesso as áreas administrativas até realizar uma 
                             nova autenticação.
                         </span>    
                     </div>
                 </div>
+                
+                
             </div>
 
             

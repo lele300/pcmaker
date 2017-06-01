@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControleComponente", urlPatterns = {"/cadastrarTipoComponente", "/cadastrarComponente", "/consultarComponente", "/deletarComponente", "/alterarComponente", "/consultarPorIdComponente", "/iniciarCadastroComponente"})
+@WebServlet(name = "ControleComponente", urlPatterns = {"/cadastrarTipoComponente", "/cadastrarComponente", "/consultarComponente", "/deletarComponente", "/alterarComponente", "/consultarPorIdTipoComponente", "/iniciarCadastroComponente", "/itensCarrinhoComponente"})
 
 public class ControleComponente extends HttpServlet {
 
@@ -51,7 +51,7 @@ public class ControleComponente extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleComponente.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        } 
     }
 
     @Override
@@ -71,9 +71,9 @@ public class ControleComponente extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (uri.equals(req.getContextPath() + "/consultarPorIdComponente")) {
+        } else if (uri.equals(req.getContextPath() + "/consultarPorIdTipoComponente")) {
             try {
-                consultarPorIdComponente(req, resp);
+                consultarPorIdTipoComponente(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -83,13 +83,13 @@ public class ControleComponente extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if ((uri.equals(req.getContextPath() + "/iniciarCarrinhoComponente"))) {
+        } else if ((uri.equals(req.getContextPath() + "/itensCarrinhoComponente"))) {
             try {
                 itensCarrinhoComponente(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        } 
     }
 
     public void iniciarCadastroComponente(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
@@ -185,13 +185,7 @@ public class ControleComponente extends HttpServlet {
 
         ComponenteDAO daoComponente = new ComponenteDAO();
         daoComponente.cadastrarComponente(componente);
-        
-//        for (Atributo atributo : componente.getAtributos()) {
-//
-//            AtributoDAO daoAtributo = new AtributoDAO();
-//            daoAtributo.cadastrarAtributo(atributo);
-//            
-//        }
+
         req.getRequestDispatcher("cadastroTipoComponenteOK.jsp").forward(req, resp);
 
     }
@@ -238,7 +232,7 @@ public class ControleComponente extends HttpServlet {
 
     }
 
-    public void consultarPorIdComponente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+    public void consultarPorIdTipoComponente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
 
         TipoComponente tipoComponente = new TipoComponente();
 
@@ -261,7 +255,7 @@ public class ControleComponente extends HttpServlet {
         listaComponentes = daoComponente.consultarComponentes();
         
         req.setAttribute("listaComponentes", listaComponentes);
-        req.getRequestDispatcher("carrinhoComponente.jsp").forward(req, resp);
+        req.getRequestDispatcher("carrinho.jsp").forward(req, resp);
         
     }
 }

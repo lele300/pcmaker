@@ -55,7 +55,7 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
                     <li><a href="<%=noCall%>" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
                     <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
-                    <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
+                    <li><a href="indexAdm.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                 </ul>
             </div>
         </nav>
@@ -132,12 +132,12 @@
 
                 <h5><%=tp.getNomeComponente()%></h5>
 
-                <i class="large material-icons left red-text text-darken-4">local_laundry_service</i>
+                <i class="large material-icons left red-text text-darken-4">layers</i>
 
 
                 <a href="#modalComponente<%=tp.getId()%>" class="btn waves-effect waves-light grey darken-4"><i class="material-icons left">add</i>Criar</a>
                 <a href="deletarComponente?id=<%=tp.getId()%>"class="btn waves-effect waves-light grey darken-4"><i class="material-icons left">delete_forever</i> Deletar </a>
-                <a href="consultarPorIdComponente?id=<%=tp.getId()%>"class="btn waves-effect waves-light grey darken-4"><i class="material-icons left">delete_forever</i> Renomear </a>
+                <a href="consultarPorIdComponente?id=<%=tp.getId()%>"class="btn waves-effect waves-light grey darken-4"><i class="material-icons left">loop</i> Renomear </a>
 
 
             </div>

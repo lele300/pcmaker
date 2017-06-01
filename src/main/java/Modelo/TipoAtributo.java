@@ -11,6 +11,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,10 +34,10 @@ public class TipoAtributo implements Serializable {
     private String nomeAtributo;
     
     //Um tipoAtributo está associado á vários atributos
-    @OneToMany(mappedBy = "tipoAtributo")
+    @OneToMany(mappedBy = "tipoAtributo", fetch = FetchType.EAGER)
     private List<Atributo> atributos;
     
-    @ManyToMany(mappedBy = "tipoAtributos")
+    @ManyToMany(mappedBy = "tipoAtributos", fetch = FetchType.EAGER)
     private List<TipoComponente> tipoComponentes;
 
     public int getId() {

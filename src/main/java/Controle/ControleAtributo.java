@@ -109,11 +109,16 @@ public class ControleAtributo extends HttpServlet {
         //Instanciando objeto Atributo e setando o id
         Atributo atributo = new Atributo();
         atributo.setId(id);
+        
+        TipoAtributo tipoAtributo = new TipoAtributo();
+        tipoAtributo.setId(id);
 
         //Instanciando o objeto AtributoDAO para operações do banco de dados
         AtributoDAO daoAtributo = new AtributoDAO();
+        TipoAtributoDAO daoTipoAtributo = new TipoAtributoDAO();
 
         //Deleta o atributo do banco de dados
+        daoTipoAtributo.deletarTipoAtributo(tipoAtributo);
         daoAtributo.deletarAtributo(atributo);
 
         //Chama o método para consultar todos os atributos e retornar á pagina de listagem dos atributos.

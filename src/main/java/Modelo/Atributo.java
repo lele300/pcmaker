@@ -10,6 +10,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,11 +32,11 @@ public class Atributo implements Serializable {
     private String valor;
     
     //Um Atributo só está associado á um tipoAtributo
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     private TipoAtributo tipoAtributo;
     
     //Um atributo pode estar associado á um componente
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Componente componentes;
 
     public int getId() {

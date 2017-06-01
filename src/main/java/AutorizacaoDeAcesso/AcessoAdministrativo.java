@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  * @author Leonardo
  */
 
-@WebFilter(servletNames = {"ControleComponente","ControleAtributo"}, urlPatterns = {"/cadastrarAcessoUsuario","/alterarAcessoUsuario"})
+@WebFilter(servletNames = {"ControleAtributo"}, urlPatterns = {"/cadastrarAcessoUsuario","/alterarAcessoUsuario", "/cadastrarTipoComponente", "/cadastrarComponente", "/consultarComponente", "/deletarComponente", "/alterarComponente", "/consultarPorIdTipoComponente", "/iniciarCadastroComponente"})
 public class AcessoAdministrativo implements Filter {
 
     @Override
