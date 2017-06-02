@@ -34,10 +34,10 @@ public class TipoComponente implements Serializable {
     private String nomeComponente;
     
     //Um tipoComponente está associado á vários componentes
-    @OneToMany(mappedBy = "tipoComponente", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tipoComponente")
     private List<Componente> componentes;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
     private List<TipoAtributo> tipoAtributos;
 
     public int getId() {

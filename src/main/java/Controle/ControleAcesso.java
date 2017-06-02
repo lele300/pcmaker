@@ -23,47 +23,47 @@ import javax.servlet.http.HttpSession;
  */
 public class ControleAcesso extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = resp.getWriter();
 
         try {
-            String acao = request.getParameter("acao");
+            String acao = req.getParameter("acao");
             if (acao.equals("Entrar")) {
                 Usuario usuario = new Usuario();
-                usuario.setLogin(request.getParameter("login"));
-                usuario.setSenha(request.getParameter("senha"));
+                usuario.setLogin(req.getParameter("login"));
+                usuario.setSenha(req.getParameter("senha"));
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 Usuario usuarioAutenticado = usuarioDAO.autenticaUsuarioComum(usuario);
 
                 if (usuarioAutenticado != null) {
-                    HttpSession sessaoUsuario = request.getSession();
+                    HttpSession sessaoUsuario = req.getSession();
                     sessaoUsuario.setAttribute("usuarioAutenticado", usuarioAutenticado);
                     if (usuarioAutenticado.getTipoAdm() == TipoAdm.ADMINISTRADOR) {
-                        response.sendRedirect("indexAdm.jsp");
+                        resp.sendRedirect("indexAdm.jsp");
                     } else {
-                        response.sendRedirect("principal.jsp");
+                        resp.sendRedirect("principal.jsp");
                     }
 
                 } else {
-                    RequestDispatcher rd = request.getRequestDispatcher("/cadastroUsuario.jsp");
-                    request.setAttribute("msg", "Login ou Senha Incorreto!");
-                    rd.forward(request, response);
+                    RequestDispatcher rd = req.getRequestDispatcher("/cadastroUsuario.jsp");
+                    req.setAttribute("msg", "Login ou Senha Incorreto!");
+                    rd.forward(req, resp);
 
                 }
 
             } else if (acao.equals("Sair")) {
-                HttpSession sessaoUsuario = request.getSession();
+                HttpSession sessaoUsuario = req.getSession();
                 sessaoUsuario.removeAttribute("usuarioAutenticado");
-                response.sendRedirect("logout.jsp");
+                resp.sendRedirect("logout.jsp");
 
             }
         } catch (Exception ex) {
-            RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
-            request.setAttribute("erro", "Login ou senha incorretos !");
-            rd.forward(request, response);
+            RequestDispatcher rd = req.getRequestDispatcher("/erro.jsp");
+            req.setAttribute("erro", "Login ou senha incorretos !");
+            rd.forward(req, resp);
         }
 
     }

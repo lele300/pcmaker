@@ -32,11 +32,11 @@ public class Atributo implements Serializable {
     private String valor;
     
     //Um Atributo só está associado á um tipoAtributo
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     private TipoAtributo tipoAtributo;
     
     //Um atributo pode estar associado á um componente
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Componente componentes;
 
     public int getId() {

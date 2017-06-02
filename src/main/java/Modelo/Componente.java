@@ -44,11 +44,11 @@ public class Componente implements Serializable {
     private String descricao;
 
     //Um componente só pode estar associado á um tipoComponente
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     private TipoComponente tipoComponente;
 
     //Um componente pode estar associado á vários atributos
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componentes", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componentes")
     private List<Atributo> atributos;
 
     public int getId() {
@@ -144,25 +144,7 @@ public class Componente implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (this.quantidade != other.quantidade) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.preco) != Double.doubleToLongBits(other.preco)) {
-            return false;
-        }
-        if (!Objects.equals(this.modelo, other.modelo)) {
-            return false;
-        }
-        if (!Objects.equals(this.marca, other.marca)) {
-            return false;
-        }
-        if (!Objects.equals(this.descricao, other.descricao)) {
-            return false;
-        }
-        if (!Objects.equals(this.tipoComponente, other.tipoComponente)) {
-            return false;
-        }
-        return Objects.equals(this.atributos, other.atributos);
+        return true;
     }
     
 }

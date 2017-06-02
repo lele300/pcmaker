@@ -34,10 +34,10 @@ public class TipoAtributo implements Serializable {
     private String nomeAtributo;
     
     //Um tipoAtributo está associado á vários atributos
-    @OneToMany(mappedBy = "tipoAtributo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tipoAtributo")
     private List<Atributo> atributos;
     
-    @ManyToMany(mappedBy = "tipoAtributos", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tipoAtributos")
     private List<TipoComponente> tipoComponentes;
 
     public int getId() {

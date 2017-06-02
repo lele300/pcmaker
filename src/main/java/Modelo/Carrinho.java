@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class Carrinho {
     
-    private List<Componente> componentesNoCarrinho;
+    private List<Componente> componentesNoCarrinho = new ArrayList<>();
 
     public List<Componente> getComponentes() {
         return componentesNoCarrinho;

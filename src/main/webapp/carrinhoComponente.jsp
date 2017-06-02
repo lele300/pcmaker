@@ -147,7 +147,7 @@
         <tr>
             <td><%=comp.getModelo()%></td>
             <td><%=formatadorPreco.format(comp.getPreco())%></td>
-            <td><a href="removerComponenteDoCarrinho?id=<%=comp.getId()%>"</td>          
+            <td><a href="removerComponenteDoCarrinho?id=<%=comp.getId()%>">Remover do Carrinho</a></td>          
         </tr>
                 <%}%>
             </tbody>

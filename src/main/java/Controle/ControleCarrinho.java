@@ -85,7 +85,7 @@ public class ControleCarrinho extends HttpServlet {
              
              Carrinho carrinho = (Carrinho) req.getSession().getAttribute("carrinho");
              carrinho.removerDoCarrinho(removerComponente);
-             resp.sendRedirect("carrinho.jsp");
+             resp.sendRedirect("carrinhoComponente.jsp");
              
          }catch(Exception ex){
              ex.getMessage();
