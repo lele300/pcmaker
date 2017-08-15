@@ -55,7 +55,7 @@
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
                         <li><a href="<%=noCall%>" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
-                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
+                        <li><a href="indexAdm.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
                 </div>
             </nav>
@@ -119,6 +119,10 @@
             </div>
         </div>
         <!-- Fim do Modal -->
+        
+        <div class="col s12">
+            <span id="erro">Erro ao recuperar usuários...Tente novamente mais tarde.</span>
+        </div>
 
         <div class="col s10 off-set s2">
             <table class="highlight centered bordered responsive-table">
@@ -145,29 +149,30 @@
 
                 <% List<Usuario> listaUsuario = (List<Usuario>) request.getAttribute("listaUsuarios");
                     for (Usuario u : listaUsuario) {%>     
-                <tr>
-                <tbody>
-                <td><%=u.getIdUsuario()%></td>
-                <td><%=u.getNomeCompleto()%></td>
-                <td><%=u.getLogin()%></td>
-                <td><%=u.getEmail()%></td>
-                <td><%=u.getCpf()%></td>
-                <td><%=u.getRg()%></td>
-                <%for (Endereco e : u.getEnderecos()) {%>
-                <td><%=e.getRua()%></td>
-                <td><%=e.getBairro()%></td>
-                <td><%=e.getCep()%></d>
-                <td><%=e.getUf()%></td>
-                <td><%=e.getNumero()%></td>
-                <td><%=u.getTipoAdm()%></td>
-                <td><%=e.getCidade()%></td>
-                <td><%=e.getComplemento()%></td>
+                    
+                <tbody>    
+                    <tr>
+                        <td><%=u.getIdUsuario()%></td>
+                        <td><%=u.getNomeCompleto()%></td>
+                        <td><%=u.getLogin()%></td>
+                        <td><%=u.getEmail()%></td>
+                        <td><%=u.getCpf()%></td>
+                        <td><%=u.getRg()%></td>
+                        <%for (Endereco e : u.getEnderecos()) {%>
+                        <td><%=e.getRua()%></td>
+                        <td><%=e.getBairro()%></td>
+                        <td><%=e.getCep()%></td>
+                        <td><%=e.getUf()%></td>
+                        <td><%=e.getNumero()%></td>
+                        <td><%=u.getTipoAdm()%></td>
+                        <td><%=e.getCidade()%></td>
+                        <td><%=e.getComplemento()%></td>
 
-                <td><b><a href="deletarUsuario?id=<%=u.getIdUsuario()%>"/>Excluir</b> </td>
-                <td> <b><a href="consultarPorId?id=<%=u.getIdUsuario()%>"/>Alterar</b> </td>
-                </tr>
-                <%}%>
-                <%}%>
+                        <td><a id="botao-excluir" href="deletarUsuario?id=<%=u.getIdUsuario()%>"/>Excluir</td>
+                        <td><a href="consultarPorId?id=<%=u.getIdUsuario()%>"/>Alterar</td>
+                    </tr>
+                    <%}%>
+                    <%}%>
                 </tbody>
             </table>
         </div>
@@ -217,6 +222,7 @@
         <script type="text/javascript" src="js/jQuery.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script type="text/javascript" src="js/customJS.js"></script>
+        <script type="text/javascript" src="js/form.js"></script>
         <script src="https://use.fontawesome.com/93d491e836.js"></script>
 
     </body>

@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/custom.css"  media="screen,projection"/>
+        <link href="css/custom.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
         <!-- Dropdown das peças -->
@@ -54,7 +54,7 @@
 
                         <div class="input-field col s12">
                             <i class="material-icons prefix grey-text text-darken-4">account_circle</i>
-                            <input id="icon_prefix" type="text" class="validate" name="login" required>
+                            <input id="icon_prefix" type="text" class="validate login" name="login" required>
                             <label for="login" class="grey-text text-darken-4">Login</label>
                         </div>
 
@@ -63,14 +63,14 @@
                     <div class="row">         
                         <div class="input-field col s12">
                             <i class="material-icons prefix grey-text text-darken-4">lock_open</i>
-                            <input id="icon_telephone" type="password" class="validate" name="senha" required>
+                            <input id="icon_telephone" type="password" class="validate senha" name="senha" required>
                             <label for="senha" class="grey-text text-darken-4">Senha</label>   
                         </div>                  
                     </div>
 
                     <div class="row left-align">
                         <div class="col s6 left-align">
-                            <input type="submit" class="btn waves-effect light-green lighten-1" name="acao" value="Entrar">                           
+                            <input id="entrar" type="submit" class="btn waves-effect light-green lighten-1" name="acao" value="Entrar">                           
                         </div> 
 
                         <div class="col s6 right-align">
@@ -128,7 +128,7 @@
                 <div class="row">
                     <div class="col s12 m4">
                         <div class="icon-block">
-                            <h2 class="center yellow-text text-darkin-2"><i class="material-icons">flash_on</i></h2>
+                            <h2 class="center black-text"><i class="material-icons">flash_on</i></h2>
                             <h5 class="center">Compatibilidade de Fonte</h5>
 
                             <p class="light center">É garantida a compatibilidade de fonte entre as peças que você escolher. Não queremos que você tenha qualquer problema na sua máquina.</p>
@@ -137,7 +137,7 @@
 
                     <div class="col s12 m4">
                         <div class="icon-block">
-                            <h2 class="center grey-text text-lighten-1"><i class="material-icons">settings</i></h2>
+                            <h2 class="center grey-text text-darken-1"><i class="material-icons">settings</i></h2>
                             <h5 class="center bordaEscrita">Escolha sem preocupações</h5>
 
                             <p class="light center">Você é o nosso principal componente. Com um sistema inteligente de cálculo de Watts, você não precisa se preocupar. Escolha sem medo.</p>
@@ -146,7 +146,7 @@
 
                     <div class="col s12 m4">
                         <div class="icon-block">
-                            <h2 class="center red-text text-darkin-3"><i class="material-icons">layers</i></h2>
+                            <h2 class="center red-text text-darken-2"><i class="material-icons">layers</i></h2>
                             <h5 class="center">Diferencial do mercado</h5>
 
                             <p class="light center">Nós garantimos á você que sua máquina não sofrerá problemas relacionados a falta de potência para sua configuração.</p>
@@ -251,8 +251,8 @@
 
             <!--  Scripts-->
             <script type="text/javascript" src="js/jQuery.js"></script>
-            <script src="js/materialize.js"></script>
-            <script type="text/javascript" src="js/customJS.js"></script>
+            <script src="js/materialize.min.js"></script>
+            <script src="js/customJS.js"></script>
             <script src="js/init.js"></script>
             <script src="https://use.fontawesome.com/93d491e836.js"></script>
 

@@ -58,7 +58,7 @@ public class ControleAcesso extends HttpServlet {
                 HttpSession sessaoUsuario = req.getSession();
                 sessaoUsuario.removeAttribute("usuarioAutenticado");
                 // Remover carrinho da sessao
-                resp.sendRedirect("logout.jsp");
+                resp.sendRedirect("home.jsp");
 
             }
         } catch (Exception ex) {
