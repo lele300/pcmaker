@@ -208,21 +208,25 @@ public class ControleComponente extends HttpServlet {
 
     public void deletarComponente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
 
+        //Recuperando o ID do TipoComponente da JSP
+        int id = Integer.parseInt(req.getParameter("id"));
+        
         //Instância de TipoComponente
         TipoComponente tipoComponente = new TipoComponente();
         Componente componente = new Componente();
-
-        //Recuperando o ID do TipoComponente da JSP
-        tipoComponente.setId(Integer.parseInt(req.getParameter("id")));
-        componente.setId(Integer.parseInt(req.getParameter("id")));
+        
+        
+        tipoComponente.setId(id);
+        componente.setId(id);
 
         //Instância da classe de persistência
         TipoComponenteDAO tipoComponenteDAO = new TipoComponenteDAO();
-        ComponenteDAO componenteDAO = new ComponenteDAO();
+        ComponenteDAO daoComponente = new ComponenteDAO();
 
         //Deletando o objeto TipoComponente do BD
+        daoComponente.deletarComponente(componente);
         tipoComponenteDAO.deletarTipoComponente(tipoComponente);
-        componenteDAO.deletarComponente(componente);
+        
 
         this.consultaTodosComponente(req, resp);
 

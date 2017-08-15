@@ -131,6 +131,16 @@
                 
                 <div class="col s4">
                     <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">GERENCIAR ATRIBUTOS</h5></center>
+                        <center><a href="consultarAtributo"><i class="large material-icons red-text text-darken-4">settings</i></a></center>
+                        <span class="grey-text text-lighten-1"> Aqui você pode gerenciar todos os tipos atributos cadastrados no sistema e assim criar característica
+                            do componente.
+                        </span>    
+                    </div>
+                </div>
+                
+                <div class="col s4">
+                    <div class="card-panel grey darken-4 hoverable">
                         <center><h5 class="grey-text text-lighten-1">LOGOUT DO SISTEMA</h5></center>
                         <center><a href="ControleAcesso?acao=Sair"><i class="large material-icons red-text text-darken-4">power_settings_new</i></a></center>
                         <span class="grey-text text-lighten-1"> Aqui você fará logout do sistema e não poderá ter acesso as áreas administrativas até realizar uma 
@@ -138,6 +148,8 @@
                         </span>    
                     </div>
                 </div>
+                
+                
                 
                 
             </div>

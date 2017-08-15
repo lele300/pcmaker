@@ -159,7 +159,7 @@
                         </span> 
 
                         <span class="grey-text text-lighten-1">
-                            <center><a href="inserirComponenteNoCarrinho?id=<%=comp.getId()%>" class="btn waves-effect waves-green grey lighten-3 grey-text text-darken-3">Colocar no carrinho<i class="medium material-icons left green-text text-darken-1">add_shopping_cart</i></a></center>
+                            <center><a id="add-carrinho" href="inserirComponenteNoCarrinho?id=<%=comp.getId()%>" class="btn waves-effect waves-green grey lighten-3 grey-text text-darken-3">Colocar no carrinho<i class="medium material-icons left green-text text-darken-1">add_shopping_cart</i></a></center>
                         </span> 
                         
                     </div>

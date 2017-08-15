@@ -44,7 +44,7 @@ public class Componente implements Serializable {
     private String descricao;
 
     //Um componente só pode estar associado á um tipoComponente
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private TipoComponente tipoComponente;
 
     //Um componente pode estar associado á vários atributos

@@ -58,7 +58,7 @@ import javax.persistence.OneToMany;
         @Column(length = 14, nullable = false)
         private String telefone;
         
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
         private List<Endereco> enderecos;
         
         //Construtor 

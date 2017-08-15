@@ -64,7 +64,6 @@ public class ControleCarrinho extends HttpServlet {
             }
             
             carrinho.adicionarNoCarrinho(componente);
-            System.out.println(carrinho.getComponentes());
             resp.sendRedirect("carrinhoComponente.jsp");
             
         } catch(IOException | NumberFormatException ex){

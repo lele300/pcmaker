@@ -18,18 +18,27 @@ public class ComponenteDAO {
             manager.getTransaction().commit();
         } catch (Exception ex) {
             ex.getMessage();
-            System.out.println("Erro ao inserir um componente: " + ex);
+            System.out.println("Não foi possível cadastrar um componente "+ ex);
         }
     }
 
     public List<Componente> consultarComponentes() {
 
+        //Instância do EntityManager para fazer as transações do banco
         EntityManager manager = new JPAUtil().getEntityManager();
-        List<Componente> listaComponentes = new ArrayList<>();
-        TypedQuery<Componente> query = manager.createQuery("select comp from Componente comp", Componente.class);
-        listaComponentes = query.getResultList();
-        return listaComponentes;
+        //Inicializar o ArrayList do tipo Componente
+        List<Componente> listaDeComponentes = new ArrayList<>();
+        try {
+            TypedQuery<Componente> query = manager.createQuery("select comp from Componente comp", Componente.class);
+            listaDeComponentes = query.getResultList();
+        } catch (Exception ex) {
+            ex.getMessage();
+            System.out.println("Não foi possível listar os componentes: " + ex);
+        } finally {
+            manager.close();
+        }
 
+        return listaDeComponentes;
     }
 
     //Método para deleter um Componente e suas dependências (TipoComponente)
