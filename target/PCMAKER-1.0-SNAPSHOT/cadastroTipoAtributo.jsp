@@ -63,7 +63,8 @@
 
                 <form class="col s12" action="ControleAcesso" method="POST">
                     <div class="row">
-
+                        
+                        <span id="erro">Login ou Senha incorretos, por favor tente novamente.</span>
                         <div class="input-field col s12">
                             <i class="material-icons prefix grey-text text-darken-4">account_circle</i>
                             <input id="icon_prefix" type="text" class="validate" name="login" required>
@@ -82,7 +83,7 @@
 
                     <div class="row left-align">
                         <div class="col s6 left-align">
-                            <input type="submit" class="btn waves-effect light-green lighten-1" name="acao" value="Entrar">                           
+                            <input type="submit" id="botao-login" class="btn waves-effect light-green lighten-1" name="acao" value="Entrar">                           
                         </div> 
 
                         <div class="col s6 right-align">

@@ -20,9 +20,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
  
-@WebServlet(name = "ControleUsuario", urlPatterns = {"/cadastrarUsuario","/consultarUsuario","/deletarUsuario","/alterarUsuario","/consultarPorId","/cadastrarAcessoUsuario","/alterarAcessoUsuario"})
+@WebServlet(name = "ControleUsuario", urlPatterns = {"/cadastrarUsuario","/consultarUsuario","/deletarUsuario","/alterarUsuario","/consultarPorId","/cadastrarAcessoUsuario","/alterarAcessoUsuario", "/consultarUsuarioAJAX"})
 public class ControleUsuario extends HttpServlet {
 
     @Override
@@ -83,7 +85,14 @@ public class ControleUsuario extends HttpServlet {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 req.getRequestDispatcher("erro.jsp").forward(req, resp);
             }
-        }    
+        } else if(uri.equals(req.getContextPath() + "/consultarUsuarioAJAX")){
+            try {
+                consultarUsuarioAJAX(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                req.getRequestDispatcher("erro.jsp").forward(req, resp);
+            }
+        }       
     }
     
     
@@ -344,6 +353,25 @@ public class ControleUsuario extends HttpServlet {
         
         daoUsuario.alterarUsuario(usuario);
         this.consultaTodosUsuarios(req, resp);
+        
+    }
+    
+    
+    public void consultarUsuarioAJAX(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+        
+        UsuarioDAO daoUsuario = new UsuarioDAO();
+        
+        List<Usuario> listaUsuarios = daoUsuario.consultarTodosUsuarios();
+        
+        Gson gson = new GsonBuilder()
+                .addSerializationExclusionStrategy(new Endereco.ExclusaoUsuarioDoEndereco())
+                .create();
+        
+        String listaUsuarioJSON = gson.toJson(listaUsuarios);
+        
+        resp.getWriter().println(listaUsuarioJSON);
+        System.out.println(listaUsuarioJSON);
+        
         
     }
     

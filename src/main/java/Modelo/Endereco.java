@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -155,4 +157,20 @@ public class Endereco implements Serializable {
     public String toString() {
         return "Endereco{" + "idEndereco=" + idEndereco + ", cep=" + cep + ", rua=" + rua + ", bairro=" + bairro + ", uf=" + uf + ", numero=" + numero + ", cidade=" + cidade + ", complemento=" + complemento + '}';
     }
+    
+    public static class ExclusaoUsuarioDoEndereco implements ExclusionStrategy {
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes fa) {
+            return fa.getDeclaringClass().getName().equals("Modelo.Endereco") &&
+                    fa.getName().equals("usuario");
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> type) {
+            return false;
+        }
+    
+    }
 }
+

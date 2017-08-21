@@ -12,6 +12,8 @@ import Modelo.Atributo;
 import Modelo.Componente;
 import Modelo.TipoAtributo;
 import Modelo.TipoComponente;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControleComponente", urlPatterns = {"/cadastrarTipoComponente", "/cadastrarComponente", "/consultarComponente", "/deletarComponente", "/alterarComponente", "/consultarPorIdTipoComponente", "/iniciarCadastroComponente", "/itensCarrinhoComponente"})
+@WebServlet(name = "ControleComponente", urlPatterns = {"/cadastrarTipoComponente", "/cadastrarComponente", "/consultarComponente", "/deletarComponente", "/alterarComponente", "/consultarPorIdTipoComponente", "/iniciarCadastroComponente", "/itensCarrinhoComponente", "/consultarComponenteAJAX", "/consultarTipoComponenteAJAX"})
 
 public class ControleComponente extends HttpServlet {
 
@@ -89,7 +91,19 @@ public class ControleComponente extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } 
+        } else if ((uri.equals(req.getContextPath() + "/consultarComponenteAJAX"))) {
+            try {
+                consultarComponenteAJAX(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if ((uri.equals(req.getContextPath() + "/consultarTipoComponenteAJAX"))) {
+            try {
+                consultarTipoComponenteAJAX(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public void iniciarCadastroComponente(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
@@ -199,6 +213,14 @@ public class ControleComponente extends HttpServlet {
         //Lista para armazenar os tiposComponentes do banco de dados
         List<TipoComponente> listaTipoComponente = daoTipoComponente.consultarTipoComponentes();
 
+        //String retorno = request.getPArameter("retorno");
+        
+        //if (retorno.equals("json") {
+        //GSon 
+        //JSONParser jp = new JSONParser(Componente.class);
+        ///String listaEMJson = jp.parse(listaComponente);
+        // response.getWriter().println(listaEmJSON);
+        // } else { //faz o que ja fazia abaixo
         // Atribuir a lista em um objeto para recuperar na JSP listaCadastroTipoComponente.jsp
         req.setAttribute("listaTipoComponente", listaTipoComponente);
         req.getRequestDispatcher("listaCadastroTipoComponente.jsp").forward(req, resp);
@@ -262,4 +284,41 @@ public class ControleComponente extends HttpServlet {
         req.getRequestDispatcher("carrinho.jsp").forward(req, resp);
         
     }
+    
+    
+    public void consultarComponenteAJAX(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+        
+        TipoComponenteDAO daoTipoComponente = new TipoComponenteDAO();
+        List<TipoComponente> listaTipoComponentes = daoTipoComponente.consultarTipoComponentes();
+        
+        Gson gson = new GsonBuilder()
+                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoComponenteDeTipoComponente())
+                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoTipoAtributoDeTipoComponente()).create();
+        
+        
+        
+        String listaComponentesJSON = gson.toJson(listaTipoComponentes);
+        
+        resp.getWriter().println(listaComponentesJSON);
+        
+        
+    }
+    
+    public void consultarTipoComponenteAJAX(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+        
+        
+        TipoComponenteDAO daoTipoComponente = new TipoComponenteDAO();
+        
+        List<TipoComponente> listaTipoComponente = daoTipoComponente.consultarTipoComponentes();
+        
+        Gson gson = new GsonBuilder()
+                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoComponenteDeTipoComponente())
+                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoTipoAtributoDeTipoComponente()).create();
+        
+        String listaTipoComponenteJSON = gson.toJson(listaTipoComponente);
+        
+        resp.getWriter().println(listaTipoComponenteJSON);
+        
+    }
+    
 }

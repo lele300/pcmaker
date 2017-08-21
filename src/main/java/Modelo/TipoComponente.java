@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -100,5 +102,42 @@ public class TipoComponente implements Serializable {
         }
         return true;
     } 
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    public static class ExclusaoComponenteDeTipoComponente implements ExclusionStrategy {
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes fa) {
+            return fa.getDeclaringClass().getName().equals("Modelo.TipoComponente")
+                    && fa.getName().equals("componentes");
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> type) {
+            return false;
+        }
+        
+    }
+    
+    
+    public static class ExclusaoTipoAtributoDeTipoComponente implements ExclusionStrategy {
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes fa) {
+            return fa.getDeclaringClass().getName().equals("Modelo.TipoComponente")
+                    && fa.getName().equals("tipoAtributos");
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> type) {
+            return false;
+        }
+        
+    }
     
 }

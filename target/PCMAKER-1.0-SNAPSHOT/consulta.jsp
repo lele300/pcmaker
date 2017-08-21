@@ -125,7 +125,7 @@
         </div>
 
         <div class="col s10 off-set s2">
-            <table class="highlight centered bordered responsive-table">
+            <table class="highlight centered bordered responsive-table tabela-usuario">
                 <thead>
                     <tr>
                         <th data-field="idUsuario">ID</th>
@@ -146,33 +146,27 @@
                         <th data-field="excluir">Alterar</th>
                     </tr>  
                 </thead>     
-
-                <% List<Usuario> listaUsuario = (List<Usuario>) request.getAttribute("listaUsuarios");
-                    for (Usuario u : listaUsuario) {%>     
                     
                 <tbody>    
                     <tr>
-                        <td><%=u.getIdUsuario()%></td>
-                        <td><%=u.getNomeCompleto()%></td>
-                        <td><%=u.getLogin()%></td>
-                        <td><%=u.getEmail()%></td>
-                        <td><%=u.getCpf()%></td>
-                        <td><%=u.getRg()%></td>
-                        <%for (Endereco e : u.getEnderecos()) {%>
-                        <td><%=e.getRua()%></td>
-                        <td><%=e.getBairro()%></td>
-                        <td><%=e.getCep()%></td>
-                        <td><%=e.getUf()%></td>
-                        <td><%=e.getNumero()%></td>
-                        <td><%=u.getTipoAdm()%></td>
-                        <td><%=e.getCidade()%></td>
-                        <td><%=e.getComplemento()%></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>                      
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
 
-                        <td><a id="botao-excluir" href="deletarUsuario?id=<%=u.getIdUsuario()%>"/>Excluir</td>
-                        <td><a href="consultarPorId?id=<%=u.getIdUsuario()%>"/>Alterar</td>
+                        <td><a id="botao-excluir" href="deletarUsuario?id=">Excluir</a></td>
+                        <td><a href="consultarPorId?id="/>Alterar</a></td>
                     </tr>
-                    <%}%>
-                    <%}%>
                 </tbody>
             </table>
         </div>
@@ -223,6 +217,7 @@
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script type="text/javascript" src="js/customJS.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
+        <script type="text/javascript" src="js/usuario.js"></script>
         <script src="https://use.fontawesome.com/93d491e836.js"></script>
 
     </body>

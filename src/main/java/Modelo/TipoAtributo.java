@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -37,7 +39,7 @@ public class TipoAtributo implements Serializable {
     @OneToMany(mappedBy = "tipoAtributo")
     private List<Atributo> atributos;
     
-    @ManyToMany(mappedBy = "tipoAtributos")
+    @ManyToMany(mappedBy = "tipoAtributos", fetch = FetchType.EAGER)
     private List<TipoComponente> tipoComponentes;
 
     public int getId() {
@@ -106,6 +108,21 @@ public class TipoAtributo implements Serializable {
     @Override
     public String toString() {
         return "TipoAtributo{" + "id=" + id + ", nomeAtributo=" + nomeAtributo + ", atributo=" + atributos + '}';
+    }
+    
+    public static class ExclusaoAtributosDeTipoAtributo implements ExclusionStrategy {
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes fa) {
+            return fa.getDeclaringClass().getName().equals("Modelo.TipoAtributo") &&
+                    fa.getName().equals("atributos");
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> type) {
+            return false;
+        }
+        
     }
     
 }

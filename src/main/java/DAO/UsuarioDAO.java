@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import org.hibernate.HibernateException;
 
 /**
  *
@@ -51,8 +50,18 @@ public class UsuarioDAO {
         EntityManager manager = new JPAUtil().getEntityManager();
         //Inicializa um ArrayList de Usuario
         List<Usuario> listaUsuarios = new ArrayList<>();
-        TypedQuery<Usuario> query = manager.createQuery("select u from Usuario u join u.enderecos", Usuario.class);
-        listaUsuarios = query.getResultList();
+        try{
+
+            TypedQuery<Usuario> query = manager.createQuery("select u from Usuario u join u.enderecos", Usuario.class);
+            listaUsuarios = query.getResultList();
+        
+        } catch(Exception ex){
+            ex.getMessage();
+            System.err.println("Ocorreu um erro ao consultar usuários: "+ex);
+            manager.getTransaction().rollback();
+        } finally {
+            manager.close();
+        }
         return listaUsuarios;
     }
 

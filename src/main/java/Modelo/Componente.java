@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,6 +6,8 @@
  */
 package Modelo;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -48,7 +51,7 @@ public class Componente implements Serializable {
     private TipoComponente tipoComponente;
 
     //Um componente pode estar associado á vários atributos
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componentes")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componentes", fetch = FetchType.EAGER)
     private List<Atributo> atributos;
 
     public int getId() {
@@ -145,6 +148,36 @@ public class Componente implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    public static class ExclusaoTipoComponenteDoComponente implements ExclusionStrategy {
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes fa) {
+            return fa.getDeclaringClass().getName().equals("Modelo.Componente") &&
+                    fa.getName().equals("tipoComponente");
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> type) {
+            return false;
+        }
+       
+    }
+    
+    public static class ExclusaoAtributosDoComponente implements ExclusionStrategy{
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes fa) {
+            return fa.getDeclaringClass().getName().equals("Modelo.Componente") &&
+                    fa.getName().equals("atributos");
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> type) {
+            return false;
+        }
+        
     }
     
 }
