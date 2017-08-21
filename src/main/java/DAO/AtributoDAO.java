@@ -26,13 +26,15 @@ public class AtributoDAO {
             manager.persist(atributo);
             manager.flush();
             manager.getTransaction().commit();
+
         } catch (Exception ex) {
             ex.getMessage();
-            System.err.println("Não foi possível inserir atributo: " + ex);
+            System.out.println("Não foi possível inserir atributo: " + ex);
             manager.getTransaction().rollback();
         } finally {
             manager.close();
         }
+
     }
 
     //Método para deleter um Atributo e suas dependências (TipoAtributo)
@@ -46,23 +48,24 @@ public class AtributoDAO {
             manager.getTransaction().commit();
         } catch (Exception ex) {
             ex.getMessage();
-            System.err.println("Falha ao deletar atributo: " + ex);
+            System.out.println("Não foi possível deletar um Atributo: " + ex);
             manager.getTransaction().rollback();
         } finally {
             manager.close();
         }
     }
-
+    
     public List<Atributo> consultarAtributos() {
-
+        
         EntityManager manager = new JPAUtil().getEntityManager();
         List<Atributo> listaAtributos = new ArrayList<>();
         TypedQuery<Atributo> query = manager.createQuery("select at from Atributo at", Atributo.class);
         listaAtributos = query.getResultList();
         return listaAtributos;
-
+           
     }
-
+    
+   
     public void alterarAtributo(Atributo atributo) {
 
         EntityManager manager = new JPAUtil().getEntityManager();

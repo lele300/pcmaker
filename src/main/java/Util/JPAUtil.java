@@ -15,6 +15,8 @@ import javax.persistence.Persistence;
  */
 public class JPAUtil {
     
+    
+
     @SuppressWarnings("FieldMayBeFinal")
     private static final EntityManagerFactory entityManagerFactory = Persistence
             .createEntityManagerFactory("pcmaker");
@@ -22,8 +24,6 @@ public class JPAUtil {
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
-    
-    
 }
 
         

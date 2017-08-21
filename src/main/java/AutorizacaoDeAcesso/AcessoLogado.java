@@ -5,7 +5,6 @@
  */
 package AutorizacaoDeAcesso;
 
-import Enum.TipoAdm;
 import Modelo.Usuario;
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -35,10 +34,10 @@ public class AcessoLogado implements Filter {
         HttpSession sessaoUsuario = ((HttpServletRequest)request).getSession();
         Usuario usuarioLogado = (Usuario) sessaoUsuario.getAttribute("usuarioAutenticado");
         
-        if(usuarioLogado == null){
-            ((HttpServletResponse)response).sendRedirect("naoAutenticado.jsp");
-        } else {
+        if(usuarioLogado != null){
             chain.doFilter(request, response);
+        } else {
+            ((HttpServletResponse)response).sendRedirect("naoAutenticado.jsp");
         }
     }
 

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -32,11 +33,11 @@ public class UsuarioDAO {
             }
             manager.flush(); // Força uma sincronia com o banco de dados
             manager.getTransaction().commit(); // Comita uma transação. 
-            System.out.println("Sucesso ao cadastrar usuário");
+            System.out.println("Usuário inserido com sucesso");
         } catch (Exception ex) {
             ex.getMessage();
-            manager.getTransaction().rollback(); // Executa um rollback em caso de erros
-            System.err.println("Falha ao cadastrar o usuário: " + ex);
+            manager.getTransaction().rollback();// Executa um rollback em caso de erros
+            System.out.println("Erro ao inserir usuário: " + ex);
         } finally {
             manager.close(); //Encerra uma transação
         }
@@ -46,9 +47,8 @@ public class UsuarioDAO {
     //Método para listar todos os clientes do banco de dados
     public List<Usuario> consultarTodosUsuarios() {
 
-        // Instancia um objeto EntityManager para realizar transações
+        // Instancia um objeto EntityManager para utilizar operações SQL
         EntityManager manager = new JPAUtil().getEntityManager();
-        //Inicializa um ArrayList de Usuario
         List<Usuario> listaUsuarios = new ArrayList<>();
         try{
 
@@ -70,6 +70,7 @@ public class UsuarioDAO {
 
         EntityManager manager = new JPAUtil().getEntityManager(); //Inicia um Entity Manager      
         manager.getTransaction().begin(); //Inicia uma transação
+
         try {
             usuario = manager.find(Usuario.class, usuario.getIdUsuario()); // Resgata um cliente através da primary key
             manager.remove(usuario); //Exclui o cliente do Banco de dados.
@@ -78,33 +79,32 @@ public class UsuarioDAO {
             ex.getMessage();
             manager.getTransaction().rollback();
             System.err.println("Erro ao deletar usuário: " + ex);
-        } finally {
-            manager.close(); //Fecha a transação
         }
+        manager.close(); //Fecha a transação
+
     }
 
     // Método para autenticar um cliente no banco de dados.
     public Usuario autenticaUsuarioComum(Usuario usuario) {
 
-        //Cria um Entity Manager
-        EntityManager manager = new JPAUtil().getEntityManager();
+        EntityManager manager = new JPAUtil().getEntityManager(); //Cria um Entity Manager
+
         try {
-            // Retorna um usuário se o login e senha existirem no Banco de dados
             TypedQuery<Usuario> query = manager.createQuery("select u from Usuario u where u.login=:pLogin"
-                    + " and u.senha=:pSenha", Usuario.class);
+                    + " and u.senha=:pSenha", Usuario.class); //Cria um retorno do tipo Usuario e um select personalizado
 
             query.setParameter("pLogin", usuario.getLogin()); //Atribui o valor no parâmetro pLogin
             query.setParameter("pSenha", usuario.getSenha()); //Atribui o valor no parâmetro pSenha
             usuario.setTipoAdm(TipoAdm.CLIENTE);
-            usuario = query.getSingleResult(); //Retorna somente um único Usuário.   
-        } catch (Exception ex) {
+            usuario = query.getSingleResult(); //Retorna um valor único no objeto cliente.   
+            manager.close(); //Fecha uma conexão
+        } catch (HibernateException ex) {
             ex.getMessage();
             manager.getTransaction().rollback();
-            System.err.println("Falha ao autenticar usuário: " + ex);
-        } finally {
-            manager.close(); //Fecha uma conexão
+            System.err.println("Erro ao autenticar usuário: " + ex);
         }
-        return usuario; //Retorna usuário autenticado.
+
+        return usuario; //Retorna um valor cliente.
     }
 
     public void alterarUsuario(Usuario usuario) {
@@ -115,15 +115,16 @@ public class UsuarioDAO {
             if (usuario.getIdUsuario() != null) {
                 manager.merge(usuario);
                 manager.getTransaction().commit();
-                System.out.println("Sucesso ao alterar Usuário");
+                System.err.println("Usuário alterado com sucesso");
             }
-        } catch (Exception ex) {
+        } catch (HibernateException ex) {
             ex.getMessage();
             manager.getTransaction().rollback();
-            System.err.println("Falha ao alterar Usuário: " + ex);
+            System.err.println("Erro ao alterar usuário: " + ex);
         } finally {
             manager.close();
         }
+
     }
 
     public Usuario consultarPorId(Usuario usuario) {
