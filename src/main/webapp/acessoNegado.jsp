@@ -58,7 +58,7 @@
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="#" class="dropdown-button hoverable grey-text text-lighten-1" data-activates="dropdown2"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
+                        <li><a href="#" class="dropdown-button hoverable grey-text text-lighten-1 modal-trigger" data-activates="dropdown2"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="home.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>

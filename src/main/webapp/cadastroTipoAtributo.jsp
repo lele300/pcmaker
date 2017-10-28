@@ -44,7 +44,7 @@
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
+                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1 modal-trigger"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="indexAdm.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
@@ -63,8 +63,7 @@
 
                 <form class="col s12" action="ControleAcesso" method="POST">
                     <div class="row">
-                        
-                        <span id="erro">Login ou Senha incorretos, por favor tente novamente.</span>
+
                         <div class="input-field col s12">
                             <i class="material-icons prefix grey-text text-darken-4">account_circle</i>
                             <input id="icon_prefix" type="text" class="validate" name="login" required>
@@ -83,7 +82,7 @@
 
                     <div class="row left-align">
                         <div class="col s6 left-align">
-                            <input type="submit" id="botao-login" class="btn waves-effect light-green lighten-1" name="acao" value="Entrar">                           
+                            <input type="submit" class="btn waves-effect light-green lighten-1" name="acao" value="Entrar">                           
                         </div> 
 
                         <div class="col s6 right-align">

@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ControleCarrinho extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
   
         String url = req.getRequestURI();
 
@@ -46,10 +46,9 @@ public class ControleCarrinho extends HttpServlet {
     }
 
     private void inserirComponenteNoCarrinho(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
-
-        
+      
         try {
-            int id = Integer.parseInt(req.getParameter("id"));
+            int id = Integer.parseInt(req.getParameter("idComponente"));
             Componente componente = new Componente();
             componente.setId(id);
             
@@ -64,19 +63,16 @@ public class ControleCarrinho extends HttpServlet {
             }
             
             carrinho.adicionarNoCarrinho(componente);
-            System.out.println(carrinho.getComponentes());
-            resp.sendRedirect("carrinhoComponente.jsp");
             
-        } catch(IOException | NumberFormatException ex){
+        } catch(NumberFormatException ex){
             Logger.getLogger(ControleCarrinho.class.getName()).log(Level.SEVERE, null, ex);
         }    
     }
-    
-    
+      
      private void removerComponenteDoCarrinho(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
 
          try{
-             int id = Integer.parseInt(req.getParameter("id"));
+             int id = Integer.parseInt(req.getParameter("idComponente"));
              Componente removerComponente = new Componente();
              removerComponente.setId(id);
              
@@ -85,9 +81,10 @@ public class ControleCarrinho extends HttpServlet {
              
              Carrinho carrinho = (Carrinho) req.getSession().getAttribute("carrinho");
              carrinho.removerDoCarrinho(removerComponente);
-             resp.sendRedirect("carrinhoComponente.jsp");
+             System.out.println(carrinho.getComponentes());
+
              
-         }catch(Exception ex){
+         } catch(NumberFormatException ex){
              ex.getMessage();
              System.out.println("Não foi possível retirar o componente do carrinho "+ex);
          }

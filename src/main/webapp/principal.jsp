@@ -11,8 +11,7 @@
     <% Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
 
         if (usuario != null) {
-
-
+            
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,29 +45,32 @@
         </ul>
 
         <ul id="dropdown2" class="dropdown-content">
-            <li><a class="grey darken-4 grey-text text-lighten-1 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">shopping_cart</i>Meus pedidos</a></li>
+            <li><a class="grey darken-4 grey-text text-lighten-1 hoverable" href="consultarPedido"><i class="material-icons left red-text text-darken-4">shopping_cart</i>Meus pedidos</a></li>
             <li class="divider"></li>
             <li><a class="grey darken-4 grey-text text-lighten-1" href="consultarPorId?id=<%=usuario.getIdUsuario()%>"><i class="material-icons left red-text text-darken-4">perm_identity</i>Meu perfil</a></li>     
         </ul>
 
+        <header>
         <!-- Inicío Barra de Navegação -->
         <div class="navbar-fixed">
-
             <nav> 
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a class="dropdown-button hoverable grey-text text-lighten-1" data-activates="dropdown2"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
+                        <li><a class="dropdown-button hoverable grey-text text-lighten-1 modal-trigger" data-activates="dropdown2"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="principal.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
                 </div>
             </nav>
         </div>    <br>
+        
+        </header>
         <!-- Fim da Barra de Navegação --> 
 
         <!-- Início área usuário comum -->
         
+        <main>
         <div class="container">
             <div class="row">
                 <div class="col s6">
@@ -90,7 +92,28 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="col s6">
+                    <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">ALTERAR INFORMAÇÕES DO PERFIL</h5></center>
+                        <center><a href="consultarPorId?id=<%=usuario.getIdUsuario()%>"><i class="large material-icons grey-text text-lighten-1">settings</i></a></center>
+                        <span class="grey-text text-lighten-1">Você poderá alterar suas informações pessoais de cadastro, endereços e mante-los atualizados. 
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="col s6">
+                    <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">MEUS PEDIDOS</h5></center>
+                        <center><a href="consultarPedido"><i class="large material-icons brown-text text-lighten-3">description</i></a></center>
+                        <span class="grey-text text-lighten-1"> Você poderá consultar todas as informações referente aos pedidos que foram realizados.
+                        </span>    
+                    </div>
+                </div>
+            </div>
         </div>
+        </main>
         
         <!-- Fim área usuário comum -->
              

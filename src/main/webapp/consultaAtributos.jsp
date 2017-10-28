@@ -47,14 +47,14 @@
 
                 if (usuario != null) {
 
-
+                String noCall = "";
             %>
 
             <nav> 
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
+                        <li><a href="<%=noCall%>" class="dropdown-button hoverable grey-text text-lighten-1 modal-trigger"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="indexAdm.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
@@ -134,15 +134,16 @@
 
                 <% List<TipoAtributo> listaTipoAtributo = (List<TipoAtributo>) request.getAttribute("listaTipoAtributos");
                     for (TipoAtributo at : listaTipoAtributo) {%>     
-                <tr>
+                
                 <tbody>
-                <td><%=at.getId()%></td>
-                <td><%=at.getNomeAtributo()%></td>                           
-                <td><b><a href="deletarAtributo?id=<%=at.getId()%>"/>Excluir</b> </td>
-                <td> <b><a href="consultarPorIdTipoAtributo?id=<%=at.getId()%>"/>Alterar</b> </td>
-                </tr>
-                <%}%>
+                    <tr>
+                        <td><%=at.getId()%></td>
+                        <td><%=at.getNomeAtributo()%></td>                           
+                        <td><b><a href="deletarAtributo?id=<%=at.getId()%>"/>Excluir</b> </td>
+                        <td> <b><a href="consultarPorIdTipoAtributo?id=<%=at.getId()%>"/>Alterar</b> </td>
+                    </tr>
                 </tbody>
+                <%}%>
             </table>
         </div>
 

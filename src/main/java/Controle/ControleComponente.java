@@ -26,13 +26,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControleComponente", urlPatterns = {"/cadastrarTipoComponente", "/cadastrarComponente", "/consultarComponente", "/deletarComponente", "/alterarComponente", "/consultarPorIdTipoComponente", "/iniciarCadastroComponente", "/itensCarrinhoComponente", "/consultarComponenteAJAX", "/consultarTipoComponenteAJAX"})
+@WebServlet(name = "ControleComponente", urlPatterns = {"/cadastrarTipoComponente", "/cadastrarComponente", "/consultarComponente", "/deletarComponente", "/alterarComponente", "/consultarPorIdTipoComponente", "/iniciarCadastroComponente", "/itensCarrinhoComponente","/consultarTipoComponenteAJAX","/consultarComponenteAJAX"})
 
 public class ControleComponente extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        
         String uri = req.getRequestURI();
 
         if (uri.equals(req.getContextPath() + "/cadastrarTipoComponente")) {
@@ -91,19 +91,19 @@ public class ControleComponente extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if ((uri.equals(req.getContextPath() + "/consultarComponenteAJAX"))) {
-            try {
-                consultarComponenteAJAX(req, resp);
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
         } else if ((uri.equals(req.getContextPath() + "/consultarTipoComponenteAJAX"))) {
             try {
                 consultarTipoComponenteAJAX(req, resp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        } else if ((uri.equals(req.getContextPath() + "/consultarComponenteAJAX"))) {
+            try {
+                consultarComponenteAJAX(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
     }
 
     public void iniciarCadastroComponente(HttpServletRequest req, HttpServletResponse resp) throws IOException, ClassNotFoundException, SQLException, ServletException {
@@ -192,7 +192,6 @@ public class ControleComponente extends HttpServlet {
             listaAtributo.add(atributo);
             at.setAtributos(listaAtributo);
             atributo.setComponentes(componente);
-
         }
 
         componente.setAtributos(listaAtributo);
@@ -213,14 +212,6 @@ public class ControleComponente extends HttpServlet {
         //Lista para armazenar os tiposComponentes do banco de dados
         List<TipoComponente> listaTipoComponente = daoTipoComponente.consultarTipoComponentes();
 
-        //String retorno = request.getPArameter("retorno");
-        
-        //if (retorno.equals("json") {
-        //GSon 
-        //JSONParser jp = new JSONParser(Componente.class);
-        ///String listaEMJson = jp.parse(listaComponente);
-        // response.getWriter().println(listaEmJSON);
-        // } else { //faz o que ja fazia abaixo
         // Atribuir a lista em um objeto para recuperar na JSP listaCadastroTipoComponente.jsp
         req.setAttribute("listaTipoComponente", listaTipoComponente);
         req.getRequestDispatcher("listaCadastroTipoComponente.jsp").forward(req, resp);
@@ -230,21 +221,25 @@ public class ControleComponente extends HttpServlet {
 
     public void deletarComponente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
 
+        //Recuperando o ID do TipoComponente da JSP
+        int id = Integer.parseInt(req.getParameter("id"));
+        
         //Instância de TipoComponente
         TipoComponente tipoComponente = new TipoComponente();
         Componente componente = new Componente();
-
-        //Recuperando o ID do TipoComponente da JSP
-        tipoComponente.setId(Integer.parseInt(req.getParameter("id")));
-        componente.setId(Integer.parseInt(req.getParameter("id")));
+        
+        
+        tipoComponente.setId(id);
+        componente.setId(id);
 
         //Instância da classe de persistência
         TipoComponenteDAO tipoComponenteDAO = new TipoComponenteDAO();
-        ComponenteDAO componenteDAO = new ComponenteDAO();
+        ComponenteDAO daoComponente = new ComponenteDAO();
 
         //Deletando o objeto TipoComponente do BD
+        daoComponente.deletarComponente(componente);
         tipoComponenteDAO.deletarTipoComponente(tipoComponente);
-        componenteDAO.deletarComponente(componente);
+        
 
         this.consultaTodosComponente(req, resp);
 
@@ -281,40 +276,45 @@ public class ControleComponente extends HttpServlet {
         
     }
     
-    
-    public void consultarComponenteAJAX(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
-        
+    public void consultarTipoComponenteAJAX(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+              
         TipoComponenteDAO daoTipoComponente = new TipoComponenteDAO();
+        
         List<TipoComponente> listaTipoComponentes = daoTipoComponente.consultarTipoComponentes();
         
         Gson gson = new GsonBuilder()
-                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoComponenteDeTipoComponente())
-                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoTipoAtributoDeTipoComponente()).create();
+                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoAtributosDoTipoComponente())
+                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoComponenteDoTipoComponente()).create();
         
-        
-        
-        String listaComponentesJSON = gson.toJson(listaTipoComponentes);
-        
-        resp.getWriter().println(listaComponentesJSON);
-        
-        
-    }
-    
-    public void consultarTipoComponenteAJAX(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
-        
-        
-        TipoComponenteDAO daoTipoComponente = new TipoComponenteDAO();
-        
-        List<TipoComponente> listaTipoComponente = daoTipoComponente.consultarTipoComponentes();
-        
-        Gson gson = new GsonBuilder()
-                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoComponenteDeTipoComponente())
-                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoTipoAtributoDeTipoComponente()).create();
-        
-        String listaTipoComponenteJSON = gson.toJson(listaTipoComponente);
+        String listaTipoComponenteJSON = gson.toJson(listaTipoComponentes);
         
         resp.getWriter().println(listaTipoComponenteJSON);
         
+        System.out.println(listaTipoComponenteJSON);
+            
     }
     
+    public void consultarComponenteAJAX(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+        
+        
+        
+        TipoComponenteDAO daoTipoComponente = new TipoComponenteDAO();
+        List<TipoComponente> listaComponente = daoTipoComponente.consultarTipoComponentes();
+        
+        Gson gson = new GsonBuilder()
+                
+                .addSerializationExclusionStrategy(new TipoComponente.ExclusaoAtributosDoTipoComponente())
+                .addSerializationExclusionStrategy(new Componente.ExclusaoTipoComponenteDoComponente())
+                .addSerializationExclusionStrategy(new Atributo.ExclusaoComponenteDoAtributo())
+                .addSerializationExclusionStrategy(new TipoAtributo.ExclusaoAtributoDoTipoAtributo())
+                .addSerializationExclusionStrategy(new TipoAtributo.ExclusaoTipoComponenteDoTipoAtributo()).create();
+        
+        String listaComponenteJSON = gson.toJson(listaComponente);
+        
+        resp.getWriter().println(listaComponenteJSON);
+        
+        System.out.println(listaComponenteJSON);
+            
+    }
+     
 }

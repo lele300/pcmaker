@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -8,23 +8,13 @@
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/custom.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Gruppo" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Palanquin+Dark" rel="stylesheet">
     </head>
     <body>
         <!-- Dropdown das peças -->
         <ul id="dropdown1" class="dropdown-content">
-            <li><a class="grey darken-4 grey-text text-lighten-5 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">memory</i>Processador</a></li>
-            <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">developer_board</i>Placa-mãe</a></li>
-            <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">hd</i>Placa de Vídeo</a></li>
-            <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">local_laundry_service</i>HD</a></li>
-            <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">settings_input_hdmi</i>Fonte</a></li>
-            <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">kitchen</i>Gabinete</a></li>
-            <li class="divider"></li>
-            <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">straighten</i>Memória</a></li>
+            
         </ul>
         <!-- Inicío Barra de Navegação -->
         <div class="nav-content">
@@ -32,7 +22,7 @@
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo grey-text text-lighten-1 left">PC MAKER</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i>Entrar/Cadastrar</a></li>
+                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1 modal-trigger"><i class="material-icons left red-text text-darken-4">group</i>Entrar/Cadastrar</a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="home.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
@@ -66,6 +56,10 @@
                             <input id="icon_telephone" type="password" class="validate senha" name="senha" required>
                             <label for="senha" class="grey-text text-darken-4">Senha</label>   
                         </div>                  
+                    </div>
+                    
+                    <div class="row center-align">
+                        <span class="erro-login invisivel">Login ou senha incorretos!</span>
                     </div>
 
                     <div class="row left-align">
@@ -106,7 +100,7 @@
             <div class="section no-pad-bot">
                 <div class="container">
                     <br><br>
-                    <h1 class="header center grey-text text-lighten-4">Monte seu PC sem preocupações.</h1>
+                    <h1 class="header center grey-text text-lighten-4 slogan">MONTE SEU PC SEM PREOCUPAÇÕES</h1>
                     <div class="row">
                         <h5 class="header col s12 light"></h5>
                     </div>
@@ -117,7 +111,7 @@
 
                 </div>
             </div>
-            <div class="parallax"><img src="img/fundo7.jpg" alt="Imagem de Fundo bits "></div>
+            <div class="parallax"><img src="img/fundo7.jpg" alt="Imagem de Fundo bits"></div>
         </div>
 
 
@@ -164,7 +158,7 @@
                     <div class="row center">
                         <h4 class="header col s12">Comece a configurar sua máquina por aqui.</h4>
                     </div>
-                    
+
                     <div class="row center">
                         <h6 class="header col s12"><a href="carrinho.jsp" class="btn-large waves-effect waves-light green lighten-1 hoverable"><i class="material-icons left">store</i>Ir para as compras</a></h6>
                     </div>
@@ -185,7 +179,7 @@
                             <p class="light center">Seus dados estão totalmente protegidos e encriptados pelos algoritmos mais seguros do mundo.</p>
                         </div>
                     </div>
-                    
+
                     <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center blue-text text-darkin-2"><i class="material-icons">query_builder</i></h2>
@@ -194,7 +188,7 @@
                             <p class="light center">Trabalhamos com transportadora própria, o que evita atraso nas entregas dos clientes.</p>
                         </div>
                     </div>
-                    
+
                     <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center yellow-text text-darkin-2"><i class="material-icons">star</i></h2>
@@ -208,53 +202,54 @@
             </div>
         </div>
 
-            <!-- Fim da Index -->
+        <!-- Fim da Index -->
 
-            <!-- Início do Rodapé -->
-            <footer class="page-footer grey darken-4">
+        <!-- Início do Rodapé -->
+        <footer class="page-footer grey darken-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12 left-align">
+                        <h5 class="grey-text text-lighten-1"><i class="material-icons left green-text text-darken-2">local_grocery_store</i> Peças mais procuradas </h5>
+                        <ul>
+                            <li><a class="" href="#!">Processador</a></li>
+                            <li><a class="" href="#!">Placa-mãe</a></li>
+                            <li><a class="" href="#!">Placa de Vídeo</a></li>
+                            <li><a class="" href="#!">HD</a></li>
+                            <li><a class="" href="#!">Fonte</a></li>
+                            <li><a class="" href="#!">Gabinete</a></li>
+                            <li><a class="" href="#!">Memória</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text grey-text text-lighten-1"><i class="material-icons left red-text text-red darken-4">share</i>Siga-nos nas redes sociais</h5>
+                        <ul class="social-nav model-9">
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" class="facebook"> <i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
                 <div class="container">
-                    <div class="row">
-                        <div class="col l6 s12 left-align">
-                            <h5 class="grey-text text-lighten-1"><i class="material-icons left green-text text-darken-2">local_grocery_store</i> Peças mais procuradas </h5>
-                            <ul>
-                                <li><a class="" href="#!">Processador</a></li>
-                                <li><a class="" href="#!">Placa-mãe</a></li>
-                                <li><a class="" href="#!">Placa de Vídeo</a></li>
-                                <li><a class="" href="#!">HD</a></li>
-                                <li><a class="" href="#!">Fonte</a></li>
-                                <li><a class="" href="#!">Gabinete</a></li>
-                                <li><a class="" href="#!">Memória</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="col l4 offset-l2 s12">
-                            <h5 class="white-text grey-text text-lighten-1"><i class="material-icons left red-text text-red darken-4">share</i>Siga-nos nas redes sociais</h5>
-                            <ul class="social-nav model-9">
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="facebook"> <i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                            <br/>
-                        </div>
-                    </div>
+                    © 2017 Todos os direitos reservados de PC MAKER | Versão 1.0
+                    <a class="grey-text text-lighten-1 right" href="#!">Fale Conosco</a>
                 </div>
-                <div class="footer-copyright">
-                    <div class="container">
-                        © 2017 Todos os direitos reservados de PC MAKER | Versão 1.0
-                        <a class="grey-text text-lighten-1 right" href="#!">Fale Conosco</a>
-                    </div>
-                </div>
-            </footer>
-            <!-- Fim do Rodapé -->
+            </div>
+        </footer>
+        <!-- Fim do Rodapé -->
 
 
-            <!--  Scripts-->
-            <script type="text/javascript" src="js/jQuery.js"></script>
-            <script src="js/materialize.min.js"></script>
-            <script src="js/customJS.js"></script>
-            <script src="js/init.js"></script>
-            <script src="https://use.fontawesome.com/93d491e836.js"></script>
+        <!--  Scripts-->
+        <script type="text/javascript" src="js/jQuery.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script src="js/customJS.js"></script>
+        <script src="js/init.js"></script>
+        <script src="https://use.fontawesome.com/93d491e836.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
 
     </body>
 </html>

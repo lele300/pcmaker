@@ -5,12 +5,13 @@
  */
 package Modelo;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -99,6 +100,37 @@ public class Atributo implements Serializable {
     @Override
     public String toString() {
         return "Atributo{" + "id=" + id + ", valor=" + valor + ", tipoAtributo=" + tipoAtributo + '}';
+    }
+    
+    
+    public static class ExclusaoTipoAtributoDoAtributo implements ExclusionStrategy{
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes fa) {
+            return fa.getDeclaringClass().getName().equals("Modelo.Atributo") &&
+                    fa.getName().equals("tipoAtributo");
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> type) {
+            return false;
+        }
+        
+    }
+    
+    public static class ExclusaoComponenteDoAtributo implements ExclusionStrategy{
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes fa) {
+            return fa.getDeclaringClass().getName().equals("Modelo.Atributo") &&
+                    fa.getName().equals("componentes");
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> type) {
+            return false;
+        }
+        
     }
     
 }

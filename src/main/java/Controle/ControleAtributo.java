@@ -9,6 +9,8 @@ import DAO.AtributoDAO;
 import DAO.TipoAtributoDAO;
 import Modelo.Atributo;
 import Modelo.TipoAtributo;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControleAtributo", urlPatterns = {"/cadastrarAtributo", "/consultarAtributo", "/deletarAtributo", "/alterarAtributo", "/consultarPorIdTipoAtributo"})
+@WebServlet(name = "ControleAtributo", urlPatterns = {"/cadastrarAtributo", "/consultarAtributo", "/deletarAtributo", "/alterarAtributo", "/consultarPorIdTipoAtributo", "/consultarTipoAtributoAJAX","/consultarAtributoAJAX"})
 public class ControleAtributo extends HttpServlet {
 
     @Override
@@ -66,6 +68,18 @@ public class ControleAtributo extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if (uri.equals(req.getContextPath() + "/consultarTipoAtributoAJAX")) {
+            try {
+                consultarTipoAtributoAJAX(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (uri.equals(req.getContextPath() + "/consultarAtributoAJAX")) {
+            try {
+                consultarAtributoAJAX(req, resp);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ControleUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -79,8 +93,6 @@ public class ControleAtributo extends HttpServlet {
         tipoAtributo.setNomeAtributo(nomeTipoAtributo);
 
         // Código retirado
-        
-
         TipoAtributoDAO daoTipoAtributo = new TipoAtributoDAO();
         daoTipoAtributo.cadastrarTipoAtributo(tipoAtributo);
         req.getRequestDispatcher("cadastroTipoAtributoOK.jsp").forward(req, resp);
@@ -109,7 +121,7 @@ public class ControleAtributo extends HttpServlet {
         //Instanciando objeto Atributo e setando o id
         Atributo atributo = new Atributo();
         atributo.setId(id);
-        
+
         TipoAtributo tipoAtributo = new TipoAtributo();
         tipoAtributo.setId(id);
 
@@ -149,7 +161,6 @@ public class ControleAtributo extends HttpServlet {
 //
 //        //Setando listaAtributo no objeto TipoAtributo
 //        tipoAtributo.setAtributos(listaAtributo);
-
         TipoAtributoDAO daoTipoAtributo = new TipoAtributoDAO();
         daoTipoAtributo.alterarTipoAtributo(tipoAtributo);
         this.consultaTodosAtributos(req, resp);
@@ -170,6 +181,37 @@ public class ControleAtributo extends HttpServlet {
         req.setAttribute("tipoAtributo", tipoAtributo);
         req.getRequestDispatcher("alterarAtributo.jsp").forward(req, resp);
         System.out.println(tipoAtributo);
+
+    }
+
+    public void consultarTipoAtributoAJAX(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+
+        TipoAtributoDAO daoTipoAtributo = new TipoAtributoDAO();
+        List<TipoAtributo> listaTipoAtributo = daoTipoAtributo.consultarTipoAtributos();
+
+        Gson gson = new GsonBuilder()
+                .addSerializationExclusionStrategy(new TipoAtributo.ExclusaoAtributoDoTipoAtributo())
+                .addSerializationExclusionStrategy(new TipoAtributo.ExclusaoTipoComponenteDoTipoAtributo()).create();
+
+        String listaTipoAtributoJSON = gson.toJson(listaTipoAtributo);
+
+        resp.getWriter().println(listaTipoAtributoJSON);
+        System.out.println(listaTipoAtributoJSON);
+
+    }
+
+    public void consultarAtributoAJAX(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException, SQLException {
+
+        AtributoDAO daoAtributo = new AtributoDAO();
+        List<Atributo> listaAtributos = daoAtributo.consultarAtributos();
+
+        Gson gson = new GsonBuilder()
+                .addSerializationExclusionStrategy(new Atributo.ExclusaoTipoAtributoDoAtributo())
+                .addSerializationExclusionStrategy(new Atributo.ExclusaoComponenteDoAtributo()).create();
+
+        String listaAtributosJSON = gson.toJson(listaAtributos);
+        resp.getWriter().println(listaAtributosJSON);
+        System.out.println(listaAtributosJSON);
 
     }
 

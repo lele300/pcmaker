@@ -38,10 +38,18 @@ public class TipoAtributoDAO {
 
         EntityManager manager = new JPAUtil().getEntityManager();
         List<TipoAtributo> listaTipoAtributos = new ArrayList<>();
-        TypedQuery<TipoAtributo> query = manager.createQuery("select tp from TipoAtributo tp", TipoAtributo.class);
-        listaTipoAtributos = query.getResultList();
-        return listaTipoAtributos;
 
+        try {
+            TypedQuery<TipoAtributo> query = manager.createQuery("select tp from TipoAtributo tp", TipoAtributo.class);
+            listaTipoAtributos = query.getResultList();
+        } catch (Exception ex) {
+            ex.getMessage();
+            System.out.println("Não foi possível recuperar os TiposAtributos");
+            manager.getTransaction().rollback();
+        } finally {
+            manager.close();
+        }
+        return listaTipoAtributos;
     }
 
     public void deletarTipoAtributo(TipoAtributo tipoAtributo) {

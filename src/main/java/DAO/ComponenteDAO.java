@@ -5,6 +5,7 @@ import Util.JPAUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class ComponenteDAO {
@@ -18,18 +19,27 @@ public class ComponenteDAO {
             manager.getTransaction().commit();
         } catch (Exception ex) {
             ex.getMessage();
-            System.out.println("Erro ao inserir um componente: " + ex);
+            System.out.println("Não foi possível cadastrar um componente "+ ex);
         }
     }
 
     public List<Componente> consultarComponentes() {
 
+        //Instância do EntityManager para fazer as transações do banco
         EntityManager manager = new JPAUtil().getEntityManager();
-        List<Componente> listaComponentes = new ArrayList<>();
-        TypedQuery<Componente> query = manager.createQuery("select comp from Componente comp", Componente.class);
-        listaComponentes = query.getResultList();
-        return listaComponentes;
+        //Inicializar o ArrayList do tipo Componente
+        List<Componente> listaDeComponentes = new ArrayList<>();
+        try {
+            TypedQuery<Componente> query = manager.createQuery("select comp from Componente comp", Componente.class);
+            listaDeComponentes = query.getResultList();
+        } catch (Exception ex) {
+            ex.getMessage();
+            System.out.println("Não foi possível listar os componentes: " + ex);
+        } finally {
+            manager.close();
+        }
 
+        return listaDeComponentes;
     }
 
     //Método para deleter um Componente e suas dependências (TipoComponente)
@@ -78,5 +88,43 @@ public class ComponenteDAO {
         }
         return componente;
     }
-
+    
+    public void atualizarEstoque(Componente comp){
+        
+        EntityManager manager = new JPAUtil().getEntityManager();
+        
+        try{
+            Query query = manager.createQuery("UPDATE Componente comp SET comp.quantidade = comp.quantidade-1 WHERE comp.id=:pId"); 
+            query.setParameter("pId",comp.getId());
+            manager.getTransaction().begin();        
+            //Executa o update no banco 
+            query.executeUpdate();       
+            //Comita a update
+            manager.getTransaction().commit();
+        } catch(Exception ex){
+            ex.getMessage();
+            System.out.println("Não foi possível atualizar estoque: "+ex);
+            manager.getTransaction().rollback();
+        } finally {
+            manager.close();
+        }
+    }
+     
+    public void retornaEstoque(Componente comp){
+        
+        EntityManager manager = new JPAUtil().getEntityManager();
+        try{
+            Query query = manager.createQuery("UPDATE Componente comp SET comp.quantidade = comp.quantidade+1 WHERE comp.id=:pId");
+            query.setParameter("pId",comp.getId());
+            manager.getTransaction().begin();
+            query.executeUpdate();
+            manager.getTransaction().commit();          
+        }catch(Exception ex){
+            ex.getMessage();
+            System.out.println("Não foi possível retornar o componente ao estoque: "+ex);
+            manager.getTransaction().rollback();
+        } finally {
+            manager.close();
+        }
+    }
 }

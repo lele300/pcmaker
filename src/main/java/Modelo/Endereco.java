@@ -27,7 +27,7 @@ public class Endereco implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idEndereco;
+    private int idEndereco;
     
     @Column(length = 8, nullable = false) //Único CEP no banco
     private String cep;
@@ -158,6 +158,7 @@ public class Endereco implements Serializable {
         return "Endereco{" + "idEndereco=" + idEndereco + ", cep=" + cep + ", rua=" + rua + ", bairro=" + bairro + ", uf=" + uf + ", numero=" + numero + ", cidade=" + cidade + ", complemento=" + complemento + '}';
     }
     
+    
     public static class ExclusaoUsuarioDoEndereco implements ExclusionStrategy {
 
         @Override
@@ -170,7 +171,6 @@ public class Endereco implements Serializable {
         public boolean shouldSkipClass(Class<?> type) {
             return false;
         }
-    
+        
     }
 }
-

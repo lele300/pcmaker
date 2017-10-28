@@ -154,6 +154,42 @@ a{
 
 #erro{
     display: none;
+    color: red;
 }
+
+.alinhado-direita{
+    margin-left: auto;
+}
+
+html{
+    font-family: 'Palanquin Dark', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.slogan{
+    font-family: 'Bungee Inline', cursive;
+}
+
+
+.destaque{
+    font-size: 200%;
+    
+}
+
+.fonte-tipo-componente{
+    font-family: 'Abel', sans-serif;
+}
+
+.invisivel{
+    display: none;
+}
+
+.erro-login{
+    color: #ef5350;
+}
+
+
+
 
 

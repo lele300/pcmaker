@@ -10,7 +10,6 @@ import com.google.gson.FieldAttributes;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,21 +23,20 @@ import javax.persistence.OneToMany;
  *
  * @author leo_l
  */
-
 @Entity
 public class TipoAtributo implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @Column(length = 100, insertable = true, updatable = true, nullable = false)
     private String nomeAtributo;
-    
+
     //Um tipoAtributo está associado á vários atributos
     @OneToMany(mappedBy = "tipoAtributo")
     private List<Atributo> atributos;
-    
+
     @ManyToMany(mappedBy = "tipoAtributos", fetch = FetchType.EAGER)
     private List<TipoComponente> tipoComponentes;
 
@@ -72,7 +70,7 @@ public class TipoAtributo implements Serializable {
 
     public void setTipoComponentes(List<TipoComponente> tipoComponentes) {
         this.tipoComponentes = tipoComponentes;
-    }  
+    }
 
     @Override
     public int hashCode() {
@@ -109,20 +107,35 @@ public class TipoAtributo implements Serializable {
     public String toString() {
         return "TipoAtributo{" + "id=" + id + ", nomeAtributo=" + nomeAtributo + ", atributo=" + atributos + '}';
     }
-    
-    public static class ExclusaoAtributosDeTipoAtributo implements ExclusionStrategy {
+
+    public static class ExclusaoAtributoDoTipoAtributo implements ExclusionStrategy {
 
         @Override
         public boolean shouldSkipField(FieldAttributes fa) {
-            return fa.getDeclaringClass().getName().equals("Modelo.TipoAtributo") &&
-                    fa.getName().equals("atributos");
+            return fa.getDeclaringClass().getName().equals("Modelo.TipoAtributo")
+                    && fa.getName().equals("atributos");
         }
 
         @Override
         public boolean shouldSkipClass(Class<?> type) {
             return false;
         }
-        
+
     }
-    
+
+    public static class ExclusaoTipoComponenteDoTipoAtributo implements ExclusionStrategy {
+
+        @Override
+        public boolean shouldSkipField(FieldAttributes fa) {
+            return fa.getDeclaringClass().getName().equals("Modelo.TipoAtributo")
+                    && fa.getName().equals("tipoComponentes");
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> type) {
+            return false;
+        }
+
+    }
+
 }

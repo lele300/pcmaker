@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,10 +19,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author leo_l
- */
 @Entity
 public class Componente implements Serializable {
 
@@ -47,13 +42,14 @@ public class Componente implements Serializable {
     private String descricao;
 
     //Um componente só pode estar associado á um tipoComponente
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private TipoComponente tipoComponente;
 
     //Um componente pode estar associado á vários atributos
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "componentes", fetch = FetchType.EAGER)
     private List<Atributo> atributos;
-
+    
+   
     public int getId() {
         return id;
     }
@@ -117,7 +113,7 @@ public class Componente implements Serializable {
     public void setPreco(double preco) {
         this.preco = preco;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -150,7 +146,8 @@ public class Componente implements Serializable {
         return true;
     }
     
-    public static class ExclusaoTipoComponenteDoComponente implements ExclusionStrategy {
+    
+    public static class ExclusaoTipoComponenteDoComponente implements ExclusionStrategy{
 
         @Override
         public boolean shouldSkipField(FieldAttributes fa) {
@@ -162,10 +159,9 @@ public class Componente implements Serializable {
         public boolean shouldSkipClass(Class<?> type) {
             return false;
         }
-       
     }
-    
-    public static class ExclusaoAtributosDoComponente implements ExclusionStrategy{
+        
+        public static class ExclusaoAtributosDoComponente implements ExclusionStrategy{
 
         @Override
         public boolean shouldSkipField(FieldAttributes fa) {
@@ -178,6 +174,7 @@ public class Componente implements Serializable {
             return false;
         }
         
+        
+        }
     }
-    
-}
+

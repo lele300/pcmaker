@@ -24,6 +24,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
+
+        <% Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
+
+            if (usuario != null) {
+
+                String noCall = "";
+
+        %>
         <!-- Dropdown das peças -->
         <ul id="dropdown1" class="dropdown-content">
             <li><a class="grey darken-4 grey-text text-lighten-5 hoverable" href="#!"><i class="material-icons left red-text text-darken-4">memory</i>Processador</a></li>
@@ -41,13 +49,6 @@
             <li><a class="grey darken-4 grey-text text-lighten-5" href="#!"><i class="material-icons left red-text text-darken-4">straighten</i>Memória</a></li>
         </ul>
         <!-- Inicío Barra de Navegação -->
-        <% Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
-
-            if (usuario != null) {
-
-            String noCall = "";
-
-        %>
 
         <nav> 
             <div class="nav-wrapper grey darken-4">
@@ -61,7 +62,6 @@
         </nav>
     </div>    <br>
     <!-- Fim da Barra de Navegação -->
-
 
     <!-- Início do Modal(Login) -->
     <div id="modal1" class="modal">
@@ -119,9 +119,10 @@
             </div>
         </div>
     </div>
-    <!-- Fim do Modal -->
+    <!-- Fim do Modal Login -->
 
-    <!-- Lista de Cadastro de Componente -->
+    <!-- Lista de Tipos de Componente -->
+    <main>
     <div class="container">
         <div class="row">
             <% List<TipoComponente> listaTipoComponente = (List<TipoComponente>) request.getAttribute("listaTipoComponente");
@@ -133,145 +134,136 @@
                 <h5><%=tp.getNomeComponente()%></h5>
 
                 <i class="large material-icons left red-text text-darken-4">layers</i>
-
-
-                <a href="#modalComponente<%=tp.getId()%>" class="btn waves-effect waves-light grey darken-4"><i class="material-icons left">add</i>Criar</a>
-                <a href="deletarComponente?id=<%=tp.getId()%>"class="btn waves-effect waves-light grey darken-4"><i class="material-icons left">delete_forever</i> Deletar </a>
-                <a href="consultarPorIdComponente?id=<%=tp.getId()%>"class="btn waves-effect waves-light grey darken-4"><i class="material-icons left">loop</i> Renomear </a>
-
-
+                <a href="#modalComponente<%=tp.getId()%>" class="btn waves-effect waves-light grey darken-4 modal-trigger">Criar<i class="material-icons left">add</i></a>
+                <a href="deletarComponente?id=<%=tp.getId()%>"class="btn waves-effect waves-light grey darken-4">Deletar<i class="material-icons left">delete_forever</i></a>
+                <a href="consultarPorIdComponente?id=<%=tp.getId()%>"class="btn waves-effect waves-light grey darken-4">Renomear<i class="material-icons left">loop</i></a>
             </div>
             <%}%>
         </div>
-
     </div>
-
-
     <!-- Fim do formulário de cadastro de componente -->
 
-</div>
+    <% List<TipoComponente> listaTiposComponentesModal = (List<TipoComponente>) request.getAttribute("listaTipoComponente");
+
+        for (TipoComponente tp : listaTiposComponentesModal) {
+    %>
 
 
-<% List<TipoComponente> listaTiposComponentesModal = (List<TipoComponente>) request.getAttribute("listaTipoComponente");
+    <!-- Início do Modal(Cadastro de Componente) -->
+    <div id="modalComponente<%=tp.getId()%>" class="modal modal-fixed-footer">
 
-    for (TipoComponente tp : listaTiposComponentesModal) {
-%>
-
-
-<!-- Início do Modal(Cadastro de Componente) -->
-<div id="modalComponente<%=tp.getId()%>" class="modal modal-fixed-footer">
-
-    <div class="row">
-        <div class="col s12 grey darken-3 center-align">
-            <h4 class="grey-text text-lighten-3">Insira as propriedades para o componente <%=tp.getNomeComponente()%></h4>
-        </div>
-    </div>
-
-    <div class="modal-content grey lighten-4">
-
-        <form class="col s12" action="cadastrarComponente" method="POST">
-
-            <div class="row">
-
-                <div class="col s12">
-                    <input hidden name="tipoComponente" value="<%=tp.getId()%>">
-
-                    <label for="marca" class="grey-text text-darken-4"><i class="material-icons left red-text text-darken-1">bookmark</i>Marca</label>
-                    <input name="marca" id="marca" class="hoverable validate" type="text" required>
-
-                    <label for="modelo" class="grey-text text-darken-4"><i class="material-icons left">description</i>Modelo</label>
-                    <input name="modelo" id="modelo" class="hoverable validate" type="text" required>
-
-                    <label for="quantidade" class="grey-text text-darken-4"><i class="material-icons left light-blue-text text-darken-3">add</i>Quantidade</label>
-                    <input name="quantidade" id="quantidade" class="hoverable validate" type="text" required>
-
-                    <label for="preco" class="grey-text text-darken-4"><i class="material-icons left green-text text-darken-2">local_atm</i>Preço R$</label>
-                    <input name="preco" id="preco" class="hoverable validate" type="text" required>
-
-                    <label for="descricao" class="grey-text text-darken-4"><i class="material-icons left">label</i>Descrição</label>
-                    <input name="descricao" id="descricao" class="hoverable validate" type="text" required>
-
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col s12">
-                    <%
-                        for (TipoAtributo ta : tp.getTipoAtributos()) {
-
-                    %>
-
-                    <label class="grey-text text-darken-4" for="<%=ta.getNomeAtributo()%>"><i class="material-icons left grey-text text-darken-2">layers</i><%=ta.getNomeAtributo()%></label>
-                    <input name="atributo<%=ta.getId()%>" id="atributo<%=ta.getId()%>" type="text" class="hoverable validate" maxlength="255" required>
-
-                    <%}%>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s12">
-
-                    <center> <input type="submit" class="btn waves-effect waves-light grey darken-4 center-align" value="Cadastrar">  </center>
-                </div>
-            </div>
-
-            <div class="row">
-
-            </div>
-        </form>
-
-    </div>
-</div>
-<!-- Fim do Modal do Cadastro de Componente -->
-
-<%}%>
-
-
-<!-- Início do Rodapé -->
-<footer class="page-footer grey darken-4">
-    <div class="container">
         <div class="row">
-            <div class="col l6 s12 left-align">
-                <h5 class="grey-text text-lighten-1"><i class="material-icons left green-text text-darken-2">local_grocery_store</i> Escolha as peças </h5>
-                <ul>
-                    <li><a class="" href="#!">Processador</a></li>
-                    <li><a class="" href="#!">Placa-mãe</a></li>
-                    <li><a class="" href="#!">Placa de Vídeo</a></li>
-                    <li><a class="" href="#!">HD</a></li>
-                    <li><a class="" href="#!">Fonte</a></li>
-                    <li><a class="" href="#!">Gabinete</a></li>
-                    <li><a class="" href="#!">Memória</a></li>
-                </ul>
-            </div>
-
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text grey-text text-lighten-1"><i class="material-icons left red-text text-red darken-4">share</i>Siga-nos nas redes sociais</h5>
-                <ul class="social-nav model-9">
-                    <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#" class="facebook"> <i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-                <br/>
+            <div class="col s12 grey darken-3 center-align">
+                <h4 class="grey-text text-lighten-3">Insira as propriedades para o componente <%=tp.getNomeComponente()%></h4>
             </div>
         </div>
+
+        <div class="modal-content grey lighten-4">
+
+            <form class="col s12" action="cadastrarComponente" method="POST">
+
+                <div class="row">
+
+                    <div class="col s12">
+                        <input hidden name="tipoComponente" value="<%=tp.getId()%>">
+
+                        <label for="marca" class="grey-text text-darken-4"><i class="material-icons left red-text text-darken-1">bookmark</i>Marca</label>
+                        <input name="marca" id="marca" class="hoverable validate" type="text" required>
+
+                        <label for="modelo" class="grey-text text-darken-4"><i class="material-icons left">description</i>Modelo</label>
+                        <input name="modelo" id="modelo" class="hoverable validate" type="text" required>
+
+                        <label for="quantidade" class="grey-text text-darken-4"><i class="material-icons left light-blue-text text-darken-3">add</i>Quantidade</label>
+                        <input name="quantidade" id="quantidade" class="hoverable validate" type="text" required>
+
+                        <label for="preco" class="grey-text text-darken-4"><i class="material-icons left green-text text-darken-2">local_atm</i>Preço R$</label>
+                        <input name="preco" id="preco" class="hoverable validate" type="text" required>
+
+                        <label for="descricao" class="grey-text text-darken-4"><i class="material-icons left">label</i>Descrição</label>
+                        <input name="descricao" id="descricao" class="hoverable validate" type="text" required>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col s12">
+                        <%
+                            for (TipoAtributo ta : tp.getTipoAtributos()) {
+
+                        %>
+
+                        <label class="grey-text text-darken-4" for="<%=ta.getNomeAtributo()%>"><i class="material-icons left grey-text text-darken-2">layers</i><%=ta.getNomeAtributo()%></label>
+                        <input name="atributo<%=ta.getId()%>" id="atributo<%=ta.getId()%>" type="text" class="hoverable validate" maxlength="255" required>
+
+                        <%}%>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+
+                        <center> <input type="submit" class="btn waves-effect waves-light grey darken-4 center-align" value="Cadastrar">  </center>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                </div>
+            </form>
+
+        </div>
     </div>
-    <div class="footer-copyright">
+    <!-- Fim do Modal do Cadastro de Componente -->
+
+    <%}%>
+    </main>
+
+    <!-- Início do Rodapé -->
+    <footer class="page-footer grey darken-4">
         <div class="container">
-            © 2017 Todos os direitos reservados de PC MAKER | Versão 1.0
-            <a class="grey-text text-lighten-1 right" href="#!">Fale Conosco</a>
-        </div>
-    </div>
-</footer>
-<%}%>
-<!-- Fim do Rodapé -->
+            <div class="row">
+                <div class="col l6 s12 left-align">
+                    <h5 class="grey-text text-lighten-1"><i class="material-icons left green-text text-darken-2">local_grocery_store</i> Escolha as peças </h5>
+                    <ul>
+                        <li><a class="" href="#!">Processador</a></li>
+                        <li><a class="" href="#!">Placa-mãe</a></li>
+                        <li><a class="" href="#!">Placa de Vídeo</a></li>
+                        <li><a class="" href="#!">HD</a></li>
+                        <li><a class="" href="#!">Fonte</a></li>
+                        <li><a class="" href="#!">Gabinete</a></li>
+                        <li><a class="" href="#!">Memória</a></li>
+                    </ul>
+                </div>
 
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="js/jQuery.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/customJS.js"></script>
-<script src="https://use.fontawesome.com/93d491e836.js"></script>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text grey-text text-lighten-1"><i class="material-icons left red-text text-red darken-4">share</i>Siga-nos nas redes sociais</h5>
+                    <ul class="social-nav model-9">
+                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" class="facebook"> <i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2017 Todos os direitos reservados de PC MAKER | Versão 1.0
+                <a class="grey-text text-lighten-1 right" href="#!">Fale Conosco</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Fim do Rodapé -->
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="js/jQuery.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/customJS.js"></script>
+    <script src="https://use.fontawesome.com/93d491e836.js"></script>
 </body>
 </html>
+<%}%>

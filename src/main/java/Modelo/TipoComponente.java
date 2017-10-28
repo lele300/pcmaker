@@ -10,7 +10,6 @@ import com.google.gson.FieldAttributes;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +35,7 @@ public class TipoComponente implements Serializable {
     private String nomeComponente;
     
     //Um tipoComponente está associado á vários componentes
-    @OneToMany(mappedBy = "tipoComponente")
+    @OneToMany(mappedBy = "tipoComponente", fetch = FetchType.EAGER)
     private List<Componente> componentes;
     
     @ManyToMany()
@@ -102,18 +101,12 @@ public class TipoComponente implements Serializable {
         }
         return true;
     } 
-
-    @Override
-    public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
-    }
     
-    
-    public static class ExclusaoComponenteDeTipoComponente implements ExclusionStrategy {
+    public static class ExclusaoComponenteDoTipoComponente implements ExclusionStrategy{
 
         @Override
         public boolean shouldSkipField(FieldAttributes fa) {
-            return fa.getDeclaringClass().getName().equals("Modelo.TipoComponente")
+            return fa.getDeclaringClass().getName().equals("Modelo.TipoComponente") 
                     && fa.getName().equals("componentes");
         }
 
@@ -124,12 +117,11 @@ public class TipoComponente implements Serializable {
         
     }
     
-    
-    public static class ExclusaoTipoAtributoDeTipoComponente implements ExclusionStrategy {
+    public static class ExclusaoAtributosDoTipoComponente implements ExclusionStrategy{
 
         @Override
         public boolean shouldSkipField(FieldAttributes fa) {
-            return fa.getDeclaringClass().getName().equals("Modelo.TipoComponente")
+            return fa.getDeclaringClass().getName().equals("Modelo.TipoComponente") 
                     && fa.getName().equals("tipoAtributos");
         }
 

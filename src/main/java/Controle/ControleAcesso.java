@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,7 @@ public class ControleAcesso extends HttpServlet {
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 Usuario usuarioAutenticado = usuarioDAO.autenticaUsuarioComum(usuario);
+                System.out.println(usuarioAutenticado);
 
                 if (usuarioAutenticado != null) {
                     HttpSession sessaoUsuario = req.getSession();
@@ -51,7 +53,6 @@ public class ControleAcesso extends HttpServlet {
                     RequestDispatcher rd = req.getRequestDispatcher("/cadastroUsuario.jsp");
                     req.setAttribute("msg", "Login ou Senha Incorreto!");
                     rd.forward(req, resp);
-
                 }
 
             } else if (acao.equals("Sair")) {
@@ -59,7 +60,6 @@ public class ControleAcesso extends HttpServlet {
                 sessaoUsuario.removeAttribute("usuarioAutenticado");
                 // Remover carrinho da sessao
                 resp.sendRedirect("home.jsp");
-
             }
         } catch (Exception ex) {
             RequestDispatcher rd = req.getRequestDispatcher("/erro.jsp");

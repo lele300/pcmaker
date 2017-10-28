@@ -38,16 +38,21 @@ public class TipoComponenteDAO {
 
         //Instância do Entity Manager 
         EntityManager manager = new JPAUtil().getEntityManager();
-
         //Criação de uma lista que possui como retorno os tiposComponentes cadastrados no BD
         List<TipoComponente> listaTipoComponente = new ArrayList<>();
+        try {
+            //Define o tipo de retorno definido para TipoComponente e criação da consulta.
+            TypedQuery<TipoComponente> query = manager.createQuery("select tcomp from TipoComponente tcomp", TipoComponente.class);
+            // Inserindo o retorno do banco na lista de TipoComponente
+            listaTipoComponente = query.getResultList();
 
-        //Define o tipo de retorno definido para TipoComponente e criação da consulta.
-        TypedQuery<TipoComponente> query = manager.createQuery("select tcomp from TipoComponente tcomp", TipoComponente.class);
-
-        // Inserindo o retorno do banco na lista de TipoComponente
-        listaTipoComponente = query.getResultList();
-
+        } catch (Exception ex) {
+            ex.getMessage();
+            System.out.println("Não foi possível recuperar os dados do TipoComponente: " + ex);
+            manager.getTransaction().rollback();
+        } finally {
+            manager.close();
+        }
         return listaTipoComponente;
     }
 

@@ -6,8 +6,6 @@
 package Modelo;
 
 import Enum.TipoAdm;
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -22,51 +20,56 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+
 /**
  *
  * @author Leonardo
  */
-@Entity
-public class Usuario implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUsuario;
-
-    @Column(length = 100, nullable = false)
-    private String nomeCompleto;
-
-    @Column(length = 20, unique = true, nullable = false, updatable = false) //Único login no banco
-    private String login;
-
-    @Column(length = 50, nullable = false)
-    private String senha;
-
-    @Column(unique = true, nullable = false, updatable = false) //Único e-mail no banco
-    private String email;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoAdm tipoAdm;
-
-    @Column(length = 11, unique = true, nullable = false) //Único CPF no banco
-    private String cpf;
-
-    @Column(length = 15, unique = true, nullable = false) //Único RG no banco
-    private String rg;
-
-    @Column(length = 14, nullable = false)
-    private String telefone;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.EAGER)
-    private List<Endereco> enderecos;
-
-    //Construtor 
-    public Usuario() {
-
-    }
-
+    @Entity
+    public class Usuario implements Serializable {
+   
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int idUsuario;
+        
+        @Column(length = 100, nullable = false)
+        private String nomeCompleto;
+        
+        @Column(length = 20, unique = true, nullable = false, updatable = false) //Único login no banco
+        private String login;
+        
+        @Column(length = 50, nullable = false)
+        private String senha;
+        
+        @Column(unique = true, nullable = false, updatable = false) //Único e-mail no banco
+        private String email;
+        
+        @Enumerated(EnumType.STRING)
+        @Column(nullable = false)
+        private TipoAdm tipoAdm;
+        
+        @Column(length = 11, unique = true, nullable = false) //Único CPF no banco
+        private String cpf;
+        
+        @Column(length = 15, unique = true, nullable = false) //Único RG no banco
+        private String rg;  
+        
+        @Column(length = 14, nullable = false)
+        private String telefone;
+        
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.EAGER)
+        private List<Endereco> enderecos;
+        
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioDoPedido")
+        private List<Pedido> pedidos;
+        
+        //Construtor 
+        public Usuario(){
+            
+        }
+            
     // Getters e Setters
+   
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -137,8 +140,8 @@ public class Usuario implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
+    }   
+  
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
@@ -147,6 +150,14 @@ public class Usuario implements Serializable {
         this.enderecos = enderecos;
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    } 
+     
     @Override
     public int hashCode() {
         int hash = 5;
@@ -167,26 +178,12 @@ public class Usuario implements Serializable {
         }
         final Usuario other = (Usuario) obj;
         return Objects.equals(this.idUsuario, other.idUsuario);
-    }
+        }
 
     @Override
     public String toString() {
         return "Usuario{" + "idUsuario=" + idUsuario + ", nomeCompleto=" + nomeCompleto + ", login=" + login + ", email=" + email + ", tipoAdm=" + tipoAdm + ", cpf=" + cpf + ", rg=" + rg + ", enderecos=" + enderecos + '}';
-    }
-
-    public static class ExclusaoEnderecoDoUsuario implements ExclusionStrategy {
-
-        @Override
-        public boolean shouldSkipField(FieldAttributes fa) {
-            return fa.getDeclaringClass().getName().equals("Modelo.Usuario")
-                    && fa.getName().equals("enderecos");
-        }
-
-        @Override
-        public boolean shouldSkipClass(Class<?> type) {
-            return false;
-        }
-
-    }
-
+    } 
+    
 }
+

@@ -21,6 +21,14 @@
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
+    
+            <% Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
+
+                if (usuario != null) {
+
+                String noCall = "";
+
+            %>
     <body>
 
         <!-- Dropdown das peças -->
@@ -42,18 +50,11 @@
         <!-- Inicío Barra de Navegação -->
         <div class="navbar-fixed">
 
-            <% Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
-
-                if (usuario != null) {
-                    
-                String noCall = "";
-            %>
-
             <nav> 
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="<%=noCall%>" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%></a></li>
+                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="indexAdm.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
@@ -145,28 +146,10 @@
                         <th data-field="alterar">Excluir</th>
                         <th data-field="excluir">Alterar</th>
                     </tr>  
-                </thead>     
+                </thead>          
                     
                 <tbody>    
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>                      
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                        <td><a id="botao-excluir" href="deletarUsuario?id=">Excluir</a></td>
-                        <td><a href="consultarPorId?id="/>Alterar</a></td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -207,6 +190,7 @@
                 </div>
             </div>
         </footer>
+        
         <%}%>
         <!-- Fim do Rodapé -->
 
@@ -216,7 +200,6 @@
         <script type="text/javascript" src="js/jQuery.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script type="text/javascript" src="js/customJS.js"></script>
-        <script type="text/javascript" src="js/form.js"></script>
         <script type="text/javascript" src="js/usuario.js"></script>
         <script src="https://use.fontawesome.com/93d491e836.js"></script>
 

@@ -13,7 +13,6 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="css/custom.css"  media="screen,projection"/>        
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -44,9 +43,9 @@
                 <div class="nav-wrapper grey darken-4">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">group</i>Entrar/Cadastrar</a></li>
+                        <li><a href="#modal1" class="hoverable grey-text text-lighten-1 modal-trigger"><i class="material-icons left red-text text-darken-4">group</i>Entrar/Cadastrar</a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
-                        <li><a href="" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
+                        <li><a href="home.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
                 </div>
             </nav>
@@ -66,7 +65,7 @@
 
                         <div class="input-field col s12">
                             <i class="material-icons prefix grey-text text-darken-4">account_circle</i>
-                            <input id="icon_prefix" type="text" class="validate" name="login" required>
+                            <input id="icon_prefix" type="text" class="validate login" name="login" required>
                             <label for="login" class="grey-text text-darken-4">Login</label>
                         </div>
 
@@ -75,14 +74,14 @@
                     <div class="row">         
                         <div class="input-field col s12">
                             <i class="material-icons prefix grey-text text-darken-4">lock_open</i>
-                            <input id="icon_telephone" type="password" class="validate" name="senha" required>
+                            <input id="icon_telephone" type="password" class="validate senha" name="senha" required>
                             <label for="senha" class="grey-text text-darken-4">Senha</label>   
                         </div>                  
                     </div>
 
                     <div class="row left-align">
                         <div class="col s6 left-align">
-                            <input type="submit" class="btn waves-effect light-green lighten-1" name="acao" value="Entrar">                           
+                            <input id="entrar" type="submit" class="btn waves-effect light-green lighten-1" name="acao" value="Entrar">                           
                         </div> 
 
                         <div class="col s6 right-align">
@@ -192,10 +191,40 @@
                             <input name="bairro" id="bairro" type="text" class="validate hoverable" required>
                             <label for="bairro" class="grey-text text-darken-4"><i class="material-icons left">place</i>Bairro</label>
                         </div>
+
                         <div class="input-field col s4">
-                            <input name="uf" id="uf" type="text" class="validate hoverable" maxlength="2" required>
-                            <label for="uf" class="grey-text text-darken-4"><i class="material-icons left">place</i>UF</label>
+                            <select name="uf" id="uf" class="hoverable validate" required>
+                                <option value="" disabled selected>Selecione um estado...</option>
+                                <option value="ac">Acre</option> 
+                                <option value="al">Alagoas</option> 
+                                <option value="am">Amazonas</option> 
+                                <option value="ap">Amapá</option> 
+                                <option value="ba">Bahia</option> 
+                                <option value="ce">Ceará</option> 
+                                <option value="df">Distrito Federal</option> 
+                                <option value="es">Espírito Santo</option> 
+                                <option value="go">Goiás</option> 
+                                <option value="ma">Maranhão</option> 
+                                <option value="mt">Mato Grosso</option> 
+                                <option value="ms">Mato Grosso do Sul</option> 
+                                <option value="mg">Minas Gerais</option> 
+                                <option value="pa">Pará</option> 
+                                <option value="pb">Paraíba</option> 
+                                <option value="pr">Paraná</option> 
+                                <option value="pe">Pernambuco</option> 
+                                <option value="pi">Piauí</option> 
+                                <option value="rj">Rio de Janeiro</option> 
+                                <option value="rn">Rio Grande do Norte</option> 
+                                <option value="ro">Rondônia</option> 
+                                <option value="rs">Rio Grande do Sul</option> 
+                                <option value="rr">Roraima</option> 
+                                <option value="sc">Santa Catarina</option> 
+                                <option value="se">Sergipe</option> 
+                                <option value="sp">São Paulo</option> 
+                                <option value="to">Tocantins</option>
+                            </select>
                         </div>
+
                         <div class="input-field col s4">
                             <input name="numero" id="numero" type="text" class="validate hoverable" maxlength="6" required>
                             <label for="numero" class="grey-text text-darken-4"><i class="material-icons left">looks_6</i>Nº</label>
@@ -209,8 +238,9 @@
                             <label for="complemento" class="grey-text text-darken-4"><i class="material-icons left">flag</i>Complemento</label>
                         </div>
                     </div>                    
-                    
+
                     <input type="submit" class="btn waves-effect waves-light grey darken-4" value="Cadastrar"> 
+                    <a class="waves-effect waves-light grey darken-4 btn right" id="btn-limpar"><i class="material-icons left">clear</i>Limpar Campos</a>
 
                 </form>
 
@@ -235,7 +265,7 @@
                             <li><a class="" href="#!">Memória</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="col l4 offset-l2 s12">
                         <h5 class="white-text grey-text text-lighten-1"><i class="material-icons left red-text text-red darken-4">share</i>Siga-nos nas redes sociais</h5>
                         <ul class="social-nav model-9 center-align">
@@ -263,6 +293,7 @@
         <script type="text/javascript" src="js/jQuery.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script type="text/javascript" src="js/customJS.js"></script>
+        <script type="text/javascript" src="js/form.js"></script>
         <script src="https://use.fontawesome.com/93d491e836.js"></script>
 
     </body>

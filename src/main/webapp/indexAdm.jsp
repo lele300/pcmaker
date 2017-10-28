@@ -68,7 +68,7 @@
                 <div class="nav-wrapper grey darken-4">
                     <a href="" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down grey darken-4">
-                        <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="<%=noCall%>" data-activates="dropdown2"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
+                        <li><a class="dropdown-button hoverable grey-text text-lighten-1 modal-trigger" href="<%=noCall%>" data-activates="dropdown2"><i class="material-icons left red-text text-darken-4">group</i><%=usuario.getLogin()%><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a class="dropdown-button hoverable grey-text text-lighten-1" href="#!" data-activates="dropdown1">Componentes<i class="material-icons left red-text text-darken-4">layers</i><i class="material-icons right red-text text-darken-4">arrow_drop_down</i></a></li>
                         <li><a href="indexAdm.jsp" class="hoverable grey-text text-lighten-1"><i class="material-icons left red-text text-darken-4">home</i>Home</a></li>
                     </ul>
@@ -131,6 +131,16 @@
                 
                 <div class="col s4">
                     <div class="card-panel grey darken-4 hoverable">
+                        <center><h5 class="grey-text text-lighten-1">GERENCIAR ATRIBUTOS</h5></center>
+                        <center><a href="consultarAtributo"><i class="large material-icons red-text text-darken-4">settings</i></a></center>
+                        <span class="grey-text text-lighten-1"> Aqui você pode gerenciar todos os tipos atributos cadastrados no sistema e assim criar característica
+                            do componente.
+                        </span>    
+                    </div>
+                </div>
+                
+                <div class="col s4">
+                    <div class="card-panel grey darken-4 hoverable">
                         <center><h5 class="grey-text text-lighten-1">LOGOUT DO SISTEMA</h5></center>
                         <center><a href="ControleAcesso?acao=Sair"><i class="large material-icons red-text text-darken-4">power_settings_new</i></a></center>
                         <span class="grey-text text-lighten-1"> Aqui você fará logout do sistema e não poderá ter acesso as áreas administrativas até realizar uma 
@@ -138,6 +148,8 @@
                         </span>    
                     </div>
                 </div>
+                
+                
                 
                 
             </div>
